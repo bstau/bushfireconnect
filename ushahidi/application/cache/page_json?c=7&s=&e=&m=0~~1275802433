@@ -1,0 +1,13 @@
+c245324980888d569ad610a6880f257df959301b{"type": "FeatureCollection","features": [{"type":"Feature","properties": {"id": "9", 
+"name":"<a href='http://localhost:8888/ushahidi/reports/view/9'>Backburning Operation</a>","category":[7], "color": "fac644", 
+"icon": "", 
+"timestamp": "1275752040"},"geometry": {"type":"Point", "coordinates":[145.250244, -37.507819]}},{"type":"Feature","properties": {"id": "11", 
+"name":"<a href='http://localhost:8888/ushahidi/reports/view/11'>A building left standing</a>","category":[7], "color": "fac644", 
+"icon": "", 
+"timestamp": "1275752340"},"geometry": {"type":"Point", "coordinates":[145.206299, -37.529332]}},{"type":"Feature","properties": {"id": "12", 
+"name":"<a href='http://localhost:8888/ushahidi/reports/view/12'>Fire Brigade at Scene</a>","category":[7], "color": "fac644", 
+"icon": "", 
+"timestamp": "1275752640"},"geometry": {"type":"Point", "coordinates":[145.340195, -37.599272]}},{"type":"Feature","properties": {"id": "13", 
+"name":"<a href='http://localhost:8888/ushahidi/reports/view/13'>Bushfire starting</a>","category":[7], "color": "fac644", 
+"icon": "", 
+"timestamp": "1275756960"},"geometry": {"type":"Point", "coordinates":[144.963169, -37.814251]}}]}

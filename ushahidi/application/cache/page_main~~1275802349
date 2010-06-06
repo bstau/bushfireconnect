@@ -1,0 +1,427 @@
+3cab98c0ce4c5a5075d396ad8be4111327709bc4
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+	<title>bushfireconnect.org</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<link rel="stylesheet" type="text/css" href="http://localhost:8888/ushahidi/media/css/style.css" />
+<link rel="stylesheet" type="text/css" href="http://localhost:8888/ushahidi/media/css/jquery-ui-themeroller.css" />
+<!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="http://localhost:8888/ushahidi/media/css/iehacks.css" />
+<![endif]--><!--[if IE 7]><link rel="stylesheet" type="text/css" href="http://localhost:8888/ushahidi/media/css/ie7hacks.css" />
+<![endif]--><!--[if IE 6]><link rel="stylesheet" type="text/css" href="http://localhost:8888/ushahidi/media/css/ie6hacks.css" />
+<![endif]--><script type="text/javascript" src="http://localhost:8888/ushahidi/media/js/OpenLayers.js"></script>
+<script type="text/javascript">OpenLayers.ImgPath = 'http://localhost:8888/ushahidi/media/img/openlayers/';</script><script type="text/javascript" src="http://localhost:8888/ushahidi/media/js/jquery.js"></script>
+<script type="text/javascript" src="http://localhost:8888/ushahidi/media/js/jquery.ui.min.js"></script>
+<script src="http://maps.google.com/maps?file=api&v=2&key=ABQIAAAAjsEM5UsvCPCIHp80spK1kBQKW7L4j6gYznY0oMkScAbKwifzxxRhJ3SP_ijydkmJpN3jX8kn5r5fEQ" type="text/javascript"></script>
+<script type="text/javascript" src="http://localhost:8888/ushahidi/media/js/selectToUISlider.jQuery.js"></script>
+<script type="text/javascript" src="http://localhost:8888/ushahidi/media/js/jquery.flot.js"></script>
+<script type="text/javascript" src="http://localhost:8888/ushahidi/media/js/timeline.js"></script>
+<!--[if IE]><script type="text/javascript" src="http://localhost:8888/ushahidi/media/js/excanvas.pack.js"></script>
+<![endif]--><script type="text/javascript" src="http://localhost:8888/ushahidi/media/js/jquery.validate.min.js"></script>
+<link rel="alternate" type="application/rss+xml" href="http://localhost/feed/" title="RSS2" /><link rel="stylesheet" type="text/css" href="http://localhost:8888/ushahidi/themes//style.css" />
+
+	<!--[if IE 6]>
+	<script type="text/javascript" src="js/ie6pngfix.js"></script>
+	<script type="text/javascript">DD_belatedPNG.fix('img, ul, ol, li, div, p, a');</script>
+	<![endif]-->
+	<script type="text/javascript">
+		var addthis_config = {
+		   ui_click: true
+		}	
+		eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('f h;f o=I;f L;f T;f 15=k p.2K(\'3R:4j\');f 1h=k p.2K(\'3R:4f\');1z(u(){f 1k;Q=2W;f z=\'\';p.2I.3A.4d.4g=I;f 1p={4h:"m",4l:16,4K:[],2L:1h,\'4I\':15};h=k p.4F(\'h\',1p);h.1v(k p.1q.4G({4H:k p.41(4M,4N)}));f 2o=1;d(2o==2){1k=k p.1u.4T("4U",{2r:I,2v:k p.2p(-H.34,-H.34,H.34,H.34)})}r d(2o==3){1k=k p.1u.4S("4R",{2r:I,2v:k p.2p(-H.34,-H.34,H.34,H.34)})}r d(2o==4){1k=k p.1u.4O.4m("4P",{2r:I,2v:k p.2p(-H.34,-H.34,H.34,H.34)})}r{1k=k p.1u.4Q("4E",{2r:I,2v:k p.2p(-H.34,-H.34,H.34,H.34)})}h.3c(1k);h.1v(k p.1q.4s());h.1v(k p.1q.4t());h.1v(k p.1q.4r());h.1v(k p.1q.4n());4o=h;$("a[V^=\'2j\']").1Z(u(){f z=19.V.2U(4);f 4w=\'2j\'+19.V.2U(4);$("a[V^=\'2j\']").2G("Z");$("[V^=\'3x\']").3Y();$("#2j"+z).2s("Z");$("#3x"+z).2y();$(19).4y("O").2y();L=z;2Y();J=h.1x();N=h.1H();18(z,\'\',\'\',J,N,14);Y=2D[0][z];1w=z;f F=k 1c($("#K").W()*S);f G=k 1c($("#M").W()*S);1e=$.2t({2E:z,F:F,G:G,Y:Y,1m:14});1e.2A();t 4x});$("a[V^=\'1P\']").1Z(u(){f 1C=19.V.2U(6);d($("#1P"+1C).47("Z")){1M=h.2S("44"+1C);d(1M){1f(f i=0;i<1M.w;i++){h.2R(1M[i])}}$("#1P"+1C).2G("Z")}r{$("#1P"+1C).2s("Z");J=h.1x();N=h.1H();18(\'\',\'\',\'\',J,N,\'\',1C,\'3Z\')}});d(!$("#K").W()){t}$("1V#K, 1V#M").4z({4A:4,4C:\'4B\',4v:{4p:u(e,4q){f K=$("#K").W();f M=$("#M").W();f L=1w;46=L;J=h.1x();N=h.1H();18(46,K,M,\'\',\'\',14);2N(K,M)}}});2D=[{"0":{"q":"2l 2c","j":[[1.X+12,"5"]],"l":"#2d"},"1":{"q":"1d 2b 1a","l":"#2a","j":[[1.X+12,"2"]]},"3":{"q":"28 29 1a","l":"#2e","j":[[1.X+12,"3"]]},"6":{"q":"2f 1L 2k 1Q","l":"#2i","j":[[1.X+12,"1"]]},"8":{"q":"1d 1X","l":"#1Y","j":[[1.X+12,"1"]]},"9":{"q":"2g","l":"#2h","j":[[1.X+12,"1"]]},"10":{"q":"27 26","l":"#1W","j":[[1.X+12,"1"]]},"12":{"q":"1U","l":"#1T","j":[[1.X+12,"1"]]},"13":{"q":"1R","l":"#1S","j":[[1.X+12,"2"]]}}];2B=[{"0":{"q":"2l 2c","j":[[1.B+12,"5"]],"l":"#2d"},"1":{"q":"1d 2b 1a","l":"#2a","j":[[1.B+12,"2"]]},"3":{"q":"28 29 1a","l":"#2e","j":[[1.B+12,"3"]]},"6":{"q":"2f 1L 2k 1Q","l":"#2i","j":[[1.B+12,"1"]]},"8":{"q":"1d 1X","l":"#1Y","j":[[1.B+12,"1"]]},"9":{"q":"2g","l":"#2h","j":[[1.B+12,"1"]]},"10":{"q":"27 26","l":"#1W","j":[[1.B+12,"1"]]},"12":{"q":"1U","l":"#1T","j":[[1.B+12,"1"]]},"13":{"q":"1R","l":"#1S","j":[[1.B+12,"2"]]}}];4D=[{"0":{"q":"2l 2c","j":[[1.B+12,"5"]],"l":"#2d"},"1":{"q":"1d 2b 1a","l":"#2a","j":[[1.B+12,"2"]]},"3":{"q":"28 29 1a","l":"#2e","j":[[1.B+12,"3"]]},"6":{"q":"2f 1L 2k 1Q","l":"#2i","j":[[1.B+12,"1"]]},"8":{"q":"1d 1X","l":"#1Y","j":[[1.B+12,"1"]]},"9":{"q":"2g","l":"#2h","j":[[1.B+12,"1"]]},"10":{"q":"27 26","l":"#1W","j":[[1.B+12,"1"]]},"12":{"q":"1U","l":"#1T","j":[[1.B+12,"1"]]},"13":{"q":"1R","l":"#1S","j":[[1.B+12,"2"]]}}];3Q=[{"0":{"q":"2l 2c","j":[[1.1b+12,"4"],[1.2J+12,"1"]],"l":"#2d"},"1":{"q":"1d 2b 1a","l":"#2a","j":[[1.1b+12,"2"]]},"3":{"q":"28 29 1a","l":"#2e","j":[[1.1b+12,"2"],[1.2J+12,"1"]]},"6":{"q":"2f 1L 2k 1Q","l":"#2i","j":[[1.1b+12,"1"]]},"9":{"q":"2g","l":"#2h","j":[[1.1b+12,"1"]]},"10":{"q":"27 26","l":"#1W","j":[[1.1b+12,"1"]]},"12":{"q":"1U","l":"#1T","j":[[1.1b+12,"1"]]},"13":{"q":"1R","l":"#1S","j":[[1.1b+12,"2"]]},"8":{"q":"1d 1X","l":"#1Y","j":[[1.2J+12,"1"]]}}];f F=4J;f G=4L;f 1p=$(\'#K > 3o > 3p\').h(u(){t $(19).W()});F=$.3s(1p,u(n,i){t n>=(\'\'+F)})[0];1p=$(\'#M > 3o > 3p\').h(u(){t $(19).W()});G=$.3s(1p,u(n,i){t n>=(\'\'+G)})[0];1w=\'0\';14=0;18(1w,F,G,\'\',\'\',14);2N(F,G);$(\'.3L 1t a\').1Z(u(){f 2H=$("#K").W();f 2M=$("#M").W();f F=k 1c(2H*S);f G=k 1c(2M*S);14=4V(19.V.3n(\'4i\',\'\'))||0;J=h.1x();N=h.1H();18(L,2H,2M,J,N,14);$(\'.3L 1t a\').4b(\'1j\',\'\');$(19).2s(\'Z\');1e=$.2t({2E:1w,F:F,G:G,1m:14,3j:"1l://1r:1y/1B/2Z/2t/"});1e.2A()});$(\'#4e\').1Z(u(){1e.4c()})});u 18(z,K,M,J,N,1m,30,23,49,35){f 1J="1l://1r:1y/1B/"+"2Z/";f T="3f";d(o){f 1o=k p.21.3O({3i:1h,3B:15})}r{f 1o=p.21.3O}d(T&&23==\'3Z\'){1J="1l://1r:1y/1B/"+"2Z/4k/"+T+"/";T="44"+30}r d(T&&23==\'2P\'){1J=49;T="4a"+30;d(o){1o=k p.21.3k({3i:1h,3B:15})}r{f 1o=p.21.3k}}1I=k p.4u({\'5a\':"${17}",69:"${3S}",67:"${l}",6c:"${37}",6b:"#3D",6e:2,5Q:0.9,\'5L\':-20,q:"${3m}",5M:"5R",5S:"#5Y",5Z:"${3q}"},{5X:{3S:u(b){d(o){D=\'\';d(C(b.o)!=\'A\'){D=b.o[0].j.17}d(D!=""){t(1F.1D(b.11.22,7)+5)*2}r{d(C(b.o)==\'A\'||b.o.w<2){t(1F.1D(b.11.22,7)+1)*4}r d(C(b.o)==\'A\'||b.o.w==2){t(1F.1D(b.11.22,7)+1)*(4*0.8)}r{t(1F.1D(b.11.22,7)+1)*(4*0.6)}}}r{D=b.11.17;d(D!=""){t 16}r{t 4*1.6}}},37:u(b){d(o){D=\'\';d(C(b.o)!=\'A\'){D=b.o[0].j.17}d(D!=""){t 1}r{t 0.8}}r{D=b.11.17;d(D!=""){t 1}r{t 0.8}}},l:u(b){d(o){d(23==\'2P\'){t"#"+35}r{d(C(b.o)!=\'A\'&&(b.o.w<2||(C(z)!=\'A\'&&z.w>0&&z!=0))||T!="3f"){t"#"+b.o[0].j.l}r{t"#3D"}}}r{t"#"+b.11.l}},17:u(b){d(o){d(C(b.o)!=\'A\'&&b.o.w<2||(C(z)!=\'A\'&&z.w>0&&z!=0)){D=\'\';d(C(b.o)!=\'A\'){D=b.o[0].j.17}d(D!=""){t"1l://1r:1y/1B/3y/3z/"+D}r{t""}}r{t""}}r{D=b.11.17;d(D!=""){t"1l://1r:1y/1B/3y/3z/"+D}r{t""}}},3m:u(b){d(o){d(C(b.o)!=\'A\'&&b.o.w>1){t b.o.w}r{t""}}r{t""}},3q:u(b){d(o){d(C(b.o)!=\'A\'&&b.o.w>10){t"5V"}r d(C(b.o)!=\'A\'&&b.o.w>5){t"5U"}r{t""}}r{t""}}}});1G=u(b){f 3l=k p.5T.5W(b.1E.x,b.1E.y);p.2K.2C(3l,15,1h)};Q=h.2S(T);d(Q&&Q.w>0){1f(f i=0;i<Q.w;i++){h.2R(Q[i])}}1g=[];d(C(z)!=\'A\'&&z.w>0){1g.25(\'c=\'+z)}d(C(K)!=\'A\'){1g.25(\'s=\'+K)}d(C(M)!=\'A\'){1g.25(\'e=\'+M)}d(C(1m)!=\'A\'){1g.25(\'m=\'+1m)}d(o){Q=k p.1u.5K(T,{1G:1G,5N:[k p.2I.3A(),k p.2I.5O({62:20})],5P:k p.61.65({3j:1J+\'?\'+1g.33(\'&\'),38:1o}),2L:1h,39:{3g:I,3h:I},3e:k p.3d({"3a":1I,"1V":1I})})}r{Q=k p.1u.6i(T,1J+\'?\'+1g.33(\'&\'),{1G:1G,38:1o,2L:15,39:{3g:I,3h:I},3e:k p.3d({"3a":1I,"1V":1I})})}h.3c(Q);2Q=k p.1q.6d(Q);h.1v(2Q);2Q.4W();Q.6f.6g({"6h":3J,"64":3X});f 1K;d(J&&N&&C(J)!=\'A\'&&C(N)!=\'A\'){1K=N;2z=J}r{1K=k p.3G(63.66,-36.6a);1K.2C(15,h.68());2z=13};h.3F(1K,2z)}5I=18;u 5d(E){$("#3K").2y()}u 5c(E){$("#3K").3Y()}u 2Y(5b){1f(f i=0;i<h.2n.w;++i){h.2F(h.2n[i])}}u 3J(E){5J=E;d(o){f v="<O 1j=\\"3V\\">";v=v+"<3H>"+E.b.o.w+" 5e[s]...</3H>\\n";v=v+"<O 1j=\\"3U\\"><1O>";1f(f i=0;i<1F.1D(E.b.o.w,5);++i){v=v+"\\n<1t>"+E.b.o[i].j.3N+"</1t>"}v=v+"</1O></O>";d(E.b.o.w>1){1N=E.b.o[0].1E.2X().2V();3P=1N.R;3W=1N.U;1n=1N.2C(1h,15);R=1n.R;U=1n.U;v=v+"\\n<O 1j=\\"48\\"><a 2m=\\"1l://1r:1y/1B/5f/?R="+R+"&U="+U+"\\">5j&P;5i</a>&P;&P;|&P;&P;<a 2m=\'31:2q("+3P+","+3W+")\'>2T&P;45</a></O>"}v=v+"</O>"}r{1n=E.b.1E.2X().2V();R=1n.R;U=1n.U;f v="<O 1j=\\"3V\\"><O 1j=\\"3U\\"><1O><1t>"+E.b.11.3N+"</1t></1O></O>";v=v+"\\n<O 1j=\\"48\\"><a 2m=\'31:2q("+R+","+U+", 1)\'>2T&P;45</a>&P;&P;|&P;&P;<a 2m=\'31:2q("+R+","+U+", -1)\'>2T&P;5h</a></O>";v=v+"</O>"}d(v.5g("<59")!=-1){v="58 51 50! 4Z v 4X.<4Y />"+v.3n(/</g,"&52;")}1i=k p.53.57("56",E.b.1E.2X().2V(),k p.41(40,40),v,2W,I,2Y);E.b.1i=1i;h.55(1i)}u 3X(E){h.2F(E.b.1i);E.b.1i.54();E.b.1i=2W}u 2N(K,M){f L=1w;d(!L||L==\'0\'){L=\'0\'}f F=k 1c(K*S);f G=k 1c(M*S);f Y=2B[0][L];d((G-F)/(S*60*60*24)<=2){Y=3Q[0][L]}r d((G-F)/(S*60*60*24)<=3T){Y=2B[0][L]}r d((G-F)/(S*60*60*24)>3T){Y=2D[0][L]}1e=$.2t({2E:L,F:k 1c(K*S),G:k 1c(M*S),1m:14,Y:Y});1e.2A()}u 2q(R,U){f 3I=k p.3G(R,U);J=h.1x();3M=J+1;h.3F(3I,3M);1f(f i=0;i<h.2n.w;++i){h.2F(h.2n[i])}}u 5k(1A,42,43){d($("#2O"+1A).47("Z")){2x=h.2S("4a"+1A);d(2x){1f(f i=0;i<2x.w;i++){h.2R(2x[i])}}$("#2O"+1A).2G("Z")}r{$("#2O"+1A).2s("Z");J=h.1x();N=h.1H();18(\'\',\'\',\'\',J,N,\'\',1A,\'2P\',42,43)}}1z(u(){1z("#3w").5l({5B:{3E:{1s:I,3b:10},32:{1s:I,3v:I},3t:{1s:I}},5A:{3E:{1s:"2w 2u 5z 5y 1f 3r 5C.",3b:"5D 5H 5G 5F 1L 5E 5x 10 5w."},32:{1s:"2w 2u 5p 3C 3u",3v:"2w 2u a 5o 3C 3u"},3t:{1s:"2w 2u 3r 5n 5m"}}})});u 5q(){1z("#3w").5r()}u 5v(V){d(V){1z(\'#\'+V).5u(5t)}}u 5s(){1z(\'#32\').W("")}',62,391,'|||||||||||feature||if||var||map||data|new|color|||cluster|OpenLayers|label|else||return|function|content|length|||catID|undefined|2757464e|typeof|feature_icon|event|startTime|endTime|20037508|true|currZoom|startDate|currentCat|endDate|currCenter|div|nbsp|markers|lon|1000|thisLayer|lat|id|val|2753144e|graphData|active||attributes|||gMediaType|proj_4326||icon|addMarkers|this|Areas|27575e|Date|Fire|gTimeline|for|params|proj_900913|popup|class|map_layer|http|mediaType|zoom_point|protocolFormat|options|Control|localhost|required|li|Layer|addControl|gCategoryId|getZoom|8888|jQuery|layerID|ushahidi|shareID|min|geometry|Math|preFeatureInsert|getCenter|style|protocolUrl|myPoint|of|share_layer|zoom_point_sm|ul|share_|Resort|SES|44a5f5|2151b8|BoM|select|e04a4a|Sightings|e03620|click||Format|count|thisLayerType||push|Alerts|Evacuation|High|Risk|c9770c|Break|Categories|990000|ed8f2b|Places|DSE|0de0e0|f5b767|cat_|Last|All|href|popups|default_map|Bounds|zoomToSelectedFeature|sphericalMercator|addClass|timeline|enter|maxExtent|Please|new_layer|show|myZoom|plot|dailyGraphData|transform|allGraphData|categoryId|removePopup|removeClass|startTimestamp|Strategy|2757536e|Projection|projection|endTimestamp|refreshGraph|layer_|layers|selectControl|removeLayer|getLayersByName|Zoom|substring|getCenterLonLat|null|getBounds|onPopupClose|json|thisLayerID|javascript|person_email|join||thisLayerColor||opacity|format|formatOptions|default|minlength|addLayer|StyleMap|styleMap|Reports|extractStyles|extractAttributes|internalProjection|url|KML|point|cluster_count|replace|optgroup|option|font_size|the|grep|feedback_captcha|Address|email|footerfeedbackMain|child_|media|uploads|Fixed|externalProjection|Email|CC0000|feedback_message|setCenter|LonLat|h2|lonlat|onFeatureSelect|loader|filters|newZoom|name|GeoJSON|lon_sm|hourlyGraphData|EPSG|radius|124|infowindow_list|infowindow|lat_sm|onFeatureUnselect|hide|shares|100|Size|layerURL|layerColor|Share_|In|currCat|hasClass|infowindow_meta|thisLayerUrl|Layer_|attr|playOrPause|prototype|playTimeline|900913|preload|units|media_|4326|share|numZoomLevels|Mapnik|LayerSwitcher|gMap|change|ui|MousePosition|Navigation|PanZoomBar|Style|sliderOptions|catSet|false|parents|selectToUISlider|labels|text|labelSrc|weeklyGraphData|google|Map|LoadingPanel|minSize|displayProjection|1275314400|controls|1277906399|573|366|OSM|openstreetmap|Google|yahoo|Yahoo|VirtualEarth|virtualearth|parseFloat|activate|below|br|Escaped|Javascript|contained|lt|Popup|destroy|addPopup|chicken|FramedCloud|Content|script|externalGraphic|evt|onMapEndLoad|onMapStartLoad|Event|reports|search|Out|Events|View|switchLayer|validate|Code|Security|valid|an|formSubmit|submit|clearField|400|toggle|showForm|characters|least|information|some|messages|rules|reply|Your|at|consist|must|message|gAddMarkers|selectedFeature|Vector|graphicYOffset|fontWeight|strategies|Cluster|protocol|strokeOpacity|bold|fontColor|Geometry|15px|20px|Point|context|ffffff|fontSize||Protocol|distance|144|featureunselected|HTTP|140625|fillColor|getProjectionObject|pointRadius|879620605027|strokeColor|fillOpacity|SelectFeature|strokeWidth|events|on|featureselected|GML'.split('|')))
+
+	</script>
+</head>
+
+<body id="page">
+	<!-- wrapper -->
+	<div class="rapidxwpr floatholder">
+
+		<!-- header -->
+		<div id="header">
+	
+			<!-- searchbox -->
+			<div id="searchbox">
+				<a class="share addthis_button" href="http://www.addthis.com/bookmark.php?v=250&amp;pub=xa-4aee423643f8276e">Share</a>
+
+				<!-- languages -->
+				<div class="language-box">
+					<form>
+						<select id="l" name="l"  onChange="this.form.submit()" >
+<option value="en_US" selected="selected">English (US)</option>
+<option value="es_UY">español, castellano (UY)</option>
+<option value="fr_FR">français (FR)</option>
+</select>					</form>
+				</div>
+				<!-- / languages -->
+			
+				<!-- searchform -->
+				<div class="search-form">
+					<form method="get" id="search" action="http://localhost:8888/ushahidi/search/">
+						<ul>
+							<li><input type="text" name="k" value="" class="text" /></li>
+							<li><input type="submit" name="b" class="searchbtn" value="search" /></li>
+						</ul>
+					</form>
+				</div>
+				<!-- / searchform -->
+		
+			</div>
+			<!-- / searchbox -->
+		
+			<!-- logo -->
+			<div id="logo">
+				<h1><p>&nbsp</p> </h1>
+				<span><p>&nbsp</p> </span>
+			</div>
+			<!-- / logo -->
+		
+			<!-- submit incident -->
+			<div class="submit-incident clearingfix">
+				<a href="http://localhost:8888/ushahidi/reports/submit">Submit an Incident</a>
+			</div>
+			<!-- / submit incident -->
+		</div>
+		<!-- / header -->
+
+		<!-- main body -->
+		<div id="middle">
+			<div class="background layoutleft">
+		
+				<!-- mainmenu -->
+				<div id="mainmenu" class="clearingfix">
+					<ul>
+						<li><a href="http://localhost:8888/ushahidi/main" class="active">Home</a></li>
+						<li><a href="http://localhost:8888/ushahidi/reports" >Reports</a></li>
+						<li><a href="http://localhost:8888/ushahidi/reports/submit" >Submit an Incident</a></li>
+						<li><a href="http://localhost:8888/ushahidi/alerts" >Get Alerts</a></li>
+													<li><a href="http://localhost:8888/ushahidi/contact" >Contact Us</a></li>
+														<li><a href="http://localhost:8888/ushahidi/help" >How to Help</a></li>
+							<li><a href="http://localhost:8888/ushahidi/page/index/1" >About Us</a></li>					</ul>
+
+				</div>
+				<!-- / mainmenu -->
+
+				<!-- main body -->
+				<div id="main" class="clearingfix">
+					<div id="mainmiddle" class="floatbox withright">
+				
+						<!-- right column -->
+						<div id="right" class="clearingfix">
+					
+							<!-- category filters -->
+							<div class="cat-filters clearingfix">
+								<strong>Category Filter</strong>
+							</div>
+						
+							<ul class="category-filters">
+								<li><a class="active" id="cat_0" href="#"><div class="swatch" style="background-color:#CC0000"></div><div class="category-title">All Categories</div></a></li>
+								<li><a href="#" id="cat_4"><div class="swatch" style="background-color:#0015ff"></div><div class="category-title">AUTHORITIES</div></a></li><div class="hide" id="child_4"><li style="padding-left:20px;"><a href="#" id="cat_9"><img src="media/uploads/category_9_1275746204.png"> DSE</a></li><li style="padding-left:20px;"><a href="#" id="cat_12"><img src="media/uploads/category_12_1275784916.png"> BoM</a></li><li style="padding-left:20px;"><a href="#" id="cat_13"><img src="media/uploads/category_13_1275784943.png"> SES</a></li></div><li><a href="#" id="cat_5"><div class="swatch" style="background-color:#ff0505"></div><div class="category-title">EMERGENCY</div></a></li><div class="hide" id="child_5"><li style="padding-left:20px;"><a href="#" id="cat_8"><img src="media/uploads/category_8_1275785900.png"> Fire Sightings</a></li><li style="padding-left:20px;"><a href="#" id="cat_10"><img src="media/uploads/category_10_1275785966.png"> Evacuation Alerts</a></li><li style="padding-left:20px;"><a href="#" id="cat_11"><img src="media/uploads/category_11_1275785985.png"> Road Closures</a></li></div><li><a href="#" id="cat_7"><div class="swatch" style="background-color:#fac644"></div><div class="category-title">PREPARATION</div></a></li><div class="hide" id="child_7"><li style="padding-left:20px;"><a href="#" id="cat_1"><img src="media/uploads/category_1_1275795854.png"> Fire Break Areas</a></li><li style="padding-left:20px;"><a href="#" id="cat_2"><img src="media/uploads/category_2_1275788144.png"> Prescribed Burn Activity</a></li><li style="padding-left:20px;"><a href="#" id="cat_3"><img src="media/uploads/category_3_1275786069.png"> High Risk Areas</a></li><li style="padding-left:20px;"><a href="#" id="cat_6"><img src="media/uploads/category_6_1275788180.png"> Places of Last Resort</a></li></div>							</ul>
+							<!-- / category filters -->
+							
+															<!-- Layers (KML/KMZ) -->
+								<div class="cat-filters clearingfix" style="margin-top:20px;">
+									<strong>Other Layers</strong>
+								</div>
+								<ul class="category-filters">
+									<li><a href="#" id="layer_1"
+										onclick="switchLayer('1','http://localhost:8888/ushahidi/media/uploads/1275722323vic_hospitals.kml','d62727'); return false;"><div class="swatch" style="background-color:#d62727"></div>
+										<div>Victorian Hospitals</div></a></li><li><a href="#" id="layer_6"
+										onclick="switchLayer('6','http://localhost:8888/ushahidi/media/uploads/12757970601275797018-22680-129.94.108.34.kml','0084ff'); return false;"><div class="swatch" style="background-color:#0084ff"></div>
+										<div>Victorian Police Stations</div></a></li>								</ul>
+								<!-- /Layers -->
+															
+							
+							<br />
+						
+							<!-- additional content -->
+							<div class="additional-content">
+								<h5>HOW TO REPORT</h5>
+								<ol>
+																		<li>By sending an email to <a href="mailto:bushfireconnect@gmail.com">bushfireconnect@gmail.com</a></li>									<li>By sending a tweet with the hashtag/s <strong>#bushfireconnect</strong></li>									<li>By <a href="http://localhost:8888/ushahidi/reports/submit/">filling a form</a> at the website</li>
+								</ol>					
+		
+							</div>
+							<div class="additional-content">
+		
+		
+							</div>
+							<!-- / additional content -->
+					
+						</div>
+						<!-- / right column -->
+					
+						<!-- content column -->
+						<div id="content" class="clearingfix">
+							<div class="floatbox">
+							
+								<!-- filters -->
+								<div class="filters clearingfix">
+								<div style="float:left; width: 65%">
+									<strong>Filters</strong>
+									<ul>
+										<li><a id="media_0" class="active" href="#"><span>Reports</span></a></li>
+										<li><a id="media_4" href="#"><span>News</span></a></li>
+										<li><a id="media_1" href="#"><span>Pictures</span></a></li>
+										<li><a id="media_2" href="#"><span>Video</span></a></li>
+										<li><a id="media_0" href="#"><span>All</span></a></li>
+									</ul>
+</div>
+								<div style="float:right; width: 31%">
+									<strong>Views</strong>
+									<ul>
+										<li><a id="view_0" class="active" href="#"><span>clusters</span></a></li>
+										<li><a id="view_1" href="#"><span>time</span></a></li>
+</div>
+								</div>
+								<!-- / filters -->
+						
+								<!-- map -->
+																<div class="map" id="map" ></div> 
+																<div class="slider-holder">
+									<form action="">
+										<fieldset>
+											<div class="play"><a href="#" id="playTimeline">PLAY</a></div>
+											<label for="startDate">From:</label>
+											<select name="startDate" id="startDate"><optgroup label="2010"><option value="1262264400">Jan 2010</option><option value="1264942800">Feb 2010</option><option value="1267362000">Mar 2010</option><option value="1270040400">Apr 2010</option><option value="1272636000" selected="selected" >May 2010</option><option value="1275314400">Jun 2010</option><option value="1277906400">Jul 2010</option><option value="1280584800">Aug 2010</option><option value="1283263200">Sep 2010</option><option value="1285855200">Oct 2010</option><option value="1288530000">Nov 2010</option><option value="1291122000">Dec 2010</option></optgroup></select>
+											<label for="endDate">To:</label>
+											<select name="endDate" id="endDate"><optgroup label="2010"><option value="1264942799">Jan 2010</option><option value="1267361999">Feb 2010</option><option value="1270040399">Mar 2010</option><option value="1272635999">Apr 2010</option><option value="1275314399">May 2010</option><option value="1277906399">Jun 2010</option><option value="1280584799" selected="selected" >Jul 2010</option><option value="1283263199">Aug 2010</option><option value="1285855199">Sep 2010</option><option value="1288529999">Oct 2010</option><option value="1291121999">Nov 2010</option><option value="1293800399" selected="selected" >Dec 2010</option></optgroup></select>
+										</fieldset>
+									</form>
+								</div>
+																<!-- / map -->
+								<div id="graph" class="graph-holder"></div>
+							</div>
+						</div>
+						<!-- / content column -->
+				
+					</div>
+				</div>
+				<!-- / main body -->
+			
+				<!-- content -->
+				<div class="content-container">
+			
+					<!-- content blocks -->
+					<div class="content-blocks clearingfix">
+				
+						<!-- left content block -->
+						<div class="content-block-left">
+							<h5>Incidents <span>(from map above listed chronologically)</span></h5>
+							<table class="table-list">
+								<thead>
+									<tr>
+										<th scope="col" class="title">TITLE </th>
+										<th scope="col" class="location">LOCATION</th>
+										<th scope="col" class="date">Date</th>
+									</tr>
+								</thead>
+								<tbody>
+																		<tr>
+										<td><a href="http://localhost:8888/ushahidi/reports/view/13"> Bushfire starting</a></td>
+										<td>Melbourne</td>
+										<td>Jun 6 2010</td>
+									</tr>
+																		<tr>
+										<td><a href="http://localhost:8888/ushahidi/reports/view/12"> Fire Brigade at Scene</a></td>
+										<td>Strathewen</td>
+										<td>Jun 6 2010</td>
+									</tr>
+																		<tr>
+										<td><a href="http://localhost:8888/ushahidi/reports/view/11"> A building left standing</a></td>
+										<td>Strathewen</td>
+										<td>Jun 6 2010</td>
+									</tr>
+																		<tr>
+										<td><a href="http://localhost:8888/ushahidi/reports/view/9"> Backburning Operation</a></td>
+										<td>Bendigo</td>
+										<td>Jun 6 2010</td>
+									</tr>
+																		<tr>
+										<td><a href="http://localhost:8888/ushahidi/reports/view/8"> Injured Animal</a></td>
+										<td>National Park</td>
+										<td>Jun 6 2010</td>
+									</tr>
+									
+								</tbody>
+							</table>
+							<a class="more" href="http://localhost:8888/ushahidi/reports/">View More...</a>
+						</div>
+						<!-- right content block -->
+						<div class="content-block-right">
+							<script src="http://widgets.twimg.com/j/2/widget.js"></script>
+<script>
+new TWTR.Widget({
+  version: 2,
+  type: 'search',
+  search: 'bushfireconnect',
+  interval: 6000,
+  title: 'Bushfire Connect Rhok',
+  subject: 'Bushfire Connect ',
+  width: 410,
+  height: 150,
+  theme: {
+    shell: {
+      background: '#b5854b',
+      color: '#ffffff'
+    },
+    tweets: {
+      background: '#ffffff',
+      color: '#444444',
+      links: '#b35c19'
+    }
+  },
+  features: {
+    scrollbar: false,
+    loop: true,
+    live: true,
+    hashtags: true,
+    timestamp: true,
+    avatars: true,
+    toptweets: true,
+    behavior: 'default'
+  }
+}).render().start();
+</script>			
+						</div>
+						<!-- / right content block -->
+												<!-- left content block -->
+						<div class="content-block-left">
+						<h5>Official &amp; mainstream news</h5>
+							<table class="table-list">
+								<thead>
+									<tr>
+										<th scope="col">TITLE </th>
+										<th scope="col">SOURCE</th>
+										<th scope="col">Date</th>
+									</tr>
+								</thead>
+								<tbody>
+																	</tbody>
+							</table>
+							<a class="more" href="http://localhost:8888/ushahidi/feeds">View More...</a>
+						</div>
+						<!-- / left content block -->
+				
+						
+				
+					</div>
+					<!-- /content blocks -->
+			
+				</div>
+				<!-- content -->
+		
+			</div>
+		</div>
+		<!-- / main body -->
+
+	</div>
+	<!-- / wrapper -->
+     
+ 
+	<!-- footer -->
+	<div id="footer" class="clearingfix">
+ 
+		<div id="underfooter"></div>
+ 
+		<!-- footer content -->
+		<div class="rapidxwpr floatholder">
+ 
+			<!-- footer credits -->
+			<div class="footer-credits">
+				Powered by <a href="http://www.ushahidi.com/"><img src="http://localhost:8888/ushahidi//media/img/footer-logo.png" alt="Ushahidi" align="absmiddle" /></a>
+			</div>
+			<!-- / footer credits -->
+		
+			<!-- footer menu -->
+			<div class="footermenu">
+				<ul class="clearingfix">
+					<li><a class="item1" href="http://localhost:8888/ushahidi/">Home</a></li>
+					<li><a href="http://localhost:8888/ushahidi/reports/submit">Report an Incident</a></li>
+					<li><a href="http://localhost:8888/ushahidi/alerts">Get Alerts</a></li>
+					<li><a href="http://localhost:8888/ushahidi/help">How to Help</a></li>
+					<li><a href="#">About </a></li>
+					<li><a href="#">Contact Us</a></li>
+					<li><a href="#">Blog</a></li>
+				</ul>
+				<p>Copyright © 2009 Ushahidi.com. All Rights Reserved.</p>
+			</div>
+			<!-- / footer menu -->
+ 
+			<!-- feedback form -->
+			<h2 class="feedback_title" style="clear:both">
+				<a href="javascript:showForm('table-holder')">Provide Feedback</a>
+			</h2>
+			<div id="table-holder" class="feedback_forms">
+				<h2>Provide Feedback <button style="margin-left:2em" onclick="javascript:showForm('table-holder')">Close</button></h2>
+				<form action="http://localhost:8888/ushahidi/main" method="post" id="footerfeedbackMain" name="footerfeedbackMain">
+				<input type="hidden" name="person_ip" value="::1"  />
+				<table class="table">
+					<tbody>
+						<tr>
+							<td>
+								<textarea id="feedback_message" name="feedback_message"  class="textarea long" rows="5" cols="50"></textarea>								<br /><br />
+															</td>
+							<td>
+								<div class="or_txt">
+									Or
+								</div>
+							</td>
+							<td>
+								<div class="detailed_feedback">
+									<a href="http://feedback.ushahidi.com/fillsurvey.php?sid=5">Provide Detailed Feedback</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="report_row">
+									<strong>Security Code:</strong><br />
+									<img alt="Captcha" src="http://localhost:8888/ushahidi/captcha/default" width="150" height="50" /><br />
+									<input type="text" id="feedback_captcha" name="feedback_captcha" value=""  class="text" />									<br /><br />
+																	</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3">
+																<input type="text" id="person_email" name="person_email" value="Email address" size="40" class="text"  onclick="clearField();" />								
+<button id="submit" name="submit" >Send</button>								<br /><br />
+															</td>
+						</tr>
+					</tbody>
+				</table>
+				</form>
+			</div>
+			<!-- /feedback form -->
+ 
+		</div>
+		<!-- / footer content -->
+ 
+	</div>
+	<!-- / footer -->
+ 
+	<img src="http://tracker.ushahidi.com/track.php?url=null&lang=en_US&version=1.0.1" />
+	<!-- Piwik -->
+		<script type="text/javascript">
+		var pkBaseURL = (("https:" == document.location.protocol) ? "https://tracker.ushahidi.com/piwik/" : "http://tracker.ushahidi.com/piwik/");
+		document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+		
+		</script><script type="text/javascript">
+		try {
+		  var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 2194);
+		  piwikTracker.trackPageView();
+		  piwikTracker.enableLinkTracking();
+		} catch( err ) {}
+		</script><noscript><p><img src="http://tracker.ushahidi.com/piwik/piwik.php?idsite=2194" style="border:0" alt=""/></p></noscript>
+		
+		<!-- End Piwik Tag -->
+				
+	<!-- Task Scheduler -->
+	<img src="http://localhost:8888/ushahidi/scheduler" height="1" width="1" border="0" />
+ 
+        <!-- script for share button -->
+        <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pub=ushahidi"></script>
+</body>
+</html>

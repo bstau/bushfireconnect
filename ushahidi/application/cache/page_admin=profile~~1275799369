@@ -1,0 +1,137 @@
+a1d411172d2ae4cf21d27f7a7c93c9632beb3922<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=7" />
+	<title>bushfireconnect.org</title>
+	<link rel="stylesheet" type="text/css" href="http://129.94.108.27:8888/ushahidi/media/css/admin/all.css" />
+<link rel="stylesheet" type="text/css" href="http://129.94.108.27:8888/ushahidi/media/css/jquery-ui-themeroller.css" />
+<!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="http://129.94.108.27:8888/ushahidi/media/css/ie6.css" />
+<![endif]--><script type="text/javascript" src="http://129.94.108.27:8888/ushahidi/media/js/jquery.js"></script>
+<script type="text/javascript" src="http://129.94.108.27:8888/ushahidi/media/js/jquery.form.js"></script>
+<script type="text/javascript" src="http://129.94.108.27:8888/ushahidi/media/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="http://129.94.108.27:8888/ushahidi/media/js/jquery.ui.min.js"></script>
+<script type="text/javascript" src="http://129.94.108.27:8888/ushahidi/media/js/selectToUISlider.jQuery.js"></script>
+<script type="text/javascript" src="http://129.94.108.27:8888/ushahidi/media/js/jquery.hovertip-1.0.js"></script>
+<link rel="stylesheet" type="text/css" href="http://129.94.108.27:8888/ushahidi/media/css/jquery.hovertip-1.0.css" />
+<script type="text/javascript">
+		$(function() {
+			if($('.tooltip[title]') != null)
+			$('.tooltip[title]').hovertip();
+		});
+	</script>	<script type="text/javascript" charset="utf-8">
+		
+		function info_search(){
+			$("#info-search").submit();
+		}
+	</script>
+</head>
+<body>
+	<div class="holder">
+		<!-- header -->
+		<div id="header">
+			<!-- top-area -->
+			<div class="top">
+				<strong>Moderator</strong>
+				<ul>
+					<li class="none-separator"> Welcome, Administrator!</li>
+					<li class="none-separator"><a href="http://129.94.108.27:8888/ushahidi/" title="View the home page">
+						View Site</a>					
+					<li class="none-separator"><a href="http://129.94.108.27:8888/ushahidi/admin/profile/">My Profile</a></li>
+					<li><a href="log_out">Logout</a></li>
+				</ul>
+                        </div>
+                        
+			<!-- info-nav -->
+			<div class="info-nav">
+				<h3>Get Help</h3>
+				<ul>
+					<li ><a href="http://wiki.ushahididev.com/">Wiki</a></li>
+					<li><a href="http://wiki.ushahididev.com/doku.php?id=how_to_use_ushahidi_alpha">FAQ's</a></li>
+					<li><a href="http://forums.ushahidi.com/">Forum</a></li>
+				</ul>
+				<div class="info-search"><form action="http://129.94.108.27:8888/ushahidi/admin/reports" id="info-search"><input type="text" name="k" class="info-keyword" value=""> <a href="javascript:info_search();" class="btn">Search</a></form></div>
+				<div style="clear:both"></div>
+			</div>
+			<!-- title -->
+			<h1>bushfireconnect.org</h1>
+			<!-- nav-holder -->
+			<div class="nav-holder">
+				<!-- main-nav -->
+				<ul class="main-nav">
+					<li><a href="http://129.94.108.27:8888/ushahidi/admin/dashboard" >
+						Dashboard						</a></li>
+					<li><a href="http://129.94.108.27:8888/ushahidi/admin/reports" >
+						Reports						</a></li>
+					<li><a href="http://129.94.108.27:8888/ushahidi/admin/comments" >
+						Comments						</a></li>
+					<li><a href="http://129.94.108.27:8888/ushahidi/admin/messages" >
+						Messages						</a></li>
+					<li><a href="http://129.94.108.27:8888/ushahidi/admin/feedback" >
+						Feedback						</a></li>
+					<li><a href="http://129.94.108.27:8888/ushahidi/admin/stats" >
+						Stats						</a></li>
+				</ul>
+				<!-- sub-nav -->
+				<ul class="sub-nav">
+											<li><a href="http://129.94.108.27:8888/ushahidi/admin/settings/site">Settings</a></li>
+						<li><a href="http://129.94.108.27:8888/ushahidi/admin/manage">Manage</a></li>
+						<li><a href="http://129.94.108.27:8888/ushahidi/admin/users">Users</a></li>
+									</ul>
+			</div>
+		</div>
+		<!-- content -->
+		<div id="content">
+			<div class="bg">
+							<div class="bg">
+				<h2>My Profile</h2>
+				<form action="http://129.94.108.27:8888/ushahidi/admin/profile" method="post">
+				<div class="report-form">
+									
+					<div class="head">
+						<input type="image" src="http://129.94.108.27:8888/ushahidi/media/img/admin/btn-save-settings.gif" class="save-rep-btn" />
+					</div>
+					<!-- column -->		
+					<div class="sms_holder">
+						<div class="row">
+							<h4><a href="#" class="tooltip" title="Your username cannot be changed">User Name</a></h4>
+							<input type="text" id="username" name="username" value="admin"  class="text long2" readonly="readonly" />						</div>
+						<div class="row">
+							<h4><a href="#" class="tooltip" title="Your full name">Full Name</a></h4>
+							<input type="text" id="name" name="name" value="Administrator"  class="text long2" />						</div>
+						<div class="row">
+							<h4><a href="#" class="tooltip" title="Your email address">Email Address</a></h4>
+							<input type="text" id="email" name="email" value="daniela@mangoldsengers.com"  class="text long2" />						</div>
+						<div class="row">
+							<h4><a href="#" class="tooltip" title="Your password. Leave this field blank if you wish to keep your current password">New Password</a></h4>
+							<input type="password" id="password" name="password" value=""  class="text" />							<div style="clear:both;"></div>
+							Your Password Again:<br />
+							<input type="password" id="password_again" name="password_again" value=""  class="text" />						</div>
+						<div class="row">
+							<h4><a href="#" class="tooltip" title="Selecting YES lets you get alerts via email when new reports or comments are posted on your website">Receive Notifications?</a></h4>
+							<select id="notify" name="notify" >
+<option value="1">YES</option>
+<option value="0" selected="selected">NO</option>
+</select>						</div>
+					</div>
+		
+					<div class="simple_border"></div>
+		
+					<input type="image" src="http://129.94.108.27:8888/ushahidi/media/img/admin/btn-save-settings.gif" class="save-rep-btn" />
+				</div>
+				</form>
+			</div>
+			</div>
+		</div>
+	</div>
+	<div id="footer">
+		<div class="holder">
+			<strong>
+				<a href="http://www.ushahidi.com" target="_blank" title="Ushahidi Engine" alt="Ushahidi Engine">
+                	<sup>1.0.1</sup>
+            	</a>
+			</strong>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,271 @@
+2d2a440b9fb37385c06c2b16c1bcd4687b9a3d6e
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+	<title>bushfireconnect.org</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<link rel="stylesheet" type="text/css" href="http://localhost:8888/ushahidi/media/css/style.css" />
+<link rel="stylesheet" type="text/css" href="http://localhost:8888/ushahidi/media/css/jquery-ui-themeroller.css" />
+<!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="http://localhost:8888/ushahidi/media/css/iehacks.css" />
+<![endif]--><!--[if IE 7]><link rel="stylesheet" type="text/css" href="http://localhost:8888/ushahidi/media/css/ie7hacks.css" />
+<![endif]--><!--[if IE 6]><link rel="stylesheet" type="text/css" href="http://localhost:8888/ushahidi/media/css/ie6hacks.css" />
+<![endif]--><script type="text/javascript" src="http://localhost:8888/ushahidi/media/js/jquery.js"></script>
+<script type="text/javascript" src="http://localhost:8888/ushahidi/media/js/jquery.ui.min.js"></script>
+<script type="text/javascript" src="http://localhost:8888/ushahidi/media/js/jquery.validate.min.js"></script>
+<script type="text/javascript">jQuery.noConflict()</script><script type="text/javascript" src="http://localhost:8888/ushahidi/media/js/protochart/prototype.js"></script>
+<!--[if IE]><script type="text/javascript" src="http://localhost:8888/ushahidi/media/js/protochart/excanvas-compressed.js"></script>
+<![endif]--><script type="text/javascript" src="http://localhost:8888/ushahidi/media/js/protochart/ProtoChart.js"></script>
+<link rel="alternate" type="application/rss+xml" href="http://localhost/feed/" title="RSS2" /><link rel="stylesheet" type="text/css" href="http://localhost:8888/ushahidi/themes//style.css" />
+
+	<!--[if IE 6]>
+	<script type="text/javascript" src="js/ie6pngfix.js"></script>
+	<script type="text/javascript">DD_belatedPNG.fix('img, ul, ol, li, div, p, a');</script>
+	<![endif]-->
+	<script type="text/javascript">
+		var addthis_config = {
+		   ui_click: true
+		}	
+		eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('1(4(){1("#h").o({n:{f:{0:2,8:e},6:{0:2,b:2},c:{0:2}},p:{f:{0:"3 5 q s r 9 m.",8:"l i k j t F I e E."},6:{0:"3 5 D g d",b:"3 5 a u g d"},c:{0:"3 5 9 H C"}}})});4 B(){1("#h").w()}4 v(7){x(7){1(\'#\'+7).y(A)}}4 z(){1(\'#6\').G("")}',45,45,'required|jQuery|true|Please|function|enter|person_email|id|minlength|the||email|feedback_captcha|Address|10|feedback_message|Email|footerfeedbackMain|message|consist|must|Your|reply|rules|validate|messages|some|for|information|of|valid|showForm|submit|if|toggle|clearField|400|formSubmit|Code|an|characters|at|val|Security|least'.split('|')))
+
+	</script>
+</head>
+
+<body id="page">
+	<!-- wrapper -->
+	<div class="rapidxwpr floatholder">
+
+		<!-- header -->
+		<div id="header">
+	
+			<!-- searchbox -->
+			<div id="searchbox">
+				<a class="share addthis_button" href="http://www.addthis.com/bookmark.php?v=250&amp;pub=xa-4aee423643f8276e">Share</a>
+
+				<!-- languages -->
+				<div class="language-box">
+					<form>
+						<select id="l" name="l"  onChange="this.form.submit()" >
+<option value="en_US" selected="selected">English (US)</option>
+<option value="es_UY">español, castellano (UY)</option>
+<option value="fr_FR">français (FR)</option>
+</select>					</form>
+				</div>
+				<!-- / languages -->
+			
+				<!-- searchform -->
+				<div class="search-form">
+					<form method="get" id="search" action="http://localhost:8888/ushahidi/search/">
+						<ul>
+							<li><input type="text" name="k" value="" class="text" /></li>
+							<li><input type="submit" name="b" class="searchbtn" value="search" /></li>
+						</ul>
+					</form>
+				</div>
+				<!-- / searchform -->
+		
+			</div>
+			<!-- / searchbox -->
+		
+			<!-- logo -->
+			<div id="logo">
+				<h1><p>&nbsp</p> </h1>
+				<span><p>&nbsp</p> </span>
+			</div>
+			<!-- / logo -->
+		
+			<!-- submit incident -->
+			<div class="submit-incident clearingfix">
+				<a href="http://localhost:8888/ushahidi/reports/submit">Submit an Incident</a>
+			</div>
+			<!-- / submit incident -->
+		</div>
+		<!-- / header -->
+
+		<!-- main body -->
+		<div id="middle">
+			<div class="background layoutleft">
+		
+				<!-- mainmenu -->
+				<div id="mainmenu" class="clearingfix">
+					<ul>
+						<li><a href="http://localhost:8888/ushahidi/main" >Home</a></li>
+						<li><a href="http://localhost:8888/ushahidi/reports" class="active">Reports</a></li>
+						<li><a href="http://localhost:8888/ushahidi/reports/submit" >Submit an Incident</a></li>
+						<li><a href="http://localhost:8888/ushahidi/alerts" >Get Alerts</a></li>
+													<li><a href="http://localhost:8888/ushahidi/contact" >Contact Us</a></li>
+														<li><a href="http://localhost:8888/ushahidi/help" >How to Help</a></li>
+							<li><a href="http://localhost:8888/ushahidi/page/index/1" >About Us</a></li>					</ul>
+
+				</div>
+				<!-- / mainmenu -->
+
+				<div id="content">
+					<div class="content-bg">
+						<!-- start reports block -->
+						<div class="big-block">
+							<h1>Reports 								(10 reports)</h1>
+								
+							<script type="text/javascript" charset="utf-8">
+			Event.observe(window, 'load', function() {
+				data0 = new Array([1,2]);
+			data1 = new Array([1,2]);
+			data2 = new Array([1,1]);
+			data3 = new Array([1,1]);
+			data4 = new Array([1,2]);
+			data5 = new Array([1,1]);
+			data6 = new Array([1,1]);
+			new Proto.Chart($('protochart_reports'),[{label: "SES", color:"#44a5f5", data: data0},{label: "High Risk Areas", color:"#ed8f2b", data: data1},{label: "Places of Last Resort", color:"#f5b767", data: data2},{label: "Evacuation Alerts", color:"#e04a4a", data: data3},{label: "Fire Break Areas", color:"#c9770c", data: data4},{label: "DSE", color:"#0de0e0", data: data5},{label: "BoM", color:"#2151b8", data: data6},],{
+				bars: {show: true,
+				},xaxis: {min: 0,
+				max: 2,
+				tickFormatter: function (val, axis)
+						{
+						    switch(val){case 1:
+						    		return 'Jun 06';default:
+						    		return '';
+						    }
+						    return 'sup';
+						  },
+				},yaxis: {tickSize: 1,
+				max: 3,
+				tickDecimals: 0,
+				},legend: {show: true,
+				noColumns: 3,
+				},grid: {drawXAxis: false,
+				},
+				});		
+			});
+		</script>
+		<div id="protochart_reports" style="width:900px;height:100px"></div>								
+							<div class="report_rowtitle">
+								<div class="report_col1">
+									<strong>MEDIA</strong>
+								</div>
+								<div class="report_col2">
+									<strong>REPORT TITLE</strong>
+								</div>
+								<div class="report_col3">
+									<strong>DATE</strong>
+								</div>
+								<div class="report_col4">
+									<strong>LOCATION</strong>
+								</div>
+								<div class="report_col5">
+									<strong>VERIFIED?</strong>
+								</div>
+							</div>
+							<div class="report_row1">	<div class="report_thumb report_col1">			&nbsp;<img src="http://localhost:8888/ushahidi/media/img/image.png">		</div>		<div class="report_details report_col2">			<h3><a href="http://localhost:8888/ushahidi/reports/view/12">Fire Brigade at Scene</a></h3>1 Fire truck		</div>		<div class="report_date report_col3">2010-06-06		</div>		<div class="report_location report_col4">Strathewen		</div>		<div class="report_status report_col5"><span class="report_no">NO</span>		</div></div><div class="report_row1">	<div class="report_thumb report_col1">			&nbsp;<img src="http://localhost:8888/ushahidi/media/img/image.png">		</div>		<div class="report_details report_col2">			<h3><a href="http://localhost:8888/ushahidi/reports/view/11">A building left standing</a></h3>Possible last place of refuge		</div>		<div class="report_date report_col3">2010-06-06		</div>		<div class="report_location report_col4">Strathewen		</div>		<div class="report_status report_col5"><span class="report_no">NO</span>		</div></div><div class="report_row1">	<div class="report_thumb report_col1">			&nbsp;<img src="http://localhost:8888/ushahidi/media/img/image.png">		</div>		<div class="report_details report_col2">			<h3><a href="http://localhost:8888/ushahidi/reports/view/9">Backburning Operation</a></h3>Fire prevention task		</div>		<div class="report_date report_col3">2010-06-06		</div>		<div class="report_location report_col4">Bendigo		</div>		<div class="report_status report_col5"><span class="report_yes">YES</span>		</div></div><div class="report_row1">	<div class="report_thumb report_col1">			&nbsp;<img src="http://localhost:8888/ushahidi/media/img/image.png">		</div>		<div class="report_details report_col2">			<h3><a href="http://localhost:8888/ushahidi/reports/view/8">Injured Animal</a></h3>An injured animal was found at this location		</div>		<div class="report_date report_col3">2010-06-06		</div>		<div class="report_location report_col4">National Park		</div>		<div class="report_status report_col5"><span class="report_yes">YES</span>		</div></div>													</div>
+						<!-- end reports block -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+     
+ 
+	<!-- footer -->
+	<div id="footer" class="clearingfix">
+ 
+		<div id="underfooter"></div>
+ 
+		<!-- footer content -->
+		<div class="rapidxwpr floatholder">
+ 
+			<!-- footer credits -->
+			<div class="footer-credits">
+				Powered by <a href="http://www.ushahidi.com/"><img src="http://localhost:8888/ushahidi//media/img/footer-logo.png" alt="Ushahidi" align="absmiddle" /></a>
+			</div>
+			<!-- / footer credits -->
+		
+			<!-- footer menu -->
+			<div class="footermenu">
+				<ul class="clearingfix">
+					<li><a class="item1" href="http://localhost:8888/ushahidi/">Home</a></li>
+					<li><a href="http://localhost:8888/ushahidi/reports/submit">Report an Incident</a></li>
+					<li><a href="http://localhost:8888/ushahidi/alerts">Get Alerts</a></li>
+					<li><a href="http://localhost:8888/ushahidi/help">How to Help</a></li>
+					<li><a href="#">About </a></li>
+					<li><a href="#">Contact Us</a></li>
+					<li><a href="#">Blog</a></li>
+				</ul>
+				<p>Copyright © 2009 Ushahidi.com. All Rights Reserved.</p>
+			</div>
+			<!-- / footer menu -->
+ 
+			<!-- feedback form -->
+			<h2 class="feedback_title" style="clear:both">
+				<a href="javascript:showForm('table-holder')">Provide Feedback</a>
+			</h2>
+			<div id="table-holder" class="feedback_forms">
+				<h2>Provide Feedback <button style="margin-left:2em" onclick="javascript:showForm('table-holder')">Close</button></h2>
+				<form action="http://localhost:8888/ushahidi/reports?lon=145.250244&amp;lat=-37.507819" method="post" id="footerfeedbackMain" name="footerfeedbackMain">
+				<input type="hidden" name="person_ip" value="::1"  />
+				<table class="table">
+					<tbody>
+						<tr>
+							<td>
+								<textarea id="feedback_message" name="feedback_message"  class="textarea long" rows="5" cols="50"></textarea>								<br /><br />
+															</td>
+							<td>
+								<div class="or_txt">
+									Or
+								</div>
+							</td>
+							<td>
+								<div class="detailed_feedback">
+									<a href="http://feedback.ushahidi.com/fillsurvey.php?sid=5">Provide Detailed Feedback</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="report_row">
+									<strong>Security Code:</strong><br />
+									<img alt="Captcha" src="http://localhost:8888/ushahidi/captcha/default" width="150" height="50" /><br />
+									<input type="text" id="feedback_captcha" name="feedback_captcha" value=""  class="text" />									<br /><br />
+																	</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3">
+																<input type="text" id="person_email" name="person_email" value="Email address" size="40" class="text"  onclick="clearField();" />								
+<button id="submit" name="submit" >Send</button>								<br /><br />
+															</td>
+						</tr>
+					</tbody>
+				</table>
+				</form>
+			</div>
+			<!-- /feedback form -->
+ 
+		</div>
+		<!-- / footer content -->
+ 
+	</div>
+	<!-- / footer -->
+ 
+	<img src="http://tracker.ushahidi.com/track.php?url=null&lang=en_US&version=1.0.1" />
+	<!-- Piwik -->
+		<script type="text/javascript">
+		var pkBaseURL = (("https:" == document.location.protocol) ? "https://tracker.ushahidi.com/piwik/" : "http://tracker.ushahidi.com/piwik/");
+		document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+		
+		</script><script type="text/javascript">
+		try {
+		  var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 2194);
+		  piwikTracker.trackPageView();
+		  piwikTracker.enableLinkTracking();
+		} catch( err ) {}
+		</script><noscript><p><img src="http://tracker.ushahidi.com/piwik/piwik.php?idsite=2194" style="border:0" alt=""/></p></noscript>
+		
+		<!-- End Piwik Tag -->
+				
+	<!-- Task Scheduler -->
+	<img src="http://localhost:8888/ushahidi/scheduler" height="1" width="1" border="0" />
+ 
+        <!-- script for share button -->
+        <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pub=ushahidi"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+80b3f2e5e3634acdd6cae58c695b62012d0124bc{"type": "FeatureCollection","features": [{"type":"Feature","properties": {"id": "8", 
+"name":"<a href='http://129.94.108.27:8888/ushahidi/reports/view/8'>Injured Animal</a>","category":[0], "color": "CC0000", 
+"icon": "", 
+"timestamp": "1275751020"},"geometry": {"type":"Point", "coordinates":[145.238571, -37.508364]}},{"type":"Feature","properties": {"id": "11", 
+"name":"<a href='http://129.94.108.27:8888/ushahidi/reports/view/11'>A building left standing</a>","category":[0], "color": "CC0000", 
+"icon": "", 
+"timestamp": "1275752340"},"geometry": {"type":"Point", "coordinates":[145.206299, -37.529332]}},{"type":"Feature","properties": {"id": "12", 
+"name":"<a href='http://129.94.108.27:8888/ushahidi/reports/view/12'>Fire Brigade at Scene</a>","category":[0], "color": "CC0000", 
+"icon": "", 
+"timestamp": "1275752640"},"geometry": {"type":"Point", "coordinates":[145.340195, -37.599272]}},{"type":"Feature","properties": {"id": "9", 
+"name":"<a href='http://129.94.108.27:8888/ushahidi/reports/view/9'>Backburning Operation</a>","category":[0], "color": "CC0000", 
+"icon": "", 
+"timestamp": "1275752040"},"geometry": {"type":"Point", "coordinates":[145.250244, -37.507819]}}]}
