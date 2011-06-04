@@ -20,9 +20,11 @@ body {
   background: -moz-linear-gradient(top, #9dd53a 0%, #a1d54f 50%, #80c217 51%, #7cbc0a 100%);
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#9dd53a), color-stop(50%,#a1d54f), color-stop(51%,#80c217), color-stop(100%,#7cbc0a));
 }
+#layerlist.hidden {
+  display: none;
+}
 
 #layerlist {
-  display: none;
   background: #7cbc0a;
   position: absolute;
   right: 0;

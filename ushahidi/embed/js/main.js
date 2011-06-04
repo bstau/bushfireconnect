@@ -28,56 +28,6 @@ ushahidi.Map.prototype.initMap_ = function(node) {
   google.maps.event.addListener(map, 'idle', function() {
     me.buildHash_();
   });
-
-  var layerBtn = document.getElementById('layerbtn');
-  if (layerBtn) {
-    layerBtn.onclick = function(e) {
-      var l = document.getElementById('layerlist');
-      if (l) {
-        l.style.display = (l.style.display == 'block') ? 'none' : 'block';
-      }
-    };
-  }
-
-  var client = new XMLHttpRequest();
-  if (client) {
-    client.onreadystatechange = function() {
-      if (4 == this.readyState && 200 == this.status) {
-        var ll = document.getElementById('layerlist');
-        if (!ll) return;
-
-        data = eval('(' + this.responseText + ')');
-        if (data.payload && data.payload.categories) {
-          for (var i = 0; i < data.payload.categories.length; ++i) {
-            var cat = data.payload.categories[i].category;
-            if (0 == cat.parent_id) {
-              var elem = document.createElement('div');
-              var cb = document.createElement('input');
-              var lbl = document.createElement('label');
-              cb.type = 'checkbox';
-              cb.id = lbl.htmlFor = 'layer' + cat.id;
-              var txt = document.createTextNode(' ' + cat.description);
-              if (cat.color && cat.color.length) {
-                var colourIcon = document.createElement('div');
-                colourIcon.style.backgroundColor = '#' + cat.color;
-                colourIcon.className = 'layercolour';
-                elem.appendChild(colourIcon);
-              }
-
-              elem.className = 'layer';
-              lbl.appendChild(txt);
-              elem.appendChild(cb);
-              elem.appendChild(lbl);
-              ll.appendChild(elem); 
-            }
-          }
-        }
-      }
-    };
-
-    client.open('GET', '../api?task=categories&resp=json');
-    client.send();
-  }
 };
 
 ushahidi.Map.prototype.getMap = function() {

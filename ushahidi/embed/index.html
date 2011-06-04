@@ -15,6 +15,7 @@
   <script src="js/layers.js"></script>
   <script src="js/api.js"></script>
   <script src="js/osm.js"></script>
+  <script src="js/layercontrol.js"></script>
   <script>
     $(window).load(function() {
       var params = {
@@ -28,6 +29,8 @@
       var map = new ushahidi.Map($('#map')[0], params);
       var api = new ushahidi.Api('../');
       map.addLayer(new ushahidi.IncidentOverlay(api));
+      var control = new ushahidi.LayerControl(api, document.getElementById('layerbtn'),
+          document.getElementById('layerlist'));
     });
 
     function parseHash(params) {
@@ -74,7 +77,6 @@
   <div id="map-wrapper">
     <div id="map"></div>
   </div>
-  <div id="layerlist">
-  </div>
+  <div id="layerlist" class="hidden"></div>
 </body>
 </html>

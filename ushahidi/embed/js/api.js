@@ -19,3 +19,7 @@ ushahidi.Api.prototype.getIncidentsByCategoryName = function(name, callback) {
 ushahidi.Api.prototype.getIncidentsCentroid = function(callback) {
   $.getJSON(this.base_ + 'api?task=geographicmidpoint', callback);
 };
+
+ushahidi.Api.prototype.getCategories = function(callback) {
+  $.getJSON(this.base_ + 'api?task=categories', callback);
+};
