@@ -1,7 +1,0 @@
-bfae464120cacdf3ed5832de655ea4d13078e243{"type": "FeatureCollection","features": [{"type":"Feature","properties": {"id": "8", 
-"name":"<a href='http://localhost:8888/ushahidi/reports/view/8'>Injured Animal</a>","category":[13], "color": "44a5f5", 
-"icon": "category_13_1275784943.png", 
-"timestamp": "1275751020"},"geometry": {"type":"Point", "coordinates":[145.238571, -37.508364]}},{"type":"Feature","properties": {"id": "12", 
-"name":"<a href='http://localhost:8888/ushahidi/reports/view/12'>Fire Brigade at Scene</a>","category":[13], "color": "44a5f5", 
-"icon": "category_13_1275784943.png", 
-"timestamp": "1275752640"},"geometry": {"type":"Point", "coordinates":[145.340195, -37.599272]}}]}

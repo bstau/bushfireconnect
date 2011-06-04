@@ -21,6 +21,22 @@ body {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#9dd53a), color-stop(50%,#a1d54f), color-stop(51%,#80c217), color-stop(100%,#7cbc0a));
 }
 
+#layerlist {
+  display: none;
+  background: #7cbc0a;
+  position: absolute;
+  right: 0;
+  top: 38px;
+  height: auto;
+  width: 20em;
+  box-shadow: 0 3px 12px 3px rgba(32, 32, 32, 0.4);
+}
+
+#layerlist .layer {
+  padding: 0.5em 0.5em;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #e7e7e7));
+}
+
 #footer {
   z-index: 1;
   position: absolute;
@@ -115,10 +131,15 @@ body {
   right: 6px;
 }
 
+#header .button-right2 {
+  right: 46px;
+}
+
 #header .button-left {
   left: 6px;
 }
 
+#layerbtn span,
 #my-location span {
   font-size: 23px !important;
   padding: 0 4px;
@@ -221,6 +242,7 @@ body {
 }
 
 #refresh span,
+#layerbtn span,
 #my-location span {
   font-size: 23px !important;
   padding: 0 4px;

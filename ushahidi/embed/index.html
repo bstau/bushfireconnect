@@ -53,9 +53,14 @@
 <body>
   <div id="header">
     <h1>Ushahidi Mobile</h1>
-    <a href="#" class="button button-right" id="refresh">
+    <a href="#" class="button button-left" id="refresh">
       <span>
         <img src="img/icon_refresh.png">
+      </span>
+    </a>
+    <a href="#" class="button button-right2" id="layerbtn">
+      <span>
+        <img src="img/layers_icon.png" id="layers"/>
       </span>
     </a>
     <a href="#" class="button button-right" id="my-location">
@@ -69,6 +74,10 @@
   <div id="map-wrapper">
     <div id="map"></div>
   </div>
-
+  <div id="layerlist">
+    <div class="layer"><input type="checkbox" id="l0"><label for="l0"> Test Layer</label></div>
+    <div class="layer"><input type="checkbox" id="l1"><label for="l1"> Test Layer</label></div>
+    <div class="layer"><input type="checkbox" id="l2"><label for="l2"> Test Layer</label></div>
+  </div>
 </body>
 </html>

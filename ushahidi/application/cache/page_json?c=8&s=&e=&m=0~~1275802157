@@ -1,4 +1,0 @@
-6028af7acbdb9c74a8b87698ff4c7b4178cc937f{"type": "FeatureCollection","features": [{"type":"Feature","properties": {"id": "13", 
-"name":"<a href='http://localhost:8888/ushahidi/reports/view/13'>Bushfire starting</a>","category":[8], "color": "e03620", 
-"icon": "category_8_1275785900.png", 
-"timestamp": "1275756960"},"geometry": {"type":"Point", "coordinates":[144.963169, -37.814251]}}]}

@@ -28,6 +28,14 @@ ushahidi.Map.prototype.initMap_ = function(node) {
   google.maps.event.addListener(map, 'idle', function() {
     me.buildHash_();
   });
+
+  var layerBtn = document.getElementById('layerbtn');
+  if (layerBtn) {
+    layerBtn.onclick = function(e) {
+      var l = document.getElementById('layerlist');
+      if (l) l.style.display = (l.style.display == 'block') ? 'none' : 'block';
+    };
+  }
 };
 
 ushahidi.Map.prototype.getMap = function() {
