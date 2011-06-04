@@ -5,6 +5,10 @@ ushahidi.Map = function(node, params) {
   this.initMap_(node);
 };
 
+ushahidi.Map.prototype.addLayer = function(layer) {
+  layer.setMap(this.map_);
+};
+
 ushahidi.Map.prototype.initMap_ = function(node) {
   var me = this;
   this.map_ = new google.maps.Map(node, {
