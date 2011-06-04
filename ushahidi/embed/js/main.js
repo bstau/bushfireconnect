@@ -11,18 +11,27 @@ ushahidi.Map.prototype.addLayer = function(layer) {
 
 ushahidi.Map.prototype.initMap_ = function(node) {
   var me = this;
-  this.map_ = new google.maps.Map(node, {
+  var map = this.map_ = new google.maps.Map(node, {
     center: this.params_.center,
     zoom: this.params_.zoom,
-    mapTypeId: this.params_.maptype
+    mapTypeId: this.params_.maptype,
+    mapTypeControlOptions: {
+      mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain', 'osm']
+    }
   });
 
-  google.maps.event.addListener(this.map_, 'maptypeid_changed', function() {
+  map.mapTypes.set('osm', osm = new OSMLayer());
+
+  google.maps.event.addListener(map, 'maptypeid_changed', function() {
     me.buildHash_();
   });
-  google.maps.event.addListener(this.map_, 'idle', function() {
+  google.maps.event.addListener(map, 'idle', function() {
     me.buildHash_();
   });
+};
+
+ushahidi.Map.prototype.getMap = function() {
+  return this.map_;
 };
 
 ushahidi.Map.prototype.buildHash_ = function() {
