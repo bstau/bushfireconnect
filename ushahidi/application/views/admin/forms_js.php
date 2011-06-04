@@ -26,6 +26,7 @@ $(document).ready(function() {
 function fillFields(id, form_title, form_description,
  form_visible )
 {
+	show_addedit();
 	$("#form_id").attr("value", unescape(id));
 	$("#form_title").attr("value", unescape(form_title));
 	$("#form_description").attr("value", unescape(form_description));
@@ -37,11 +38,12 @@ function fillFields(id, form_title, form_description,
 function formAction ( action, confirmAction, id )
 {
 	var statusMessage;
-	var answer = confirm('Are You Sure You Want To ' 
-		+ confirmAction + ' items?');
+	var answer = confirm('<?php echo Kohana::lang('ui_admin.are_you_sure_you_want_to'); ?> ' + confirmAction + '?');
+		
 	if (answer){
 		// Set Submit Type
 		$("#action_" + id).attr("value", action);		
+		
 		// Submit Form
 		$("#form_action_" + id).submit();			
 	
@@ -75,7 +77,7 @@ function showFormSelected(id, form_id, field_id, select_disable)
 		$('#form_result_' + form_id).hide();
 		$('#form_fields_' + form_id).hide(300);
 		$('#form_field_' + form_id +' [name=field_type]').val(id);
-		$.post("<?php echo url::base() . 'admin/manage/forms/selector' ?>", { selector_id: id, form_id: form_id, field_id: field_id },
+		$.post("<?php echo url::site() . 'admin/manage/forms/selector' ?>", { selector_id: id, form_id: form_id, field_id: field_id },
 			function(data){
 				if (data.status == 'success'){
 					$('#form_fields_' + form_id).html('');
@@ -106,10 +108,9 @@ function fieldAction( action, confirmAction, field_id, form_id, field_type )
 		});
 		break;
 	case 'd':
-		var answer = confirm('Are You Sure You Want To ' 
-			+ confirmAction + ' Field?');
+		var answer = confirm('<?php echo Kohana::lang('ui_admin.are_you_sure_you_want_to'); ?> ' + confirmAction + '?');
 		if (answer){
-			$.post("<?php echo url::base() . 'admin/manage/forms/field_delete' ?>", { form_id: form_id, field_id: field_id },
+			$.post("<?php echo url::site() . 'admin/manage/forms/field_delete' ?>", { form_id: form_id, field_id: field_id },
 				function(data){
 					if (data.status == 'success'){
 						$('#form_fields_current_' + form_id).html('');
@@ -123,7 +124,7 @@ function fieldAction( action, confirmAction, field_id, form_id, field_type )
 		}
 		break;
 	case 'mu':
-		$.post("<?php echo url::base() . 'admin/manage/forms/field_move' ?>", { form_id: form_id, field_id: field_id, field_position: 'u' },
+		$.post("<?php echo url::site() . 'admin/manage/forms/field_move' ?>", { form_id: form_id, field_id: field_id, field_position: 'u' },
 			function(data){
 				if (data.status == 'success'){
 					$('#form_fields_current_' + form_id).html('');
@@ -136,7 +137,7 @@ function fieldAction( action, confirmAction, field_id, form_id, field_type )
 		  	}, "json");
 		break;
 	case 'md':
-		$.post("<?php echo url::base() . 'admin/manage/forms/field_move' ?>", { form_id: form_id, field_id: field_id, field_position: 'd' },
+		$.post("<?php echo url::site() . 'admin/manage/forms/field_move' ?>", { form_id: form_id, field_id: field_id, field_position: 'd' },
 			function(data){
 				if (data.status == 'success'){
 					$('#form_fields_current_' + form_id).html('');

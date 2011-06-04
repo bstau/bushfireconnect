@@ -19,7 +19,18 @@
 		var map_layer;
 		var radius = 20000;
 		
-		jQuery(function() {
+		jQuery(function($) {
+			
+			$(window).load(function(){
+			<?php 
+				
+				/*OpenLayers uses IE's VML for vector graphics.
+					We need to wait for IE's engine to finish loading all namespaces (document.namespaces) for VML.
+					jQuery.ready is executing too soon for IE to complete it's loading process.
+				 */
+			?>
+			
+			
 			/*
 			- Initialize Map
 			- Uses Spherical Mercator Projection
@@ -29,7 +40,7 @@
 			var proj_900913 = new OpenLayers.Projection('EPSG:900913');
 			var options = {
 				units: "m",
-				numZoomLevels: 16,
+				numZoomLevels: 18,
 				controls:[],
 				projection: proj_900913,
 				'displayProjection': proj_4326
@@ -42,47 +53,26 @@
 			- Live/Yahoo/OSM/Google
 			- Set Bounds					
 			*/
-			var default_map = <?php echo $default_map; ?>;
-			if (default_map == 2)
-			{
-				map_layer = new OpenLayers.Layer.VirtualEarth("virtualearth", {
-					sphericalMercator: true,
-					maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34)
-					});
-			}
-			else if (default_map == 3)
-			{
-				map_layer = new OpenLayers.Layer.Yahoo("yahoo", {
-					sphericalMercator: true,
-					maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34)
-					});
-			}
-			else if (default_map == 4)
-			{
-				map_layer = new OpenLayers.Layer.OSM.Mapnik("openstreetmap", {
-					sphericalMercator: true,
-					maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34)
-					});
-			}
-			else
-			{
-				map_layer = new OpenLayers.Layer.Google("google", {
-					sphericalMercator: true,
-					maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34)
-					});
-			}
-			map.addLayer(map_layer);
+
+			<?php echo map::layers_js(FALSE); ?>
+			map.addLayers(<?php echo map::layers_array(FALSE); ?>);
 			
 			map.addControl(new OpenLayers.Control.Navigation());
+			
 			map.addControl(new OpenLayers.Control.PanZoomBar());
+			
 			map.addControl(new OpenLayers.Control.Attribution());
+			
 			map.addControl(new OpenLayers.Control.MousePosition());
+			
+			map.addControl(new OpenLayers.Control.LayerSwitcher());
+			
 			
 			
 			// Create the Circle/Radius layer
 			var radiusLayer = new OpenLayers.Layer.Vector("Radius Layer");
 			
-			
+					
 			// Create the markers layer
 			var markers = new OpenLayers.Layer.Markers("Markers");
 			map.addLayers([radiusLayer, markers]);
@@ -142,46 +132,52 @@
 			Google GeoCoder
 			TODO - Add Yahoo and Bing Geocoding Services
 			 */
-			$('.btn_find').live('click', function () {
-				address = $("#location_find").val();
-				if ( typeof GBrowserIsCompatible == 'undefined' ) {
-					alert('GeoCoding is only currently supported by Google Maps.\n\nPlease pinpoint the location on the map\nusing your mouse.');
-				} else {
-					var geocoder = new GClientGeocoder();
-					if (geocoder) {
-						$('#find_loading').html('<img src="<?php echo url::base() . "media/img/loading_g.gif"; ?>">');
-						geocoder.getLatLng(
-							address,
-							function(point) {
-								if (!point) {
-									alert(address + " not found!\n\n***************************\nFind a city or town close by and zoom in\nto find your precise location");
-									$('#find_loading').html('');
-								} else {
-									var lonlat = new OpenLayers.LonLat(point.lng(), point.lat());
-									lonlat.transform(proj_4326,proj_900913);
-								
-									m = new OpenLayers.Marker(lonlat);
-									markers.clearMarkers();
-							    	markers.addMarker(m);
-									map.setCenter(lonlat, <?php echo $default_zoom; ?>);
-								
-									newRadius = $("#alert_radius").val();
+			 $('.btn_find').live('click', function () {
+				geoCode();
+			});
+			
+			
+			
+			//DFP 07/02/2011 
+		/**
+		 * Google GeoCoder
+		 */
+		function geoCode()
+		{
+			$('#find_loading').html('<img src="<?php echo url::base() . "media/img/loading_g.gif"; ?>">');
+			address = $("#location_find").val() + " Australia";
+			$.post("<?php echo url::site() . 'alerts/geocode/' ?>", { address: address },
+				function(data){
+					if (data.status == 'success'){
+						var lonlat = new OpenLayers.LonLat(data.message[1], data.message[0]);
+						lonlat.transform(proj_4326,proj_900913);
+					
+						m = new OpenLayers.Marker(lonlat);
+						markers.clearMarkers();
+				    	markers.addMarker(m);
+						map.setCenter(lonlat, <?php echo $default_zoom; ?>);
+						
+						// Update form values
+						$("#alert_lat").attr("value", data.message[0]);
+						$("#alert_lon").attr("value", data.message[1]);
+						
+						newRadius = $("#alert_radius").val();
 									radius = newRadius * 1000
 
-									drawCircle(point.lng(),point.lat(), radius);
+									drawCircle( data.message[1], data.message[0], radius);
 								
-									// Update form values (jQuery)
-									$("#alert_lat").attr("value", point.lat());
-									$("#alert_lon").attr("value", point.lng());
 								
-									$('#find_loading').html('');
-								}
-							}
-						);
+								
+						
+					} else {
+						alert(address + " not found!\n\n***************************\nEnter more details like city, town, country\nor find a city or town close by and zoom in\nto find your precise location");
 					}
-				}
-				return false;
-			});
+					$('#find_loading').html('');
+				}, "json");
+			return false;
+		}
+	     
+			
 			
 			
 			// Alerts Slider
@@ -220,4 +216,14 @@
 					$("#alert_email_yes").attr("checked",false);
 				}
 			});
+		
+		
+			// Category treeview
+		    $("#category-column-1,#category-column-2").treeview({
+		      persist: "location",
+			  collapsed: true,
+			  unique: false
+			  });
+			});
 		});
+			

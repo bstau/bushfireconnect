@@ -4,7 +4,7 @@
  * then a full URL will be used, eg: http://localhost/ushahidi/. If it only includes
  * the path, and a site_protocol is specified, the domain will be auto-detected.
  */
-$config['site_domain'] = '/ushahidi/';
+$config['site_domain'] = 'localhost/ushahidi/';
 
 /**
  * Force a default protocol to be used by the site. If no site_protocol is
@@ -18,7 +18,7 @@ $config['site_protocol'] = 'http';
  *
  * This can be removed by using URL rewriting.
  */
-$config['index_page'] = '';
+$config['index_page'] = 'index.php';
 
 /**
  * Fake file extension that will be added to all generated URLs. Example: .html
@@ -30,7 +30,7 @@ $config['url_suffix'] = '';
  * The internal cache stores file paths and config entries across requests and
  * can give significant speed improvements at the expense of delayed updating.
  */
-$config['internal_cache'] = TRUE;
+$config['internal_cache'] = FALSE;
 
 /**
  * Enable or disable gzip output compression. This can dramatically decrease
@@ -86,6 +86,14 @@ $config['display_errors'] = TRUE;
  * @see http://docs.kohanaphp.com/general/configuration
  */
 $config['render_stats'] = TRUE;
+
+/**
+ * Turn MHI on or off. This is an advanced feature that will drastically alter
+ * the way your instance works. Please read documentation before proceeding.
+ *
+ * @see [A URL not yet created]
+ */
+$config['enable_mhi'] = FALSE;
 
 /**
  * Filename prefixed used to determine extensions. For example, an

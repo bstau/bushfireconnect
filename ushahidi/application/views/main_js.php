@@ -1,8 +1,8 @@
-<?php 
+<?php
 /**
- * Main js file.
+ * Main cluster js file.
  * 
- * Handles javascript stuff related to main function.
+ * Server Side Map Clustering
  *
  * PHP version 5
  * LICENSE: This source file is subject to LGPL license 
@@ -16,308 +16,576 @@
  */
 ?>
 		// Map JS
+		
+		// Map Object
 		var map;
+		// Selected Category
+		var currentCat;
+		// Selected Layer
+		var thisLayer;
+		// WGS84 Datum
+		var proj_4326 = new OpenLayers.Projection('EPSG:4326');
+		// Spherical Mercator
+		var proj_900913 = new OpenLayers.Projection('EPSG:900913');
+		// Change to 1 after map loads
+		var mapLoad = 0;
+		// /json or /json/cluster depending on if clustering is on
+		var default_json_url = "<?php echo $json_url ?>";
+		// Current json_url, if map is switched dynamically between json and json_cluster
+		var json_url = default_json_url;
+		
+		var baseUrl = "<?php echo url::base(); ?>";
+		var longitude = <?php echo $longitude; ?>;
+		var latitude = <?php echo $latitude; ?>;
+		var defaultZoom = <?php echo $default_zoom; ?>;
+		var markerRadius = <?php echo $marker_radius; ?>;
+		var markerOpacity = "<?php echo $marker_opacity; ?>";
+		
+		var activeZoom = null;
+
+		var gMarkerOptions = {baseUrl: baseUrl, longitude: longitude,
+		                     latitude: latitude, defaultZoom: defaultZoom,
+							 markerRadius: markerRadius,
+							 markerOpacity: markerOpacity,
+							 protocolFormat: OpenLayers.Format.GeoJSON};
+							
+		/*
+		Create the Markers Layer
+		*/
+		function addMarkers(catID,startDate,endDate, currZoom, currCenter,
+			mediaType, thisLayerID, thisLayerType, thisLayerUrl, thisLayerColor)
+		{
+			activeZoom = currZoom;
+			
+			if(activeZoom == ''){
+				return $.timeline({categoryId: catID,
+		                   startTime: new Date(startDate * 1000),
+		                   endTime: new Date(endDate * 1000),
+						   mediaType: mediaType
+						  }).addMarkers(
+							startDate, endDate, gMap.getZoom(),
+							gMap.getCenter(), thisLayerID, thisLayerType, 
+							thisLayerUrl, thisLayerColor, json_url);
+			}
+			
+			setTimeout(function(){
+				if(currZoom == activeZoom){
+					return $.timeline({categoryId: catID,
+		                   startTime: new Date(startDate * 1000),
+		                   endTime: new Date(endDate * 1000),
+						   mediaType: mediaType
+						  }).addMarkers(
+							startDate, endDate, gMap.getZoom(),
+							gMap.getCenter(), thisLayerID, thisLayerType, 
+							thisLayerUrl, thisLayerColor, json_url);
+				}else{
+					return true;
+				}
+			}, 2000);
+		}
+
+		/*
+		Display loader as Map Loads
+		*/
+		function onMapStartLoad(event)
+		{
+			if ($("#loader"))
+			{
+				$("#loader").show();
+			}
+
+			if ($("#OpenLayers\\.Control\\.LoadingPanel_4"))
+			{
+				$("#OpenLayers\\.Control\\.LoadingPanel_4").show();
+			}
+		}
+
+		/*
+		Hide Loader
+		*/
+		function onMapEndLoad(event)
+		{
+			if ($("#loader"))
+			{
+				$("#loader").hide();
+			}
+
+			if ($("#OpenLayers\\.Control\\.LoadingPanel_4"))
+			{
+				$("#OpenLayers\\.Control\\.LoadingPanel_4").hide();
+			}
+		}
+
+		/*
+		Close Popup
+		*/
+		function onPopupClose(evt)
+		{
+            // selectControl.unselect(selectedFeature);
+			for (var i=0; i<map.popups.length; ++i)
+			{
+				map.removePopup(map.popups[i]);
+			}
+        }
+
+		/*
+		Display popup when feature selected
+		*/
+        function onFeatureSelect(event)
+		{
+            selectedFeature = event;
+            // Since KML is user-generated, do naive protection against
+            // Javascript.
+
+			zoom_point = event.feature.geometry.getBounds().getCenterLonLat();
+			lon = zoom_point.lon;
+			lat = zoom_point.lat;
+
+			var content = "<div class=\"infowindow\"><div class=\"infowindow_list\">"+event.feature.attributes.name+"<div style=\"clear:both;\"></div></div>";
+		    content = content + "\n<div class=\"infowindow_meta\"><a href='"+event.feature.attributes.link+"'><?php echo Kohana::lang('ui_main.more_information');?></a><br/><a href='javascript:zoomToSelectedFeature("+ lon + ","+ lat +", 1)'><?php echo Kohana::lang('ui_main.zoom_in');?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href='javascript:zoomToSelectedFeature("+ lon + ","+ lat +", -1)'><?php echo Kohana::lang('ui_main.zoom_out');?></a></div>";
+			content = content + "</div>";			
+
+			if (content.search("<script") != -1)
+			{
+                content = "Content contained Javascript! Escaped content below.<br />" + content.replace(/</g, "&lt;");
+            }
+            popup = new OpenLayers.Popup.FramedCloud("chicken", 
+				event.feature.geometry.getBounds().getCenterLonLat(),
+				new OpenLayers.Size(100,100),
+				content,
+				null, true, onPopupClose);
+            event.feature.popup = popup;
+            map.addPopup(popup);
+        }
+
+		/*
+		Destroy Popup Layer
+		*/
+        function onFeatureUnselect(event)
+		{
+            map.removePopup(event.feature.popup);
+            event.feature.popup.destroy();
+            event.feature.popup = null;
+        }
+
+		// Refactor Clusters On Zoom
+		// *** Causes the map to load json twice on the first go
+		// *** Need to fix this!
+		function mapZoom(event)
+		{
+			// Prevent this event from running on the first load
+			if (mapLoad > 0)
+			{
+				// Get Current Category
+				currCat = $("#currentCat").val();
+
+				// Get Current Start Date
+				currStartDate = $("#startDate").val();
+
+				// Get Current End Date
+				currEndDate = $("#endDate").val();
+
+				// Get Current Zoom
+				currZoom = map.getZoom();
+
+				// Get Current Center
+				currCenter = map.getCenter();
+
+				// Refresh Map
+				addMarkers(currCat, currStartDate, currEndDate, currZoom, currCenter);
+			}
+		}
+
+		function mapMove(event)
+		{
+			// Prevent this event from running on the first load
+			if (mapLoad > 0)
+			{
+				// Get Current Category
+				currCat = $("#currentCat").val();
+
+				// Get Current Start Date
+				currStartDate = $("#startDate").val();
+
+				// Get Current End Date
+				currEndDate = $("#endDate").val();
+
+				// Get Current Zoom
+				currZoom = map.getZoom();
+
+				// Get Current Center
+				currCenter = map.getCenter();
+
+				// Refresh Map
+				addMarkers(currCat, currStartDate, currEndDate, currZoom, currCenter);
+			}
+		}
+
+
+		/*
+		Refresh Graph on Slider Change
+		*/
+		function refreshGraph(startDate, endDate)
+		{
+			var currentCat = gCategoryId;
+
+			// refresh graph
+			if (!currentCat || currentCat == '0')
+			{
+				currentCat = '0';
+			}
+
+			var startTime = new Date(startDate * 1000);
+			var endTime = new Date(endDate * 1000);
+
+			// daily
+			var graphData = "";
+
+			// plot hourly incidents when period is within 2 days
+			if ((endTime - startTime) / (1000 * 60 * 60 * 24) <= 3)
+			{
+				$.getJSON("<?php echo url::site()."json/timeline/"?>"+currentCat+"?i=hour", function(data) {
+					graphData = data[0];
+
+					gTimeline = $.timeline({categoryId: currentCat,
+						startTime: new Date(startDate * 1000),
+					    endTime: new Date(endDate * 1000), mediaType: gMediaType,
+						markerOptions: gMarkerOptions,
+						graphData: graphData
+					});
+					gTimeline.plot();
+				});
+			} 
+			else if ((endTime - startTime) / (1000 * 60 * 60 * 24) <= 124)
+			{
+			    // weekly if period > 2 months
+				$.getJSON("<?php echo url::site()."json/timeline/"?>"+currentCat+"?i=day", function(data) {
+					graphData = data[0];
+
+					gTimeline = $.timeline({categoryId: currentCat,
+						startTime: new Date(startDate * 1000),
+					    endTime: new Date(endDate * 1000), mediaType: gMediaType,
+						markerOptions: gMarkerOptions,
+						graphData: graphData
+					});
+					gTimeline.plot();
+				});
+			} 
+			else if ((endTime - startTime) / (1000 * 60 * 60 * 24) > 124)
+			{
+				// monthly if period > 4 months
+				$.getJSON("<?php echo url::site()."json/timeline/"?>"+currentCat, function(data) {
+					graphData = data[0];
+
+					gTimeline = $.timeline({categoryId: currentCat,
+						startTime: new Date(startDate * 1000),
+					    endTime: new Date(endDate * 1000), mediaType: gMediaType,
+						markerOptions: gMarkerOptions,
+						graphData: graphData
+					});
+					gTimeline.plot();
+				});
+			}
+
+			// Get dailyGraphData for All Categories
+			$.getJSON("<?php echo url::site()."json/timeline/"?>"+currentCat+"?i=day", function(data) {
+				dailyGraphData = data[0];
+			});
+
+			// Get allGraphData for All Categories
+			$.getJSON("<?php echo url::site()."json/timeline/"?>"+currentCat, function(data) {
+				allGraphData = data[0];
+			});
+
+		}
+
+		/*
+		Zoom to Selected Feature from within Popup
+		*/
+		function zoomToSelectedFeature(lon, lat, zoomfactor)
+		{
+			var lonlat = new OpenLayers.LonLat(lon,lat);
+
+			// Get Current Zoom
+			currZoom = map.getZoom();
+			// New Zoom
+			newZoom = currZoom + zoomfactor;
+			// Center and Zoom
+			map.setCenter(lonlat, newZoom);
+			// Remove Popups
+			for (var i=0; i<map.popups.length; ++i)
+			{
+				map.removePopup(map.popups[i]);
+			}
+		}
+
+		/*
+		Add KML/KMZ Layers
+		*/
+		function switchLayer(layerID, layerURL, layerColor)
+		{
+			if ( $("#layer_" + layerID).hasClass("active") )
+			{
+				new_layer = map.getLayersByName("Layer_"+layerID);
+				if (new_layer)
+				{
+					for (var i = 0; i < new_layer.length; i++)
+					{
+						map.removeLayer(new_layer[i]);
+					}
+				}
+				$("#layer_" + layerID).removeClass("active");
+
+			}
+			else
+			{
+				$("#layer_" + layerID).addClass("active");
+
+				// Get Current Zoom
+				currZoom = map.getZoom();
+
+				// Get Current Center
+				currCenter = map.getCenter();
+
+				// Add New Layer
+				addMarkers('', '', '', currZoom, currCenter, '', layerID, 'layers', layerURL, layerColor);
+			}
+		}
+
+		/*
+		Toggle Layer Switchers
+		*/
+		function toggleLayer(link, layer){
+			if ($("#"+link).text() == "<?php echo Kohana::lang('ui_main.show'); ?>")
+			{
+				$("#"+link).text("<?php echo Kohana::lang('ui_main.hide'); ?>");
+			}
+			else
+			{
+				$("#"+link).text("<?php echo Kohana::lang('ui_main.show'); ?>");
+			}
+			$('#'+layer).toggle(500);
+		}							
+
 		jQuery(function() {
 			var map_layer;
-	
+			markers = null;
+			var catID = '';
+			OpenLayers.Strategy.Fixed.prototype.preload=true;
+			
 			/*
 			- Initialize Map
 			- Uses Spherical Mercator Projection
 			- Units in Metres instead of Degrees					
 			*/
-			var proj_4326 = new OpenLayers.Projection('EPSG:4326');
-			var proj_900913 = new OpenLayers.Projection('EPSG:900913');
 			var options = {
-				units: "m",
-				numZoomLevels: 16,
+				units: "mi",
+				numZoomLevels: 18,
 				controls:[],
-				projection: proj_900913
+				projection: proj_900913,
+				'displayProjection': proj_4326,
+				eventListeners: {
+						"zoomend": mapMove
+				    },
+				'theme': null
 				};
 			map = new OpenLayers.Map('map', options);
 			map.addControl( new OpenLayers.Control.LoadingPanel({minSize: new OpenLayers.Size(573, 366)}) );
 			
+			<?php echo map::layers_js(FALSE); ?>
+			map.addLayers(<?php echo map::layers_array(FALSE); ?>);
 			
-			/*
-			- Select A Mapping API
-			- Live/Yahoo/OSM/Google
-			- Set Bounds					
-			*/
-			var default_map = <?php echo $default_map; ?>;
-			if (default_map == 2)
-			{
-				map_layer = new OpenLayers.Layer.VirtualEarth("virtualearth", {
-					sphericalMercator: true,
-					maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34)
-					});
-			}
-			else if (default_map == 3)
-			{
-				map_layer = new OpenLayers.Layer.Yahoo("yahoo", {
-					sphericalMercator: true,
-					maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34)
-					});
-			}
-			else if (default_map == 4)
-			{
-				map_layer = new OpenLayers.Layer.OSM.Mapnik("openstreetmap", {
-					sphericalMercator: true,
-					maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34)
-					});
-			}
-			else
-			{
-				map_layer = new OpenLayers.Layer.Google("google", {
-					sphericalMercator: true,
-					maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34)
-					});
-			}
-			map.addLayer(map_layer);
 			
 			// Add Controls
 			map.addControl(new OpenLayers.Control.Navigation());
-			map.addControl(new OpenLayers.Control.PanZoomBar());
 			map.addControl(new OpenLayers.Control.Attribution());
-			map.addControl(new OpenLayers.Control.MousePosition());
+			map.addControl(new OpenLayers.Control.PanZoomBar());
+			map.addControl(new OpenLayers.Control.MousePosition(
+				{
+					div: document.getElementById('mapMousePosition'),
+					numdigits: 5
+				}));    
+			map.addControl(new OpenLayers.Control.Scale('mapScale'));
+            map.addControl(new OpenLayers.Control.ScaleLine());
 			map.addControl(new OpenLayers.Control.LayerSwitcher());
 			
-			// Set Feature Styles
-			style = new OpenLayers.Style({
-				'externalGraphic': "${icon}",
-				pointRadius: "${radius}",
-				fillColor: "${color}",
-				fillOpacity: "${opacity}",
-				strokeColor: "#<?php echo $default_map_all;?>",
-				strokeWidth: <?php echo $marker_stroke_width; ?>,
-				strokeOpacity: <?php echo $marker_stroke_opacity; ?>,
-				'graphicYOffset': -20
-			}, 
-			{
-				context: 
-				{
-					radius: function(feature)
-					{
-						feature_icon = feature.attributes.icon;
-						if (feature_icon!="") {
-							return 16;
-						} else {
-							return <?php echo $marker_radius; ?> * 1.6;
-						}
-					},
-					opacity: function(feature)
-					{
-						feature_icon = feature.attributes.icon;
-						if (feature_icon!="") {
-							return 1;
-						} else {
-							return <?php echo $marker_opacity; ?>;
-						}
-					},					
-					color: function(feature) 
-					{
-						return "#" + feature.attributes.color;
-					},
-					icon: function(feature)
-					{
-						feature_icon = feature.attributes.icon;
-						if (feature_icon!="") {
-							return "<?php echo url::base() . 'media/uploads/' ?>" + feature_icon;
-						} else {
-							return "";
-						}
-					}					
-				}
-			});
-			
-			// Transform feature point coordinate to Spherical Mercator
-			preFeatureInsert = function(feature) {			
-				var point = new OpenLayers.Geometry.Point(feature.geometry.x, feature.geometry.y);
-				OpenLayers.Projection.transform(point, proj_4326, proj_900913);
-			};
-			
-			// Create the markers layer
-			markers = new OpenLayers.Layer.GML("reports", "<?php echo url::base() . 'json' ?>", 
-			{
-				preFeatureInsert:preFeatureInsert,
-				format: OpenLayers.Format.GeoJSON,
-				projection: proj_4326,
-				formatOptions: {
-					extractStyles: true,
-					extractAttributes: true
-				},
-				styleMap: new OpenLayers.StyleMap({
-					"default":style,
-					"select": style
-				})
-			});			
-			map.addLayer(markers);
-			
-			selectControl = new OpenLayers.Control.SelectFeature(markers,
-                {onSelect: onFeatureSelect, onUnselect: onFeatureUnselect});
-            map.addControl(selectControl);
-            selectControl.activate();
-			
-			
-			// Create center lat/lon object, converted to metres
-			var myPoint = new OpenLayers.LonLat(<?php echo $longitude; ?>, <?php echo $latitude; ?>);
-			myPoint.transform(proj_4326, map.getProjectionObject());
-			
-			// display the map centered on a latitude and longitude (Google zoom levels)
-			map.setCenter(myPoint, <?php echo $default_zoom; ?>);
-
-			
-			
-			function onPopupClose(evt) {
-	            // selectControl.unselect(selectedFeature);
-				for (var i=0; i<map.popups.length; ++i)
-				{
-					map.removePopup(map.popups[i]);
-				}
-	        }
-	        function onFeatureSelect(feature) {
-	            selectedFeature = feature;
-	            // Lon/Lat Spherical Mercator
-				zoom_point = feature.geometry.getBounds().getCenterLonLat();
-				lon = zoom_point.lon;
-				lat = zoom_point.lat;
-	            var content = "<div class=\"infowindow\"><div class=\"infowindow_list\"><ul><li>"+feature.attributes.name + "</li></ul></div>";
-				content = content + "\n<div class=\"infowindow_meta\"><a href='javascript:zoomToSelectedFeature("+ lon + ","+ lat +", 1)'>Zoom&nbsp;In</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href='javascript:zoomToSelectedFeature("+ lon + ","+ lat +", -1)'>Zoom&nbsp;Out</a></div>";
-				content = content + "</div>";
-				// Since KML is user-generated, do naive protection against
-	            // Javascript.
-	            if (content.search("<script") != -1) {
-	                content = "Content contained Javascript! Escaped content below.<br />" + content.replace(/</g, "&lt;");
-	            }
-	            popup = new OpenLayers.Popup.FramedCloud("chicken", 
-	                                     feature.geometry.getBounds().getCenterLonLat(),
-	                                     new OpenLayers.Size(100,100),
-	                                     content,
-	                                     null, true, onPopupClose);
-	            feature.popup = popup;
-	            map.addPopup(popup);
-	        }
-	        function onFeatureUnselect(feature) {
-	            map.removePopup(feature.popup);
-	            feature.popup.destroy();
-	            feature.popup = null;
-	        }
-	
-			// Category Switch
-			$("a[id^='cat_']").click(function() {
-				var catID = this.id.substring(4);
-				var catSet = 'cat_' + this.id.substring(4);		
+			// display the map projection
+			document.getElementById('mapProjection').innerHTML = map.projection;
 				
+			gMap = map;
+			
+			// Category Switch Action
+			$("a[id^='cat_']").click(function()
+			{
+				var catID = this.id.substring(4);
+				var catSet = 'cat_' + this.id.substring(4);
 				$("a[id^='cat_']").removeClass("active"); // Remove All active
 				$("[id^='child_']").hide(); // Hide All Children DIV
 				$("#cat_" + catID).addClass("active"); // Add Highlight
 				$("#child_" + catID).show(); // Show children DIV
 				$(this).parents("div").show();
 				
+				currentCat = catID;
 				$("#currentCat").val(catID);
-				markers.setUrl("<?php echo url::base() . 'json/?c=' ?>" + catID);
+
+				// setUrl not supported with Cluster Strategy
+				//markers.setUrl("<?php echo url::site(); ?>" json_url + '/?c=' + catID);
+				
+				// Destroy any open popups
+				onPopupClose();
+				
+				// Get Current Zoom
+				currZoom = map.getZoom();
+				
+				// Get Current Center
+				currCenter = map.getCenter();
+				
+				gCategoryId = catID;
+				var startTime = new Date($("#startDate").val() * 1000);
+				var endTime = new Date($("#endDate").val() * 1000);
+				addMarkers(catID, $("#startDate").val(), $("#endDate").val(), currZoom, currCenter, gMediaType);
+								
+				graphData = "";
+				$.getJSON("<?php echo url::site()."json/timeline/"?>"+catID, function(data) {
+					graphData = data[0];
+
+					gTimeline = $.timeline({categoryId: catID, startTime: startTime, endTime: endTime,
+						graphData: graphData,
+						mediaType: gMediaType
+					});
+					gTimeline.plot();
+				});
+				
+				dailyGraphData = "";
+				$.getJSON("<?php echo url::site()."json/timeline/"?>"+catID+"?i=day", function(data) {
+					dailyGraphData = data[0];
+				});
+				allGraphData = "";
+				$.getJSON("<?php echo url::site()."json/timeline/"?>"+currentCat, function(data) {
+					allGraphData = data[0];
+				});
+				
+				return false;
 			});
 			
-			if (!$("#startDate").val()) {
+			// Sharing Layer[s] Switch Action
+			$("a[id^='share_']").click(function()
+			{
+				var shareID = this.id.substring(6);
+				
+				if ( $("#share_" + shareID).hasClass("active") )
+				{
+					share_layer = map.getLayersByName("Share_"+shareID);
+					if (share_layer)
+					{
+						for (var i = 0; i < share_layer.length; i++)
+						{
+							map.removeLayer(share_layer[i]);
+						}
+					}
+					$("#share_" + shareID).removeClass("active");
+					
+				} 
+				else
+				{
+					$("#share_" + shareID).addClass("active");
+					
+					// Get Current Zoom
+					currZoom = map.getZoom();
+
+					// Get Current Center
+					currCenter = map.getCenter();
+					
+					// Add New Layer
+					addMarkers('', '', '', currZoom, currCenter, '', shareID, 'shares');
+				}
+			});
+
+			// Exit if we don't have any incidents
+			if (!$("#startDate").val())
+			{
+				map.setCenter(new OpenLayers.LonLat(<?php echo $longitude ?>, <?php echo $latitude ?>), 5);
 				return;
 			}
 			
 			//Accessible Slider/Select Switch
 			$("select#startDate, select#endDate").selectToUISlider({
-				labels: 6,
+				labels: 4,
 				labelSrc: 'text',
 				sliderOptions: {
-					change: function(e, ui) {
+					change: function(e, ui)
+					{
 						var startDate = $("#startDate").val();
 						var endDate = $("#endDate").val();
 						var currentCat = gCategoryId;
-
-						// refresh graph
-						if (!currentCat || currentCat == '0') {
-							currentCat = 'ALL';
-						}
 						
+						// Get Current Category
+						currCat = currentCat;
+						
+						// Get Current Zoom
+						currZoom = map.getZoom();
+						
+						// Get Current Center
+						currCenter = map.getCenter();
+						
+						// If we're in a month date range, switch to
+						// non-clustered mode. Default interval is monthly
 						var startTime = new Date(startDate * 1000);
 						var endTime = new Date(endDate * 1000);
-						// daily
-						var graphData = dailyGraphData[0][currentCat];
-
-						// plot hourly incidents when period is within 2 days
-						if ((endTime - startTime) / (1000 * 60 * 60 * 24) <= 2) {
-						    graphData = hourlyGraphData[0][currentCat];
-						} else if ((endTime - startTime) / (1000 * 60 * 60 * 24) <= 124) { 
-						    // weekly if period > 2 months
-						    graphData = dailyGraphData[0][currentCat];
-						} else if ((endTime - startTime) / (1000 * 60 * 60 * 24) > 124) {
-							// monthly if period > 4 months
-						    graphData = allGraphData[0][currentCat];
+						if ((endTime - startTime) / (1000 * 60 * 60 * 24) <= 32)
+						{
+							json_url = "json";
+						} 
+						else
+						{
+							json_url = default_json_url;
 						}
 						
-						gTimeline = $.timeline({categoryId: currentCat, 
-							startTime: new Date(startDate * 1000), 
-						    endTime: new Date(endDate * 1000),
-							graphData: graphData, 
-							mediaType: gMediaType,
-						});
-						gTimeline.plot();
-						gTimeline.plotMarkers(style, markers);
+						// Refresh Map
+						addMarkers(currCat, startDate, endDate, '', '', gMediaType);
+						
+						refreshGraph(startDate, endDate);
 					}
 				}
 			});
-
-		
-			// Graph
-			allGraphData = [<?php echo $all_graphs ?>];
-			dailyGraphData = [<?php echo $daily_graphs ?>];
-			weeklyGraphData = [<?php echo $weekly_graphs ?>];
-			hourlyGraphData = [<?php echo $hourly_graphs ?>];
-			var plotPeriod = $.timelinePeriod(allGraphData[0]['ALL'].data);
-			var startTime = $.monthStartTime(plotPeriod[0]) / 1000;
-			var endTime = $.monthEndDateTime(plotPeriod[1]) / 1000;
 			
+			var allGraphData = "";
+			var dailyGraphData = "";
+			
+			var startTime = <?php echo $active_startDate ?>;	// Default to most active month
+			var endTime = <?php echo $active_endDate ?>;		// Default to most active month
+					
 			// get the closest existing dates in the selection options
-			var options = $('#startDate > optgroup > option').map(function() { 
+			options = $('#startDate > optgroup > option').map(function()
+			{
 				return $(this).val(); 
 			});
-			startTime = $.grep(options, function(n,i) {
+			startTime = $.grep(options, function(n,i)
+			{
 			  return n >= ('' + startTime) ;
 			})[0];
 			
-			options = $('#endDate > optgroup > option').map(function() { 
+			options = $('#endDate > optgroup > option').map(function()
+			{
 				return $(this).val(); 
 			});
-			endTime = $.grep(options, function(n,i) {
+			endTime = $.grep(options, function(n,i)
+			{
 			  return n >= ('' + endTime) ;
 			})[0];
 			
-			$("#startDate").val(startTime);
-			$("#endDate").val(endTime);
-			gCategoryId = 'ALL';
+			gCategoryId = '0';
 			gMediaType = 0;
-			$("#startDate, #endDate").change();
-
-			var categoryIds = [0,<?php echo join(array_keys($categories), ","); ?>];
-				
-			for (var i=0; i<categoryIds.length; i++) {
-				$('#cat_'+categoryIds[i]).click(function(){
-					onPopupClose(false);
-					var categories = <?php echo json_encode($categories); ?>;
-					categories['0'] = ["ALL", "#990000"];
-					graphData = allGraphData[0][categories[this.id.split("_")[1]][0]];
-					var catId = categories[this.id.split("_")[1]][0];
-					gCategoryId = catId;
-					
-					var startTime = new Date($("#startDate").val() * 1000);
-					var endTime = new Date($("#endDate").val() * 1000);
-					gTimeline = $.timeline({categoryId: catId, startTime: startTime, endTime: endTime,
-			            graphData: graphData,
-			            //url: "<?php echo url::base() . 'json/timeline/' ?>",	            
-			            mediaType: gMediaType
-					});
-					gTimeline.plot();
-				});
-			}
+			//$("#startDate").val(startTime);
+			//$("#endDate").val(endTime);
 			
-			// media filter
-			$('.filter a').click(function(){
+			// Initialize Map
+			addMarkers(gCategoryId, startTime, endTime, '', '', gMediaType);
+			refreshGraph(startTime, endTime);
+			
+			// Media Filter Action
+			$('.filters li a').click(function()
+			{
 				var startTimestamp = $("#startDate").val();
 				var endTimestamp = $("#endDate").val();
 				var startTime = new Date(startTimestamp * 1000);
@@ -331,37 +599,35 @@
 				currCenter = map.getCenter();
 				
 				// Refresh Map
-				// TODO: Fix filter markers on media type
-				//addMarkers($('#currentCat').val(), startTimestamp, endTimestamp, 
-				//           currZoom, currCenter, gMediaType);
+				addMarkers(currentCat, startTimestamp, endTimestamp, 
+				           currZoom, currCenter, gMediaType);
 				
-				$('.filter a').attr('class', '');
+				$('.filters li a').attr('class', '');
 				$(this).addClass('active');
 				gTimeline = $.timeline({categoryId: gCategoryId, startTime: startTime, 
 				    endTime: endTime, mediaType: gMediaType,
-					url: "<?php echo url::base() . 'json/timeline/' ?>"
+					url: "<?php echo url::site(); ?>json_url+'/timeline/'"
 				});
 				gTimeline.plot();
 			});
 			
-			$('#playTimeline').click(function() {
-				//gTimeline.resetPlay().play();
-				gTimeline.playOrPause();
+			$('#playTimeline').click(function()
+			{
+			    gTimelineMarkers = gTimeline.addMarkers(gStartTime.getTime()/1000,
+					$.dayEndDateTime(gEndTime.getTime()/1000), gMap.getZoom(),
+					gMap.getCenter(),null,null,null,null,"json");
+				gTimeline.playOrPause('raindrops');
 			});
 		});
 		
-		function zoomToSelectedFeature(lon, lat){
-			var lonlat = new OpenLayers.LonLat(lon,lat);
-			
-			// Get Current Zoom
-			currZoom = map.getZoom();
-			// New Zoom
-			newZoom = currZoom + 1;
-			// Center and Zoom
-			map.setCenter(lonlat, newZoom);
-			// Remove Popups
-			for (var i=0; i<map.popups.length; ++i)
-			{
-				map.removePopup(map.popups[i]);
-			}
-		}
+		/*		
+		d = $('#startDate > optgroup > option').map(function()
+		{
+			return $(this).val();
+		});
+
+		$.grep(d, function(n,i)
+		{
+			return n > '1183240800';
+		})[0];
+*/

@@ -11,7 +11,7 @@ class VideoEmbed{
       
       //get the code
       $hosts = array("http://www.youtube.com/watch?v=", "http://video.google.com/videoplay?docid=-",
-      "http://one.revver.com/watch/", "http://www.metacafe.com/watch/", "http://www.liveleak.com/view?i=","http://dotsub.com/media/");
+      "http://one.revver.com/watch/", "http://www.metacafe.com/watch/", "http://www.liveleak.com/view?i=","http://dotsub.com/media/","http://vimeo.com/");
       $code = str_replace($hosts, "", $raw);
       
    
@@ -22,6 +22,7 @@ class VideoEmbed{
       $host4 = strpos($raw, "www.metacafe.com", 1);
       $host5 = strpos($raw, "www.liveleak.com", 1);
 	  $host6 = strpos($raw, "dotsub.com", 1);
+	  $host7 = strpos($raw, "vimeo.com", 1);
       
       if($host1 != null) {$host .= "youtube";}
       if($host2 != null) {$host .= "google";}
@@ -29,12 +30,13 @@ class VideoEmbed{
       if($host4 != null) {$host .= "metacafe";}
       if($host5 != null) {$host .= "liveleak";}
 	  if($host6 != null) {$host .= "dotsub";}
+	  if($host7 != null) {$host .= "vimeo";}
       
       //error
-      if($host != "youtube" && $host != "google" && $host != "revver" && $host != "metacafe" && $host != "liveleak" && $host != "dotsub")
+      if($host != "youtube" && $host != "google" && $host != "revver" && $host != "metacafe" && $host != "liveleak" && $host != "dotsub" && $host != "vimeo")
       {
          $error = true;
-         echo "Error Embedding<br/>";
+         echo '<a href="'.$raw.'" target="_blank">'.Kohana::lang('ui_main.view').' '.Kohana::lang('ui_main.video').'</a><br/>';
       }
       
       if($host == "youtube")
@@ -47,7 +49,7 @@ class VideoEmbed{
          <object width='320' height='265'><param name='movie' value='http://www.youtube.com/v/$code$you_auto'></param>
          <param name='wmode' value='transparent'></param>
          <embed src='http://www.youtube.com/v/$code$you_auto' type='application/x-shockwave-flash' wmode='transparent' width='320' height='265'>
-         </embed></object><br/>";
+         </embed></object>";
       }
       
       if($host == "google")
@@ -58,7 +60,7 @@ class VideoEmbed{
       
          echo "
          <embed style='width:320px; height:265px;' id='VideoPlayback' type='application/x-shockwave-flash'
-         src='http://video.google.com/googleplayer.swf?docId=-$code$google_auto&hl=en' flashvars=''></embed><br/><br/>";
+         src='http://video.google.com/googleplayer.swf?docId=-$code$google_auto&hl=en' flashvars=''></embed>";
       }
       
       if($host == "revver")
@@ -71,7 +73,7 @@ class VideoEmbed{
          if($auto == "play") { $rev_auto = "&autoStart=true"; }
          
          echo "<script src='http://flash.revver.com/player/1.0/player.js?mediaId:$code;affiliateId:0;height:320;width:265;' type='text/javascript'>
-         </script><br/>";
+         </script>";
       }
       
       if($host == "metacafe")
@@ -83,7 +85,7 @@ class VideoEmbed{
       
          echo "<embed src='http://www.metacafe.com/fplayer/$code.swf'
          width='320' height='265' wmode='transparent' pluginspage='http://www.macromedia.com/go/getflashplayer'
-         type='application/x-shockwave-flash'> </embed><br/><br/>";
+         type='application/x-shockwave-flash'> </embed>";
       }
       
       if($host == "liveleak")
@@ -95,12 +97,17 @@ class VideoEmbed{
          echo "<object type='application/x-shockwave-flash' width='320' height='272'='transparent'
          data='http://www.liveleak.com/player.swf?autostart=$live_auto&token=$code'>
          <param name='movie' value='http://www.liveleak.com/player.swf?autostart=$live_auto&token=$code'>
-         <param name='wmode' value='transparent'><param name='quality' value='high'></object><br/><br/>";
+         <param name='wmode' value='transparent'><param name='quality' value='high'></object>";
       }
 
 	  if( $host == "dotsub") 
 	  {
 		 echo "<iframe src='http://dotsub.com/media/$code' frameborder='0' width='320' height='500'></iframe>";
+	  }
+	  
+	  if( $host == "vimeo") 
+	  {
+		 echo "<iframe src=\"http://player.vimeo.com/video/$code\" width=\"100%\" height=\"300\" frameborder=\"0\"></iframe>";
 	  }
       
       //clean up varibles

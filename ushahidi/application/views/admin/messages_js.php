@@ -43,7 +43,7 @@
 		function sendMessage(id, loader)
 		{
 			$('#' + loader).html('<img src="<?php echo url::base() . "media/img/loading_g.gif"; ?>">');
-			$.post("<?php echo url::base() . 'admin/messages/send/' ?>", { to_id: id, message: $("#message_" + id).attr("value") },
+			$.post("<?php echo url::site() . 'admin/messages/send/' ?>", { to_id: id, message: $("#message_" + id).attr("value") },
 				function(data){
 					if (data.status == 'sent'){
 						$('#reply_' + id).hide();
@@ -68,51 +68,36 @@
 			$("#" + field).attr("value", autoreply);		
 		}
 
-        function submitIds()
-        {
-            if (confirm("Delete cannot be undone. Are you sure you want to continue?"))
-                $('#messagesMain').submit(); 
-        }
-	
-		// Ajax Submission
-		function itemAction ( action, confirmAction, item_id, level )
+		function messagesAction ( action, confirmAction, message_id )
 		{
 			var statusMessage;
-			if( !isChecked( "message" ) && item_id=='' )
+			if( !isChecked( "message" ) && message_id=='' )
 			{ 
-				alert('Please select at least one report.');
+				alert('Please select at least one message.');
 			} else {
-				var answer = confirm('Are You Sure You Want To ' + confirmAction + ' items?')
+				var answer = confirm('<?php echo Kohana::lang('ui_admin.are_you_sure_you_want_to'); ?> ' + confirmAction + '?')
 				if (answer){
+
 					// Set Submit Type
 					$("#action").attr("value", action);
-					
-					if (item_id != '') 
+
+					if (message_id != '') 
 					{
 						// Submit Form For Single Item
-						$("#item_single").attr("value", item_id);
-						$("#messagesMain").submit();
+						$("#message_single").attr("value", message_id);
+						$("#messageMain").submit();
 					}
 					else
 					{
 						// Set Hidden form item to 000 so that it doesn't return server side error for blank value
-						$("#item_single").attr("value", "000");
-						$("#level").attr("value", level);
-						// Submit Form For Multiple Items
-						$('#messagesMain').submit();
-/*						
-						$("input[name='incident_id[]'][checked]").each(
-							function() 
-							{
-								$("#messageMain").submit();
-							}
-						);
-*/						
+						$("#message_single").attr("value", "000");
 
+						// Submit Form For Multiple Items
+						$("#messageMain").submit();
 					}
-				
+
 				} else {
-					return false;
+				//	return false;
 				}
 			}
 		}

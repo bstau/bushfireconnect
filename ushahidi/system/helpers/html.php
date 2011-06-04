@@ -398,7 +398,7 @@ class html_Core {
 			// Make the src attribute into an absolute URL
 			$attributes['src'] = url::base($index).$attributes['src'];
 		}
-
+       
 		return '<img'.html::attributes($attributes).' />';
 	}
 

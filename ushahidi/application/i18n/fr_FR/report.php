@@ -1,96 +1,63 @@
 <?php
-
-$lang = array
-(
-	'incident_title' => array
-	(
-		'required'		=> 'The title field is required.',
-		'length'		=> 'The title field must be at least 3 and no more 200 characters long.',
+	$lang = array(
+	'incident_ampm' => array(
+		'validvalues' => 'Champ «am/pm» invalide',
 	),
-	
-	'incident_description' => array
-	(
-		'required'		=> 'The description field is required.'
-	),	
-	
-	'incident_date' => array
-	(
-		'required'		=> 'The date field is required.',
-		'date_mmddyyyy' => 'The date field does not appear to contain a valid date?',
-		'date_ddmmyyyy' => 'The date field does not appear to contain a valid date?'
+	'incident_category' => array(
+		'numeric' => 'Catégorie invalide',
+		'required' => 'Veuillez indiquer une catégorie.',
 	),
-	
-	'incident_hour' => array
-	(
-		'required'		=> 'The hour field is required.',
-		'between' => 'The hour field does not appear to contain a valid hour?'
+	'incident_date' => array(
+		'date_ddmmyyyy' => 'date incorrecte',
+		'date_mmddyyyy' => 'date incorrecte',
+		'required' => 'Veuillez indiquer la date.',
 	),
-	
-	'incident_minute' => array
-	(
-		'required'		=> 'The hour field is required.',
-		'between' => 'The hour field does not appear to contain a valid hour?'
+	'incident_description' => array(
+		'required' => 'Veuillez indiquer une description.',
 	),
-	
-	'incident_ampm' => array
-	(
-		'validvalues' => 'The am/pm field does not appear to contain a valid value?'
+	'incident_hour' => array(
+		'between' => 'Format de l\'heure invalide',
+		'required' => 'Veuillez indiquer une heure.',
 	),
-	
-	'latitude' => array
-	(
-		'required'		=> 'The latitude field is required.',
-		'between' => 'The latitude field does not appear to contain a valid latitude?'
+	'incident_minute' => array(
+		'between' => 'Format des minutes invalide',
+		'required' => 'Veuillez indiquer les minutes.',
 	),
-	
-	'longitude' => array
-	(
-		'required'		=> 'The longitude field is required.',
-		'between' => 'The longitude field does not appear to contain a valid longitude?'
+	'incident_news' => array(
+		'url' => 'URL de source d\'actualité invalide',
 	),
-	
-	'location_name' => array
-	(
-		'required'		=> 'The location name field is required.',
-		'length'		=> 'The location name field must be at least 3 and no more 200 characters long.',
+	'incident_photo' => array(
+		'size' => 'Photo de taille supérieure à 2Mo. Veuiller choisir une photo plus petite.',
+		'type' => 'Format de fichier image invalide. Seuls les formats .JPG, .PNG and .GIF. sont acceptés',
+		'valid' => 'Fichier image invalide',
 	),
-			
-	'incident_category' => array
-	(
-		'required'		=> 'The category field is required.',
-		'numeric'		=> 'The category field does not appear to contain a valid category?'
+	'incident_title' => array(
+		'length' => 'Le titre doit comporter entre 3 et 200 caractères',
+		'required' => 'Veuillez indiquer un titre.',
 	),
-	
-	'incident_news' => array
-	(
-		'url'		=> 'The news source links field does not appear to contain a valid URL?'
+	'incident_video' => array(
+		'url' => 'URL de vidéo invalide',
 	),
-	
-	'incident_video' => array
-	(
-		'url'		=> 'The video links field does not appear to contain a valid URL?'
+	'latitude' => array(
+		'between' => 'Format de latitude invalide',
+		'required' => 'Veuillez indiquer une latitude.',
 	),
-	
-	'incident_photo' => array
-	(
-		'valid'		=> 'The Upload Photos field does not appear to contain a valid file',
-		'type'		=> 'The Upload Photos field does not appear to contain a valid image. The only accepted formats are .JPG, .PNG and .GIF.',
-		'size'		=> 'Please ensure that photo uploads sizes are limited to 2MB.'
+	'location_name' => array(
+		'length' => 'Le champ «lieu» doit comporter entre 3 et 200 caractères.',
+		'required' => 'Veuillez indiquer un lieu.',
 	),
-	
-	'person_first' => array
-	(
-		'length'		=> 'The first name field must be at least 3 and no more 100 characters long.'
+	'longitude' => array(
+		'between' => 'Format de longitude invalide',
+		'required' => 'Veuillez indiquer une longitude.',
 	),
-	
-	'person_last' => array
-	(
-		'length'		=> 'The last name field must be at least 3 and no more 100 characters long.'
+	'person_email' => array(
+		'email' => 'Adresse email invalide.',
+		'length' => 'L\'adresse email doit comporter entre 4 et 64 caractères.',
 	),
-	
-	'person_email' => array
-	(
-		'email'		  => 'The email field does not appear to contain a valid email address?',
-		'length'	  => 'The email field must be at least 4 and no more 64 characters long.'
-	)
-);
+	'person_first' => array(
+		'length' => 'Le prénom doit comporter entre 3 et 100 caractères.',
+	),
+	'person_last' => array(
+		'length' => 'Le nom de famille doit comporter entre 3 et 100 caractères.',
+	));
+?>

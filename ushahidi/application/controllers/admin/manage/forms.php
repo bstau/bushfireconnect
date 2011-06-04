@@ -21,13 +21,11 @@ class Forms_Controller extends Admin_Controller
 		parent::__construct();
 		$this->template->this_page = 'manage';
 		
-		// If this is not a super-user account, redirect to dashboard
-		if (!$this->auth->logged_in('admin'))
-        {
-             url::redirect('admin/dashboard');
+		// If user doesn't have access, redirect to dashboard
+		if ( ! admin::permissions($this->user, "manage"))
+		{
+			url::redirect(url::site().'admin/dashboard');
 		}
-		
-		// $profiler = new Profiler;
 	}
 	
 	
@@ -85,9 +83,9 @@ class Forms_Controller extends Admin_Controller
 				{ // Delete Action
 					$custom_form->delete( $form_id );
 					$form_saved = TRUE;
-					$form_action = "DELETED";
+					$form_action = strtoupper(Kohana::lang('ui_admin.deleted'));
 				}
-				else if($post->action == 'a')
+				else if($post->action == 'h')
 				{ // Active/Inactive Action
 					if ($custom_form->loaded==true)
 					{
@@ -101,7 +99,7 @@ class Forms_Controller extends Admin_Controller
 						}
 						$custom_form->save();
 						$form_saved = TRUE;
-						$form_action = "MODIFIED";
+						$form_action = strtoupper(Kohana::lang('ui_admin.modified'));
 					}
 				}
 				else
@@ -110,8 +108,11 @@ class Forms_Controller extends Admin_Controller
 					$custom_form->form_description = $post->form_description;
 					$custom_form->save();
 					$form_saved = TRUE;
-					$form_action = "CREATED/EDITED";
+					$form_action = strtoupper(Kohana::lang('ui_admin.created_edited'));
 				}
+				
+				// Empty $form array
+				array_fill_keys($form, '');
 				
 			} else {
 				// repopulate the form fields
@@ -139,13 +140,14 @@ class Forms_Controller extends Admin_Controller
 		// Form Field Types
 		$form_field_types = array
 		(
-			'' => '--- Select A Field Type ---',
-			1 => 'Text Field',
-			2 => 'Text Area Field (Free Text)'
+			'' => Kohana::lang('ui_admin.select_field_type'),
+			1 => Kohana::lang('ui_admin.text_field'),
+			2 => Kohana::lang('ui_admin.free_text_field'),
 			// 4 => 'Add Attachments'
 		);
 
-        $this->template->content->form_error = $form_error;
+        $this->template->content->form = $form;
+		$this->template->content->form_error = $form_error;
         $this->template->content->form_saved = $form_saved;
 		$this->template->content->form_action = $form_action;
         $this->template->content->pagination = $pagination;
@@ -157,6 +159,7 @@ class Forms_Controller extends Admin_Controller
         // Javascript Header
         $this->template->js = new View('admin/forms_js');
 		$this->template->js->form_id = $form_id;
+		$this->template->form_error = $form_error;
 	}
 
 	
@@ -201,7 +204,7 @@ class Forms_Controller extends Admin_Controller
 		{
 			switch ($selector_id) {
 			    case 0:
-			        $selector_content = "Please select an item";
+			        $selector_content = Kohana::lang('ui_main.select_item');
 			        break;
 			    case 1:
 			        $selector_content = $this->_get_selector_text($form_id, $field_id);
@@ -322,7 +325,7 @@ class Forms_Controller extends Admin_Controller
 				else
 				{
 					$field_add_status = "error";
-					$field_add_response = "That Form Does Not Exist!";
+					$field_add_response = Kohana::lang('ui_main.form_not_exists');
 				}
 				
 			} else {
@@ -517,41 +520,41 @@ class Forms_Controller extends Admin_Controller
 		$html .="<input type=\"hidden\" name=\"field_id\" id=\"field_id\" value=\"".$field_id."\">";
 		$html .="<div id=\"form_result_".$form_id."\" class=\"forms_fields_result\"></div>";
 		$html .="<div class=\"forms_item\">"; 
-		$html .="	<strong>Field Name:</strong><br />"; 
+		$html .="	<strong>".Kohana::lang('ui_admin.field_name').":</strong><br />"; 
 		$html .= 	form::input('field_name', $field_name, ' class="text"');
 		$html .="</div>"; 
 		$html .="<div class=\"forms_item\">"; 
-		$html .="	<strong>Default Value?:</strong><br />"; 
+		$html .="	<strong>".Kohana::lang('ui_admin.field_default')."?:</strong><br />"; 
 		$html .= 	form::input('field_default', $field_default, ' class="text"');
 		$html .="</div>"; 
 		$html .="<div class=\"forms_item\">"; 
-		$html .="	<strong>Required?</strong><br />";
+		$html .="	<strong>".Kohana::lang('ui_admin.required')."?</strong><br />";
 		if ($field_required != 1)
 		{
-			$html .= 	"YES " . form::radio('field_required', '1', FALSE) . "&nbsp;&nbsp;";
-			$html .= 	"NO " . form::radio('field_required', '0', TRUE);
+			$html .= 	Kohana::lang('ui_admin.yes')." " . form::radio('field_required', '1', FALSE) . "&nbsp;&nbsp;";
+			$html .= 	Kohana::lang('ui_admin.no')." " . form::radio('field_required', '0', TRUE);
 		}
 		else
 		{
-			$html .= 	"YES " . form::radio('field_required', '1', TRUE) . "&nbsp;&nbsp;";
-			$html .= 	"NO " . form::radio('field_required', '0', FALSE);
+			$html .= 	Kohana::lang('ui_admin.yes')." " . form::radio('field_required', '1', TRUE) . "&nbsp;&nbsp;";
+			$html .= 	Kohana::lang('ui_admin.no')." " . form::radio('field_required', '0', FALSE);
 		}
 		$html .="</div>";
 		$html .="<div class=\"forms_item\">"; 
-		$html .="	<strong>Maximum Character Length:</strong><br />"; 
+		$html .="	<strong>".Kohana::lang('ui_admin.field_maxlength').":</strong><br />"; 
 		$html .= 	form::input('field_maxlength', $field_maxlength, ' class="text short"');
 		$html .="</div>";
 		$html .="<div class=\"forms_item\">"; 
-		$html .="	<strong>Is this a Date Field?</strong><br />";
+		$html .="	<strong>".Kohana::lang('ui_admin.is_date')."</strong><br />";
 		if ($field_isdate != 1)
 		{
-			$html .= 	"YES " . form::radio('field_isdate', '1', FALSE) . "&nbsp;&nbsp;";
-			$html .= 	"NO " . form::radio('field_isdate', '0', TRUE);
+			$html .= 	Kohana::lang('ui_admin.yes')." " . form::radio('field_isdate', '1', FALSE) . "&nbsp;&nbsp;";
+			$html .= 	Kohana::lang('ui_admin.no')." " . form::radio('field_isdate', '0', TRUE);
 		}
 		else
 		{
-			$html .= 	"YES " . form::radio('field_isdate', '1', TRUE) . "&nbsp;&nbsp;";
-			$html .= 	"NO " . form::radio('field_isdate', '0', FALSE);
+			$html .= 	Kohana::lang('ui_admin.yes')." " . form::radio('field_isdate', '1', TRUE) . "&nbsp;&nbsp;";
+			$html .= 	Kohana::lang('ui_admin.no')." " . form::radio('field_isdate', '0', FALSE);
 		}
 		$html .="</div>";
 		//$html .="<div class=\"forms_item\">"; 
@@ -605,28 +608,28 @@ class Forms_Controller extends Admin_Controller
 		
 		$html = "";
 		$html .="<input type=\"hidden\" name=\"form_id\" id=\"form_id\" value=\"".$form_id."\">";
-		$html .="<input type=\"hidden\" name=\"field_id\" id=\"field_id\" value=\"\">";
+		$html .="<input type=\"hidden\" name=\"field_id\" id=\"field_id\" value=\"".$field_id."\">";
 		$html .="<input type=\"hidden\" name=\"field_isdate\" id=\"field_id\" value=\"0\">";
 		$html .="<div id=\"form_result_".$form_id."\" class=\"forms_fields_result\"></div>";
 		$html .="<div class=\"forms_item\">"; 
-		$html .="	<strong>Field Name:</strong><br />"; 
+		$html .="	<strong>".Kohana::lang('ui_admin.field_name').":</strong><br />"; 
 		$html .= 	form::input('field_name', $field_name, ' class="text"');
 		$html .="</div>"; 
 		$html .="<div class=\"forms_item\">"; 
-		$html .="	<strong>Default Value?:</strong><br />"; 
+		$html .="	<strong>".Kohana::lang('ui_admin.field_default')."?:</strong><br />"; 
 		$html .= 	form::input('field_default', $field_default, ' class="text"');
 		$html .="</div>"; 
 		$html .="<div class=\"forms_item\">"; 
-		$html .="	<strong>Required?</strong><br />"; 
+		$html .="	<strong>".Kohana::lang('ui_admin.required')."?</strong><br />"; 
 		if ($field_required != 1)
 		{
-			$html .= 	"YES " . form::radio('field_required', '1', FALSE) . "&nbsp;&nbsp;";
-			$html .= 	"NO " . form::radio('field_required', '0', TRUE);
+			$html .= 	Kohana::lang('ui_admin.yes')." " . form::radio('field_required', '1', FALSE) . "&nbsp;&nbsp;";
+			$html .= 	Kohana::lang('ui_admin.no')." " . form::radio('field_required', '0', TRUE);
 		}
 		else
 		{
-			$html .= 	"YES " . form::radio('field_required', '1', TRUE) . "&nbsp;&nbsp;";
-			$html .= 	"NO " . form::radio('field_required', '0', FALSE);
+			$html .= 	Kohana::lang('ui_admin.yes')." " . form::radio('field_required', '1', TRUE) . "&nbsp;&nbsp;";
+			$html .= 	Kohana::lang('ui_admin.no')." " . form::radio('field_required', '0', FALSE);
 		}
 		$html .="</div>";
 		//$html .="<div class=\"forms_item\">"; 
@@ -634,7 +637,7 @@ class Forms_Controller extends Admin_Controller
 		//$html .= 	form::input('field_width', '', ' class="text short"');
 		//$html .="</div>";
 		$html .="<div class=\"forms_item\">"; 
-		$html .="	<strong>Height (Rows):</strong><br />"; 
+		$html .="	<strong>".Kohana::lang('ui_admin.field_height').":</strong><br />"; 
 		$html .= 	form::input('field_height', $field_height, ' class="text short"');
 		$html .="</div>";
 		$html .="<div style=\"clear:both;\"></div>";
@@ -704,7 +707,7 @@ class Forms_Controller extends Admin_Controller
 			->orderby('id', 'asc')
 			->find_all();
 		
-		$html = "<form>";
+		$html = "<form action=\"\">";
 		foreach ($fields as $field)
 		{
 			$field_id = $field->id;
@@ -733,10 +736,10 @@ class Forms_Controller extends Admin_Controller
 				$html .= "&nbsp;<a href=\"#\"><img src = \"".url::base()."media/img/icon-calendar.gif\"  align=\"middle\" border=\"0\"></a>";
 			}
 			$html .= "	<div class=\"forms_fields_edit\">
-			<a href=\"javascript:fieldAction('e','EDIT',".$field_id.",".$form_id.",".$field_type.");\">EDIT</a>&nbsp;|&nbsp;
-			<a href=\"javascript:fieldAction('d','DELETE',".$field_id.",".$form_id.",".$field_type.");\">DELETE</a>&nbsp;|&nbsp;
-			<a href=\"javascript:fieldAction('mu','MOVE',".$field_id.",".$form_id.",".$field_type.");\">MOVE UP</a>&nbsp;|&nbsp;
-			<a href=\"javascript:fieldAction('md','MOVE',".$field_id.",".$form_id.",".$field_type.");\">MOVE DOWN</a></div>";
+			<a href=\"javascript:fieldAction('e','EDIT',".$field_id.",".$form_id.",".$field_type.");\">".strtoupper(Kohana::lang('ui_admin.edit_action'))."</a>&nbsp;|&nbsp;
+			<a href=\"javascript:fieldAction('d','DELETE',".$field_id.",".$form_id.",".$field_type.");\">".strtoupper(Kohana::lang('ui_admin.delete_action'))."</a>&nbsp;|&nbsp;
+			<a href=\"javascript:fieldAction('mu','MOVE',".$field_id.",".$form_id.",".$field_type.");\">".strtoupper(Kohana::lang('ui_admin.move_up_action'))."</a>&nbsp;|&nbsp;
+			<a href=\"javascript:fieldAction('md','MOVE',".$field_id.",".$form_id.",".$field_type.");\">".strtoupper(Kohana::lang('ui_admin.move_down_action'))."</a></div>";
 			$html .= "</div>";
 			$html .= "</form>";
 		}

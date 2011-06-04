@@ -6,7 +6,7 @@
     print $header;
  ?>
 <body>
-<div id="ushahidi_login_container">
+<div id="ushahidi_install_container">
     <div id="ushahidi_login_logo"><img src="../media/img/admin/logo_login.gif" /></div>
     <div id="ushahidi_login" class="clearfix">
     <form method="POST" name="frm_install" action="process.php" style="line-height: 100%; margin-top: 0; margin-bottom: 0;">  
@@ -33,6 +33,9 @@
 							print ( $form->error('uploads_perm') == "" ) ? '' : 
 							"<li>".$form->error('uploads_perm')."</li>";
 							
+							print ( $form->error('modules') == "" ) ? '' : 
+							"<li>".$form->error('modules')."</li>";
+							
 	   				    ?>
 					</ul>
 			</div>
@@ -50,15 +53,15 @@
             
         <p>Here are instructions for changing file permissions:</p>
         <ul>
-            <li><a href="http://www.washington.edu/computing/unix/permissions.html">Unix/Linux</a></li>
-            <li><a href="http://support.microsoft.com/kb/308419">Windows</a></li>
+            <li><a href="http://www.washington.edu/computing/unix/permissions.html" target="_blank">Unix/Linux</a></li>
+            <li><a href="http://support.microsoft.com/kb/308419" target="_blank">Windows</a></li>
         </ul>
     </div>
 		
     
 	<p>For the installation process, please have the following bits of information on hand.</p>	
 	<div class="two-col tc-left">
-        <h3>Database <a href="http://wiki.ushahidi.com/doku.php?id=a_brief_word_on_databases">what's this?</a></h3>
+        <h3>Database <a href="http://wiki.ushahidi.com/doku.php?id=a_brief_word_on_databases" target="_blank">what's this?</a></h3>
         <ol>	
             <li>Database name</li>
             <li>Database username</li>

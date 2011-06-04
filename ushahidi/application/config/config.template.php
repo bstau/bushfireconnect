@@ -18,7 +18,7 @@ $config['site_protocol'] = 'http';
  *
  * This can be removed by using URL rewriting.
  */
-$config['index_page'] = '';
+$config['index_page'] = 'index.php';
 
 /**
  * Fake file extension that will be added to all generated URLs. Example: .html
@@ -86,6 +86,14 @@ $config['display_errors'] = TRUE;
  * @see http://docs.kohanaphp.com/general/configuration
  */
 $config['render_stats'] = TRUE;
+
+/**
+ * Turn MHI on or off. This is an advanced feature that will drastically alter
+ * the way your instance works. Please read documentation before proceeding.
+ *
+ * @see [A URL not yet created]
+ */
+$config['enable_mhi'] = FALSE;
 
 /**
  * Filename prefixed used to determine extensions. For example, an

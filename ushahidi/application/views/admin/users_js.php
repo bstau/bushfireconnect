@@ -13,7 +13,7 @@
  * @copyright  Ushahidi - http://www.ushahidi.com
  * @license    http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License (LGPL) 
  */
-		// Categories JS
+		// Users JS
 		function fillFields(id, username, name, role, email)
 		{
 			$("#user_id").attr("value", unescape(id));
@@ -28,11 +28,11 @@
 		function userAction ( action, confirmAction, id )
 		{
 			var statusMessage;
-			var answer = confirm('Are You Sure You Want To ' 
-				+ confirmAction + ' users?')
+			var answer = confirm('<?php echo Kohana::lang('ui_admin.are_you_sure_you_want_to'); ?> ' 
+				+ confirmAction + ' user with ID: ' + id + '?')
 			if (answer){
-				// Set Category ID
-				$("#user_id").attr("value", id);
+				// Set User ID
+				$("#user_id_action").attr("value", id);
 				// Set Submit Type
 				$("#action").attr("value", action);		
 				// Submit Form

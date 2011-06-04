@@ -20,10 +20,12 @@ function fillFields(id, page_title, page_tab,
  page_description )
 {
 	$("#page_id").attr("value", unescape(id));
+	page_title = decodeURIComponent(escape($.base64.decode(page_title)));
 	$("#page_title").attr("value", unescape(page_title));
+	page_tab = decodeURIComponent(escape($.base64.decode(page_tab)));
 	$("#page_tab").attr("value", unescape(page_tab));
-	$("#page_description").attr("value", 
-		unescape(page_description));
+	page_description = decodeURIComponent(escape($.base64.decode(page_description)));
+	$("#page_description").attr("value", unescape(page_description));
 	tinyMCE.getInstanceById("page_description").setContent(unescape(page_description));
 }
 
@@ -31,8 +33,7 @@ function fillFields(id, page_title, page_tab,
 function pageAction ( action, confirmAction, id )
 {
 	var statusMessage;
-	var answer = confirm('Are You Sure You Want To ' 
-		+ confirmAction + ' items?')
+	var answer = confirm('<?php echo Kohana::lang('ui_admin.are_you_sure_you_want_to'); ?> ' + confirmAction + '?')
 	if (answer){
 		// Set Category ID
 		$("#page_id_action").attr("value", id);
@@ -56,5 +57,10 @@ tinyMCE.init({
 	theme_advanced_statusbar_location : "bottom",
 	toolbar_location : "top",
 	height:"400px",
-	width:"700px"
+	width:"700px",
+	encoding : "xml",
+	entity_encoding : "named"
+
 });
+
+

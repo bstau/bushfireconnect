@@ -1,100 +1,66 @@
 <?php
-
-$lang = array
-(
-	'site_name' => array
-	(
-		'required'		=> 'The site name field is required.',
-		'length'		=> 'The site name field must be at least 3 and no more 50 characters long.',
+	$lang = array(
+	'allow_comments' => array(
+		'between' => 'Veuillez indiquer correctement si les commentaires sont autorisés.',
+		'required' => 'Veuillez indiquer si les commentaires sont autorisés.',
 	),
-	
-	'site_tagline' => array
-	(
-		'required'		=> 'The tagline field is required.',
-		'length'		=> 'The tagline field must be at least 3 and no more 100 characters long.',
+	'allow_feed' => array(
+		'between' => 'Veuillez indiquer correctement si le fil est inclus.',
+		'required' => 'Veuillez indiquer si le fil est inclus.',
 	),
-	
-	'site_email' => array
-	(
-		'email'		  => 'The site email field does not appear to contain a valid email address?',
-		'length'	  => 'The site email field must be at least 4 and no more 100 characters long.'
+	'allow_reports' => array(
+		'between' => 'Veuillez indiquer correctement si les rapports sont autorisés.',
+		'required' => 'Veuillez indiquer si les rapports sont autorisés.',
 	),
-	
-	'items_per_page' => array
-	(
-		'required'		=> 'The items per page (Frontend) field is required.',
-		'between' => 'The items per page (Frontend) field does not appear to contain a valid value?'
+	'allow_stat_sharing' => array(
+		'between' => 'Le champ «partage des statistiques» a une valeur incorrecte',
+		'required' => 'Veuillez indiquer une valeur pour le partage des statistiques.',
 	),
-	
-	'items_per_page_admin' => array
-	(
-		'required'		=> 'The items per page (Admin) field is required.',
-		'between' => 'The items per page (Admin) field does not appear to contain a valid value?'
+	'clickatell_api' => array(
+		'length' => 'Le numéro d\'API Clickatell doit comporter moins de 20 caractères.',
+		'required' => 'Veuillez indiquer un numéro d\'API Clickatell.',
 	),
-	
-	'allow_reports' => array
-	(
-		'required'		=> 'The allow reports field is required.',
-		'between' => 'The allow reports field does not appear to contain a valid value?'
+	'clickatell_password' => array(
+		'length' => 'Le mot de passe Clickatell doit comporter entre 5 et 50 caractères.',
+		'required' => 'Veuillez indiquer un mot de passe Clickatell.',
 	),
-	
-	'allow_comments' => array
-	(
-		'required'		=> 'The allow comments field is required.',
-		'between' => 'The allow comments field does not appear to contain a valid value?'
+	'clickatell_username' => array(
+		'length' => 'Le nom d\'utilisateur Clickatell doit comporter moins de 20 caractères.',
+		'required' => 'Veuillez indiquer un nom d\'utilisateur Clickatell.',
 	),
-	
-	'allow_stat_sharing' => array
-	(
-		'required'		=> 'The stat sharing field is required.',
-		'between' => 'The stat sharing field does not appear to contain a valid value?'
+	'google_analytics' => array(
+		'length' => 'Le champ «Google Analytics» doit contenir un identifiant «Web Property» au format UA-XXXXX-XX.',
 	),
-	
-	'allow_feed' => array
-	(
-		'required'		=> 'The include feed field is required.',
-		'between' => 'The include feed field does not appear to contain a valid value?'
+	'items_per_page' => array(
+		'between' => 'Le nombre d\'éléments par page (Frontend) n\'est pas valide',
+		'required' => 'Veuillez indiquer le nombre d\'éléments par page (Frontend).',
 	),
-	
-	'sms_no1' => array
-	(
-		'numeric'		=> 'The phone 1 field should contain numbers only.',
-		'length' => 'The phone 1 field does not appear to contain a valid value?'
+	'items_per_page_admin' => array(
+		'between' => 'Le nombre d\'éléments par page (Admin) n\'est pas valide',
+		'required' => 'Veuillez indiquer le nombre d\'éléments par page (Admin).',
 	),
-	
-	'sms_no2' => array
-	(
-		'numeric'		=> 'The phone 2 field should contain numbers only.',
-		'length' => 'The phone 2 field is too long'
+	'site_email' => array(
+		'email' => 'L\'adresse email du site n\'est pas valide.',
+		'length' => 'L\'adresse email du site doit comporter entre 4 et 100 caractères.',
 	),
-	
-	'sms_no3' => array
-	(
-		'numeric'		=> 'The phone 3 field should contain numbers only.',
-		'length' => 'The phone 3 field is too long'
+	'site_name' => array(
+		'length' => 'le nom du site doit comporter entre 3 et 50 caractères.',
+		'required' => 'Veuillez entrer le nom du site.',
 	),
-	
-	'clickatell_api' => array
-	(
-		'required'		=> 'The Clickatell API number field is required.',
-		'length'		=> 'The Clickatell API number field must be no more 20 characters long.',
+	'site_tagline' => array(
+		'length' => 'Le slogan doit comporter entre 3 et 100 caractères.',
+		'required' => 'Veuiller entrer un slogan.',
 	),
-	
-	'clickatell_username' => array
-	(
-		'required'		=> 'The Clickatell Username field is required.',
-		'length'		=> 'The Clickatell Username field must be no more 50 characters long.',
+	'sms_no1' => array(
+		'length' => 'Le premier numéro de téléphone a un format invalide',
+		'numeric' => 'Le premier numéro de téléphone ne doit comporter que des chiffres.',
 	),
-	
-	'clickatell_password' => array
-	(
-		'required'		=> 'The Clickatell Password field is required.',
-		'length'		=> 'The Clickatell Password field must be at least 5 and no more 50 characters long.',
+	'sms_no2' => array(
+		'length' => 'Le second numéro de téléphone a un format invalide',
+		'numeric' => 'Le second numéro de téléphone ne doit comporter que des chiffres.',
 	),
-
-	'google_analytics' => array
-	(
-		'length'		=> 'The Google Analytics field must contain a valid Web Property ID in the format UA-XXXXX-XX.',
-	)		
-	
-);
+	'sms_no3' => array(
+		'length' => 'Le troisième numéro de téléphone a un format invalide',
+		'numeric' => 'Le troisième numéro de téléphone ne doit comporter que des chiffres.',
+	));
+?>

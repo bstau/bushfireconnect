@@ -97,6 +97,11 @@ a:hover{ text-decoration:none;}
 .top ul li a{
 	color:#ffa9a9;
 }
+.top span {
+	color:#C90000;
+	background-color:#FFE8E7;
+	padding:0 4px 0 4px;
+}
 /*-- info-nav --*/
 .info-nav {
 	margin:40px 7px 0 0;
@@ -301,6 +306,23 @@ ul.inf li a{
 	clear:both;
 	overflow:hidden;
 }
+.post-edit-log-red{
+	padding:3px;
+	background-color:#FFE7D5;
+	border:1px solid #FFB782;
+}
+.post-edit-log-gray{
+	padding:3px;
+	background-color:#eee;
+	border:1px solid #ccc;
+}
+.post-edit-log-red a, .post-edit-log-gray a{
+	color:#666;
+}
+.post-edit-log{
+	display:none;
+	padding:5px;
+}
 .post-trans-new{
 	margin:5px 0 2px 20px;
 	font-size:80%;
@@ -398,7 +420,14 @@ ul.nav-list li a.categories { background:url(../../img/admin/category-icon.gif) 
 ul.nav-list li a.locations { background:url(../../img/admin/locations-icon.gif) no-repeat 0 2px;}
 ul.nav-list li a.media { background:url(../../img/admin/media-icon.gif) no-repeat 0 2px;}
 ul.nav-list li a.messages { background:url(../../img/admin/messages-icon.gif) no-repeat 0 2px;}
-
+ul.nav-list li span.locations {
+	background:url(../../img/admin/locations-icon.gif) no-repeat 0 2px;
+	padding:0 0 5px 40px;
+	float:left;
+	font-size:18px;
+	line-height:20px;
+	color:#9b0000;
+}
 ul.nav-list li strong{
 	float:right;
 	font-weight:normal;
@@ -496,6 +525,10 @@ ul.tabset li a{
 ul.tabset li a.active{
 	color:#636363;
 	background:#eee !important;
+}
+ul.tabset li a.active2{
+	color:#fff;
+	background:#C0C0C0 !important;
 }
 ul.tabset li a:hover{
 	color:#636363;
@@ -794,6 +827,17 @@ ul.pager li a.active {background:#f2f7fa;}
 	line-height:24px;
 	float:left;
 }
+.head h4{
+	padding:0 0 0 20px;
+	font-weight:bold;
+	font-size:16px;
+	line-height:18px;
+	float:left;
+}
+	.head h4.version{
+		text-decoration:underline;
+		color:#37616F;
+	}
 .report-form input:focus, .report-form textarea:focus
 {
 	background: #EDF9EE;
@@ -930,6 +974,16 @@ a.new-cat:hover, a.show-messages:hover;{ text-decoration:none;}
 	color:#555;
 	font-size:11px;
 }
+/*Categories Tree*/
+.category ul ul { width: auto; float: none; }
+.category ul li.sub_category { padding-left: 47px; }
+.category ul li.sub_category_last { background-position: 16px -1766px; }
+.category ul li input.check-box { margin: 0 3px 0 0; }
+.category ul li.hover,
+.category ul li li:hover { background-color: #efefef; }
+ul.treeview li.lastCollapsable,
+ul.treeview li.lastExpandable { width:155px; }
+
 .check-box {
 	margin:0;
 	padding:0;
@@ -987,6 +1041,7 @@ a.new-cat:hover, a.show-messages:hover;{ text-decoration:none;}
 	float:left;
 }
 .incident-find-location {
+	margin-top:0;
 	margin-right:6px;
 	padding:0 9px 9px 9px;
 	background-color:#eee;
@@ -1145,8 +1200,7 @@ input.long2 {
 }
 .status_yes{
 	color:#009900;
-	font-weight:bold;
-	font-size:13px;
+	font-size:12px;
 	text-decoration:none;
 }
 .status_no{
@@ -1275,7 +1329,7 @@ div.sms_nav_holder a{
 }
 div.sms_nav_holder a:hover{background-color: #f0f0f0;}
 div.sms_nav_holder a.active{background-color: #eee; color: #6c6c6c; font-weight: bold;}
-div.sms_holder{
+div.sms_holder, div.settings_holder{
 	width: 860px;
 	padding: 15px;
 	margin-left: 20px;
@@ -1309,6 +1363,18 @@ div.sms_holder{
 		div.theme_select:hover{
 			background-color:#FFFFCC;
 		}
+	div.test_settings{
+		margin-bottom:15px;
+	}
+		div.test_settings #test_loading{
+			line-height: 24px;
+		}
+		div.test_settings #test_status{
+			line-height: 24px;
+			font-size:16px;
+			font-weight:bold;
+		}
+		
 
 div.simple_border{
 	width: 900px;
@@ -1454,6 +1520,9 @@ table.p_replace td.special{
 	margin:0 0 3px 0;
 	padding:2px;
 	display:none;
+}
+.spam_tr {
+	background-color:#ffffcc;
 }
 
 /*-- Forms --*/
@@ -1900,6 +1969,118 @@ html[xmlns] .clearfix {
 * html .clearfix {
 	height: 1%;
 }
+
+/* Reporters */
+.reporters h3{
+	font-weight:bold;
+	color:#990000;
+	font-size:14px;
+	padding:0;
+	margin:0;
+}
+h4 span.highlight{
+	background-color:#ffffcc;
+	font-size: 15px;
+	font-weight:bold;
+	color:#000;
+}
+#reporter_location{
+	clear:both;
+	padding:10px;
+	margin:10px;
+	border:1px solid #ccc;
+}
+	#reporter_location h3{
+		color:#666;
+	}
+		#reporter_location h3 span{
+			font-weight:normal;
+			font-size:11px;
+		}
+	#reporter_location #ReporterMap{
+		height:250px;
+		width:600px;
+		border:1px solid #666;
+	}
+	/* Trusted Reporter */
+	ul.info li strong.reporters_4{
+		background-color:#005366;
+		color:#fff;
+		padding:2px;
+	}
+	.tab ul li a.reporters_tab_4{
+		background-color:#005366;
+		color:#fff;
+	}
+	/* Trusted + Verify Reporter */
+	ul.info li strong.reporters_5{
+		background-color:#339900;
+		color:#fff;
+		padding:2px;
+	}
+	.tab ul li a.reporters_tab_5{
+		background-color:#339900;
+		color:#fff;
+	}
+	
+.attachment_thumbs{
+	float:left;
+	margin:0 10px 10px 0;
+	border:1px solid #ccc;
+}
+	.attachment_thumbs img{
+		border-width:0;
+	}
+	
+/* Upgrade Process */
+#upgrade_log .upgrade_log_message{
+	font-size:14px;
+	font-weight:bold;
+	border:2px solid #ccc;
+	background-color:#eee;
+	padding:8px;
+	margin-bottom:5px;
+}
+	#upgrade_log .log_success{
+		background-color:#d8f1d8;
+		border-color: #a7d1a7;
+	}
+	#upgrade_log .log_error{
+		background-color:#FFD8D9;
+		border-color: #990000;
+	}
+	.ftp-settings{
+		display:none;
+		width:600px;
+		margin-top:10px;
+		padding:10px;
+		background-color:#ffffcc;
+	}
+	
+/* Plugins/Addons/Themes */
+tr.addon_active td{
+	background-color:#ffffcc;
+}
+
+/* floaties */
+.right {
+	float:right;
+}
+.left {
+	float:left;
+}
+
+/* Map Toggles */
+ul.map-toggles { overflow:auto; clear:both; margin:3px 0 0 0; padding:0; }
+ul.map-toggles li { display:none; float:right; list-style-type: none; }
+
+ul.map-toggles li a, 
+ul.map-toggles li a:active { display:inline-block; padding:3px 5px 3px 17px; outline:none; }
+
+	a.wider-map		{ background:transparent url(../../img/admin/icon_sprite.png) -4px -202px no-repeat;  }
+	a.taller-map	{ background:transparent url(../../img/admin/icon_sprite.png) -4px -221px no-repeat;  }
+	a.shorter-map	{ background:transparent url(../../img/admin/icon_sprite.png) -4px -241px no-repeat;  }
+	a.smaller-map	{ background:transparent url(../../img/admin/icon_sprite.png) -4px -182px no-repeat;  }
 
 /*--  --*/
 /*--  --*/

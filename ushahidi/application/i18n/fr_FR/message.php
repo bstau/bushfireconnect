@@ -1,34 +1,22 @@
 <?php
-
-$lang = array
-(
-	'name' => array
-	(
-		'required'=> 'The name field is required.',
-		'length'		=> 'The name field must be at least 3 characters long.',
+	$lang = array(
+	'captcha' => array(
+		'default' => 'Veuillez taper un code de sécurité valide',
+		'required' => 'Veuillez taper le code de sécurité',
 	),
-	
-	'email' => array
-	(
-		'required'		=> 'The Email field is required if the checkbox is checked.',
-		'email'		  => 'The Email field does not appear to contain a valid email address?',
-		'length'	  => 'The Email field must be at least 4 and no more 64 characters long.'
-	),	
-	
-	'phone' => array
-	(
-		'length'		=> 'The phone field is not valid.',
+	'email' => array(
+		'email' => 'Adress email invalide',
+		'length' => 'L\'adresse email doit comporter entre 4 et 64 caractères.',
+		'required' => 'Une adresse email est requise si la case est cochée.',
 	),
-		
-	'message' => array
-	(
-		'required'		=> 'The comments field is required.'
+	'message' => array(
+		'required' => 'Veuillez entrer un commentaire.',
 	),
-	
-	'captcha' => array
-	(
-		'required' => 'Please enter the security code', 
-		'default' => 'Please enter a valid security code'
-	)
-	
-);
+	'name' => array(
+		'length' => 'Le nom doit comporter plus de 3 caractères.',
+		'required' => 'Veuillez indiquer un nom.',
+	),
+	'phone' => array(
+		'length' => 'Numéro de téléphone invalide.',
+	));
+?>

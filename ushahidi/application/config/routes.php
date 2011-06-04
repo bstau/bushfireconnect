@@ -4,5 +4,9 @@
  *
  * Sets the default route to "welcome"
  */
+
 $config['_default'] = 'main';
 $config['feed/atom'] = 'feed/index/atom';
+
+// Action::config - Config Routes
+Event::run('ushahidi_action.config_routes', $config);

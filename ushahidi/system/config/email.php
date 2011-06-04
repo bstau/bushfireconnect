@@ -20,4 +20,3 @@ $config['driver'] = 'native';
  * @param   array   smtp: hostname, (username), (password), (port), (auth), (encryption)
  */
 $config['options'] = NULL;
-//$config['options'] = array('hostname'=>'smtp.gmail.com', 'port'=>'465','username'=>'bushfireconnect@gmail.com','password'=>'bfchrhok2010','encryption'=>'tls');

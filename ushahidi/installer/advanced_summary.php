@@ -6,7 +6,7 @@
     print $header;
  ?>
 <body>
-<div id="ushahidi_login_container">
+<div id="ushahidi_install_container">
     <div id="ushahidi_login_logo"><img src="../media/img/admin/logo_login.gif" /></div>
     <div id="ushahidi_login" class="clearfix">
     <form method="POST" name="frm_install" action="process.php" style="line-height: 100%; margin-top: 0; margin-bottom: 0;">  
@@ -33,6 +33,20 @@
 							print ( $form->error('uploads_perm') == "" ) ? '' : 
 							"<li>".$form->error('uploads_perm')."</li>";
 							
+							print ( $form->error('curl') == "" ) ? '' : 
+							"<li>".$form->error('curl')."</li>";
+							
+							print ( $form->error('pcre') == "" ) ? '' : 
+							"<li>".$form->error('pcre')."</li>";
+							
+							print ( $form->error('iconv') == "" ) ? '' : 
+							"<li>".$form->error('iconv')."</li>";
+							
+							print ( $form->error('mcrypt') == "" ) ? '' : 
+							"<li>".$form->error('mcrypt')."</li>";
+							
+							print ( $form->error('spl') == "" ) ? '' : 
+							"<li>".$form->error('spl')."</li>";
 	   				    ?>
 					</ul>
 			</div>
@@ -40,8 +54,8 @@
     <div class="feedback info"> 
     	<p>The files and folders listed below need to be writable by your webserver.</p>
     	<p>More information on changing file permissions can be found at the following 
-			links: <a href="http://www.washington.edu/computing/unix/permissions.html">
-			Unix/Linux</a>, <a href="http://support.microsoft.com/kb/308419\">Windows.</a></p>
+			links: <a href="http://www.washington.edu/computing/unix/permissions.html" target="_blank">
+			Unix/Linux</a>, <a href="http://support.microsoft.com/kb/308419\" target="_blank">Windows.</a></p>
             <ul>
                 <li>application/config/config.php</li>
                 <li>application/config</li>
@@ -49,12 +63,21 @@
                 <li>application/logs</li>
                 <li>media/uploads</li>
                 <li>.htaccess</li>
-            </ul> 
+            </ul>
+
+		<p>Ushahidi will run in almost any environment with minimal configuration. The following PHP extensions are required.</p>
+			<ul>
+				<li><a href="http://php.net/curl" target="_blank">cURL</a> for getting or sending files using the URL syntax.</li>
+				<li><a href="http://php.net/pcre" target="_blank">PCRE</a> compiled with <code>–enable-utf8</code> and <code>–enable-unicode-properties</code> for UTF-8 functions to work properly.</li>
+				<li><a href="http://php.net/iconv" target="_blank">iconv</a> for UTF-8 transliteration.</li>
+				<li><a href="http://php.net/mcrypt" target="_blank">mcrypt</a> for encryption.</li>
+				<li><a href="http://php.net/spl" target="_blank">SPL</a> for several core libraries.</li>
+			</ul>
     </div>
 		
 	<p>Before you get started, you will need to make sure the following files and folders are writable by your webserver. This involves changing file permissions.</p>
 	<div class="two-col tc-left">
-        <h3>Database <a href="http://wiki.ushahidi.com/doku.php?id=a_brief_word_on_databases">what's this?</a></h3>
+        <h3>Database <a href="http://wiki.ushahidi.com/doku.php?id=a_brief_word_on_databases" target="_blank">what's this?</a></h3>
         <ol>	
             <li>Database name</li>
             <li>Database username</li>

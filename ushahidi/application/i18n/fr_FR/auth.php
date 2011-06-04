@@ -1,51 +1,35 @@
 <?php
-
-$lang = array
-(
-	'name' => array
-	(
-		'required'		=> 'The full name field is required.',
-		'length'		=> 'The full name field must be at least 3 and no more 100 characters long.',
-		'standard_text' => 'The username field contains disallowed characters.',
-		'login error'	=> 'Please check that you entered the correct name.'
+	$lang = array(
+	'email' => array(
+		'email' => 'Adresse email invalide.',
+		'exists' => 'Cette adress email existe déja.',
+		'length' => 'L\'adresse email doit comporter entre 4 et 64 caractères.',
+		'required' => 'Veuillez indiquer une adresse email.',
 	),
-	
-	'email' => array
-	(
-		'required'	  => 'The email field is required.',
-		'email'		  => 'The email field does not appear to contain a valid email address?',
-		'length'	  => 'The email field must be at least 4 and no more 64 characters long.',
-		'exists'	  => 'Sorry, a user account already exists for this email address.',
-		'login error' => 'Please check that you entered the correct email address.'
+	'name' => array(
+		'length' => 'Le nom complet doit comporter entre 3 et 100 caractères.',
+		'required' => 'Veuillez indiquer le nom complet.',
+		'standard_text' => 'Le nom d\'utilisateur comporte des caractères invalides.',
 	),
-
-	'username' => array
-	(
-		'required'		=> 'The username field is required.',
-		'length'		=> 'The username field must be at least 2 and no more 16 characters long.',
-		'standard_text' => 'The username field contains disallowed characters.',
-		'admin' 		=> 'The admin user role cannot be modified.',
-		'exists'		=> 'Sorry, this username is already in use.',
-		'login error'	=> 'Please check that you entered the correct username.'
+	'password' => array(
+		'alpha_numeric' => 'Le mot de passe doit être composé uniquement de lettres et de chiffres.',
+		'length' => 'Le mot de passe doit comporter entre 5 et 16 caractères.',
+		'login error' => 'Veuillez vérifier le mot de passe.',
+		'required' => 'Veuillez entrer un mot de passe.',
 	),
-
-	'password' => array
-	(
-		'required'		=> 'The password field is required.',
-		'length'		=> 'The password field must be at least 5 and no more 16 characters long.',
-		'standard_text' => 'The password field contains disallowed characters.',
-		'login error'	=> 'Please check that you entered the correct password.'
+	'password_confirm' => array(
+		'matches' => 'Les deux mots de passe doivent être les mêmes.',
 	),
-
-	'password_confirm' => array
-	(
-		'matches' => 'The password confirmation field must match the password field.'
+	'roles' => array(
+		'required' => 'Veuillez définier au moins un role.',
+		'values' => 'Le rôle doit être ADMINISTRATEUR ou UTILISATEUR.',
 	),
-
-	'roles' => array
-	(
-		'required' => 'You must define at least one role.',
-		'values' => 'You must select either ADMIN or USER role.'
-	)
-
-);
+	'username' => array(
+		'admin' => 'The role de l\'administrateur ne peut être modifié.',
+		'alpha' => 'Le nom d\'utilisateur doit être composé de lettres uniquement.',
+		'exists' => 'Ce nom d\'utilisateur est déjà pris.',
+		'length' => 'Le nom d\'utilisateur doit comporter entre 2 et 16 caractères.',
+		'login error' => 'Veuillez vérifier que le nom d\'utilisateur est correct.',
+		'required' => 'Veuillez indiquer un nom d\'utilisateur.',
+	));
+?>
