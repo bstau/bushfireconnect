@@ -24,23 +24,13 @@ ushahidi.Map.prototype.initMap_ = function(node) {
     me.buildHash_();
   });
 
-  this.menuControl = document.createElement('div');
-  this.menuControl.id = 'mapmenu';
-
-  this.searchControl = document.createElement('div');
-  this.searchControl.id = 'searchroot';
-
-  this.searchBox = document.createElement('input');
-  this.searchBox.id = 'mapsearchterm';
-  this.searchControl.appendChild(this.searchBox);
-
-  this.layerButton = document.createElement('div');
-  this.layerButton.id = 'maplayerbtn';
-  this.menuControl.appendChild(this.layerButton);
-
-  this.locateButton = document.createElement('div');
-  this.locateButton.id = 'maplocatebtn';
-  this.menuControl.appendChild(this.locateButton);
+  var layerBtn = document.getElementById('layerbtn');
+  if (layerBtn) {
+    layerBtn.onclick = function(e) {
+      var l = document.getElementById('layerlist');
+      if (l) l.style.display = (l.style.display == 'block') ? 'none' : 'block';
+    };
+  }
 };
 
 ushahidi.Map.prototype.buildHash_ = function() {
