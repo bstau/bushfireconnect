@@ -14,12 +14,14 @@
   <script src="js/main.js"></script>
   <script src="js/layers.js"></script>
   <script src="js/api.js"></script>
+  <script src="js/geolocation.js"></script>
   <script>
     $(window).load(function() {
       var params = {
         center: new google.maps.LatLng(-28.917378673228, 132.037210454868),
         zoom: 4,
-        maptype: 'terrain'
+        maptype: google.maps.MapTypeId.TERRAIN,
+        geolocate: true
       };
       if (window.location.hash) {
         parseHash(params);
@@ -44,6 +46,7 @@
             break;
           case 'm':
             params.maptype = param[1];
+            break;
         }
       }
     }
