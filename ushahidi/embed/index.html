@@ -1,7 +1,19 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
 <head>
+  <title>Ushahidi Mobile</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <link href="styles.css" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
   <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
   <script src="js/main.js"></script>
+  <script src="js/layers.js"></script>
+  <script src="js/api.js"></script>
   <script>
     $(window).load(function() {
       var params = {
@@ -12,7 +24,9 @@
       if (window.location.hash) {
         parseHash(params);
       }
-      new ushahidi.Map($('#map')[0], params);
+      var map = new ushahidi.Map($('#map')[0], params);
+      var api = new ushahidi.Api('../');
+      map.addLayer(new ushahidi.IncidentOverlay(api));
     });
 
     function parseHash(params) {
@@ -23,6 +37,7 @@
           case 'c':
             var center = param[1].split(',');
             params.center = new google.maps.LatLng(center[0], center[1]);
+            params.geolocate = false;
             break;
           case 'z':
             params.zoom = parseInt(param[1], 10);
@@ -34,15 +49,35 @@
     }
   </script>
   <style>
+    /*
     html, body, #map {
       width: 100%;
       height: 100%;
       margin: 0;
       padding: 0;
     }
+    */
   </style>
 </head>
 <body>
-  <div id="map"></div>
-</body>
+  <div id="header">
+    <h1>Ushahidi Mobile</h1>
+    <a href="#" class="button button-right" id="refresh">
+      <span>
+        <img src="img/icon_refresh.png">
+      </span>
+    </a>
+    <a href="#" class="button button-right" id="my-location">
+      <span>
+        <img src="img/geolocation_icon.png" id="loc"/>
+        <img src="img/ajax-loader.gif" id="load"/>
+      </span>
+    </a>
+  </div>
 
+  <div id="map-wrapper">
+    <div id="map"></div>
+  </div>
+
+</body>
+</html>
