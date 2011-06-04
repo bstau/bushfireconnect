@@ -255,3 +255,10 @@ body {
 img a {
   border: none;
 }
+
+.layercolour {
+  float: right;
+  border: 2px solid #eee;
+  width: 10px;
+  height: 10px;
+}
