@@ -1,4 +1,5 @@
 // TODO: some way to customise and filter the markers
+// TODO: modal dialog instead of info window
 ushahidi.IncidentOverlay = function(api) {
   this.api_ = api;
 };
