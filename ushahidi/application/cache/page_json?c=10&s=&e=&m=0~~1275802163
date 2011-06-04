@@ -1,4 +1,0 @@
-591e4bc4b777922627c2e91ee5587bc90fbc7d7d{"type": "FeatureCollection","features": [{"type":"Feature","properties": {"id": "11", 
-"name":"<a href='http://localhost:8888/ushahidi/reports/view/11'>A building left standing</a>","category":[10], "color": "e04a4a", 
-"icon": "category_10_1275785966.png", 
-"timestamp": "1275752340"},"geometry": {"type":"Point", "coordinates":[145.206299, -37.529332]}}]}

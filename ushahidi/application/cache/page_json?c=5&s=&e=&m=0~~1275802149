@@ -1,7 +1,0 @@
-9805659ace329ef1fc8608832ccbb7bdeb6b5f32{"type": "FeatureCollection","features": [{"type":"Feature","properties": {"id": "11", 
-"name":"<a href='http://localhost:8888/ushahidi/reports/view/11'>A building left standing</a>","category":[5], "color": "ff0505", 
-"icon": "category_5_1275785812.png", 
-"timestamp": "1275752340"},"geometry": {"type":"Point", "coordinates":[145.206299, -37.529332]}},{"type":"Feature","properties": {"id": "13", 
-"name":"<a href='http://localhost:8888/ushahidi/reports/view/13'>Bushfire starting</a>","category":[5], "color": "ff0505", 
-"icon": "category_5_1275785812.png", 
-"timestamp": "1275756960"},"geometry": {"type":"Point", "coordinates":[144.963169, -37.814251]}}]}

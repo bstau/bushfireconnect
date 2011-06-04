@@ -1,4 +1,0 @@
-0b6f82f97b0d70b15cb52aaa7b124a63a70c3537{"type": "FeatureCollection","features": [{"type":"Feature","properties": {"id": "12", 
-"name":"<a href='http://129.94.108.27:8888/ushahidi/reports/view/12'>Fire Brigade at Scene</a>","category":[12], "color": "2151b8", 
-"icon": "category_12_1275784916.png", 
-"timestamp": "1275752640"},"geometry": {"type":"Point", "coordinates":[145.340195, -37.599272]}}]}

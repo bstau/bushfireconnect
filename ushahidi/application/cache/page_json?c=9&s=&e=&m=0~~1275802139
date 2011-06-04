@@ -1,4 +1,0 @@
-3ddee1b4aa837078775ca9ab3a5fbc2b3d692eba{"type": "FeatureCollection","features": [{"type":"Feature","properties": {"id": "9", 
-"name":"<a href='http://localhost:8888/ushahidi/reports/view/9'>Backburning Operation</a>","category":[9], "color": "0de0e0", 
-"icon": "category_9_1275746204.png", 
-"timestamp": "1275752040"},"geometry": {"type":"Point", "coordinates":[145.250244, -37.507819]}}]}
