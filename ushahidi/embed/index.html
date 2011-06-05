@@ -36,12 +36,27 @@
           document.getElementById('layerbtn'),
           document.getElementById('layerlist'));
 
-      var geolocation = new ushahidi.Geolocation(map);
-
-      if (params.geolocate) {
-        geolocation.updateLocation();
+      var geo = setupGeolocation(map, navigator.geolocation);
+      if (geo && params.geolocate) {
+        geo.updateLocation();
       }
     });
+
+    function setupGeolocation(map, hasGeolocation) {
+      if (hasGeolocation) {
+        var geolocation = new ushahidi.Geolocation(map);
+
+        $('#my-location').click(function() {
+          geolocation.updateLocation();
+          return false;
+        });
+
+        return geolocation;
+      }
+
+      // no geolocation
+      $('#my-location').remove();
+    }
 
     function parseHash(params) {
       var chunks = window.location.hash.substring(1).split('|');
