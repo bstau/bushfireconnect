@@ -12,7 +12,8 @@ ushahidi.Geolocation.prototype.updateLocation = function() {
     me.browserSupportFlag_ = true;
     navigator.geolocation.getCurrentPosition(function(position) {
       me.location_ = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-      me.updateMap_("Location found using W3C standard");
+      me.accuracy_ = position.coords.accuracy;
+      me.updateMap_();
     }, function() {
       me.handleNoGeolocation_();
     });
@@ -22,7 +23,8 @@ ushahidi.Geolocation.prototype.updateLocation = function() {
     var geo = google.gears.factory.create('beta.geolocation');
     geo.getCurrentPosition(function(position) {
       me.location_ = new google.maps.LatLng(position.latitude,position.longitude);
-      me.updateMap_("Location found using Google Gears");
+      me.accuracy_ = position.accuracy;
+      me.updateMap_();
     }, function() {
       me.handleNoGeolocation_(browserSupportFlag);
     });
@@ -44,8 +46,30 @@ ushahidi.Geolocation.prototype.handleNoGeolocation_ = function() {
 
 ushahidi.Geolocation.prototype.updateMap_ = function(contentString) {
   this.map_.setCenter(this.location_);
-  this.map_.setZoom(this.zoomLevel_)
-  this.infoWindow_.setContent(contentString);
-  this.infoWindow_.setPosition(this.location_);
-  this.infoWindow_.open(this.map_);
+  this.map_.setZoom(this.zoomLevel_);
+
+  if (!this.marker) {
+    this.marker = new google.maps.Marker({
+        visible: false,
+        map: this.map_,
+        draggable: false,
+        icon: new google.maps.MarkerImage(
+          'http://oa-samples.googlecode.com/svn-history/r73/trunk/' +
+            'presentations/gdd-2010/saopaulo/talks/maps/my-location.png',
+              null, null, new google.maps.Point(6, 7)),
+        flat: true,
+        raiseOnDrag: false});
+  }
+
+  if (!this.markerCircle) {
+    this.markerCircle = new google.maps.Circle({
+        map: this.map_,
+        radius: this.accuracy_,
+        strokeColor: '#44c4ff',
+        fillColor: '#44c4ff'
+    }).bindTo('center', this.marker, 'position');
+  }
+
+  this.marker.setPosition(this.location_);
+  this.marker.setVisible(true);
 }

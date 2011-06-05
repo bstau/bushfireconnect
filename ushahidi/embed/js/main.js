@@ -17,17 +17,6 @@ ushahidi.Map.prototype.initMap_ = function(node) {
     mapTypeId: this.params_.maptype
   });
 
-  var marker = new google.maps.Marker({
-    map: this.map_,
-    draggable: true,
-    icon: new google.maps.MarkerImage(
-      'http://oa-samples.googlecode.com/svn-history/r73/trunk/' +
-      'presentations/gdd-2010/saopaulo/talks/maps/my-location.png',
-      null, null, new google.maps.Point(6, 7)),
-    flat: true,
-    raiseOnDrag: false
-  });
-
   this.geolocation_ = null;
   if (ushahidi.Geolocation) {
     this.geolocation_ = new ushahidi.Geolocation(this.map_);
@@ -82,6 +71,7 @@ ushahidi.Map.prototype.initMap_ = function(node) {
                 var cb = document.createElement('input');
                 var lbl = document.createElement('label');
                 cb.type = 'checkbox';
+                cb.checked = true;
                 cb.id = lbl.htmlFor = 'layer' + cat.id;
                 var txt = document.createTextNode(' ' + cat.description);
                 if (cat.color && cat.color.length) {
@@ -103,7 +93,7 @@ ushahidi.Map.prototype.initMap_ = function(node) {
             if (lb) lb.style.display = 'none';
           }
         }
-      } else {
+      } else if (this.status && this.status != 200) {
         var lb = document.getElementById('layerbtn');
         if (lb) lb.style.display = 'none';
       }
