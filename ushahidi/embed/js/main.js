@@ -18,9 +18,11 @@ ushahidi.Map.prototype.initMap_ = function(node) {
   });
 
   this.geolocation_ = null;
-
-  if (this.params_.geolocate == true && ushahidi.Geolocation)  {
+  if (ushahidi.Geolocation) {
     this.geolocation_ = new ushahidi.Geolocation(this.map_);
+  }
+
+  if (this.params_.geolocate == true && this.geolocation_)  {
     this.geolocation_.updateLocation();
   }
 
@@ -43,9 +45,13 @@ ushahidi.Map.prototype.initMap_ = function(node) {
 
   var locateBtn = document.getElementById('my-location');
   if (locateBtn) {
-    locateBtn.onclick = function(e) {
-      me.geolocation_.updateLocation(); 
-    };
+    if (this.geolocation_) {
+      locateBtn.onclick = function(e) {
+        me.geolocation_.updateLocation(); 
+      };
+    } else {
+      locateBtn.style.display = 'none';
+    }
   }
 
   var client = new XMLHttpRequest();
@@ -57,30 +63,38 @@ ushahidi.Map.prototype.initMap_ = function(node) {
 
         data = eval('(' + this.responseText + ')');
         if (data.payload && data.payload.categories) {
-          for (var i = 0; i < data.payload.categories.length; ++i) {
-            var cat = data.payload.categories[i].category;
-            if (0 == cat.parent_id) {
-              var elem = document.createElement('div');
-              var cb = document.createElement('input');
-              var lbl = document.createElement('label');
-              cb.type = 'checkbox';
-              cb.id = lbl.htmlFor = 'layer' + cat.id;
-              var txt = document.createTextNode(' ' + cat.description);
-              if (cat.color && cat.color.length) {
-                var colourIcon = document.createElement('div');
-                colourIcon.style.backgroundColor = '#' + cat.color;
-                colourIcon.className = 'layercolour';
-                elem.appendChild(colourIcon);
-              }
+          if (data.payload.categories.length) {
+            for (var i = 0; i < data.payload.categories.length; ++i) {
+              var cat = data.payload.categories[i].category;
+              if (0 == cat.parent_id) {
+                var elem = document.createElement('div');
+                var cb = document.createElement('input');
+                var lbl = document.createElement('label');
+                cb.type = 'checkbox';
+                cb.id = lbl.htmlFor = 'layer' + cat.id;
+                var txt = document.createTextNode(' ' + cat.description);
+                if (cat.color && cat.color.length) {
+                  var colourIcon = document.createElement('div');
+                  colourIcon.style.backgroundColor = '#' + cat.color;
+                  colourIcon.className = 'layercolour';
+                  elem.appendChild(colourIcon);
+                }
 
-              elem.className = 'layer';
-              lbl.appendChild(txt);
-              elem.appendChild(cb);
-              elem.appendChild(lbl);
-              ll.appendChild(elem); 
+                elem.className = 'layer';
+                lbl.appendChild(txt);
+                elem.appendChild(cb);
+                elem.appendChild(lbl);
+                ll.appendChild(elem); 
+              }
             }
+          } else {
+            var lb = document.getElementById('layerbtn');
+            if (lb) lb.style.display = 'none';
           }
         }
+      } else {
+        var lb = document.getElementById('layerbtn');
+        if (lb) lb.style.display = 'none';
       }
     };
 
