@@ -59,7 +59,7 @@ ushahidi.IncidentOverlay.prototype.setParent = function(ushaMap) {
   this.ushahidiMap_ = ushaMap;
 }
 
-ushahidi.IncidentOverlay.prototype.setIncidents_ = function(incidents) {
+ushahidi.IncidentOverlay.prototype.setIncidents_ = function(incidents, cats) {
   var map = this.map_;
   this.incidents_ = incidents;
 
@@ -69,6 +69,7 @@ ushahidi.IncidentOverlay.prototype.setIncidents_ = function(incidents) {
     var loc = new google.maps.LatLng(incident.locationlatitude,
         incident.locationlongitude);
 
+    // TODO: get the most senior category's color
     var color = '#' + cats[category.id].color;
     var marker = new google.maps.Marker({
       position: loc,
