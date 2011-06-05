@@ -17,6 +17,11 @@ ushahidi.Map.prototype.initMap_ = function(node) {
     mapTypeId: this.params_.maptype
   });
 
+  if (this.params_.geolocate == true && ushahidi.Geolocation)  {
+    var geolocation = new ushahidi.Geolocation(this.map_);
+    geolocation.updateLocation();
+  }
+
   google.maps.event.addListener(this.map_, 'maptypeid_changed', function() {
     me.buildHash_();
   });
