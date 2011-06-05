@@ -30,6 +30,8 @@ body {
   right: 0;
   top: 38px;
   width: 20em;
+  -webkit-box-shadow: 0 3px 12px 3px rgba(32, 32, 32, 0.4);
+  -moz-box-shadow: 0 3px 12px 3px rgba(32, 32, 32, 0.4);
   box-shadow: 0 3px 12px 3px rgba(32, 32, 32, 0.4);
 }
 
@@ -38,6 +40,7 @@ body {
   height: 30px;
   line-height: 30px;
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #e7e7e7));
+  background: -moz-linear-gradient(center bottom, #e7e7e7 0%, #ffffff 100%);
 }
 
 #footer {

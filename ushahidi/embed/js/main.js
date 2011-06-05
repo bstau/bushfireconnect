@@ -2,11 +2,15 @@ var ushahidi = ushahidi || {};
 
 ushahidi.Map = function(node, params) {
   this.params_ = params;
+  this.layers = [];
   this.initMap_(node);
 };
 
 ushahidi.Map.prototype.addLayer = function(layer) {
+  this.layers.push(layer);
   layer.setMap(this.map_);
+  if (layer.setParent)
+      layer.setParent(this);
 };
 
 ushahidi.Map.prototype.initMap_ = function(node) {
