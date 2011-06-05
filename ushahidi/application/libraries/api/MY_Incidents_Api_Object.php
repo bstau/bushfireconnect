@@ -699,7 +699,7 @@ class Incidents_Api_Object extends Api_Object_Core {
 			}
 		}
 
-		$location_id_in = '1=1';
+		$location_id_in = 'true=false';
 		if (count($location_ids) > 0)
 		{
 			$location_id_in = 'l.id IN ('.implode(',',$location_ids).')';
