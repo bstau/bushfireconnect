@@ -31,7 +31,7 @@
       }
       var map = new ushahidi.Map($('#map')[0], params);
       var api = new ushahidi.Api('../');
-      var dotter = new ushahidi.Dotter(10, 10);
+      var dotter = new ushahidi.Dotter(15, 15);
       map.addLayer(new ushahidi.IncidentOverlay(api, dotter));
 
       new ushahidi.LayerControl(api,

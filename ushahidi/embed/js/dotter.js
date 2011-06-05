@@ -20,8 +20,10 @@ ushahidi.Dotter.prototype.generateDot_ = function(color) {
   el.height = this.height_;
 
   var ctx = el.getContext('2d');
-  ctx.fillStyle = color;
+  ctx.fillStyle = 'black';
   ctx.fillRect(0, 0, el.width, el.height);
+  ctx.fillStyle = color;
+  ctx.fillRect(1, 1, el.width - 2, el.height - 2);
 
   return el.toDataURL();
 };
