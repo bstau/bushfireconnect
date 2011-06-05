@@ -17,9 +17,11 @@ ushahidi.Map.prototype.initMap_ = function(node) {
     mapTypeId: this.params_.maptype
   });
 
+  this.geolocation_ = null;
+
   if (this.params_.geolocate == true && ushahidi.Geolocation)  {
-    var geolocation = new ushahidi.Geolocation(this.map_);
-    geolocation.updateLocation();
+    this.geolocation_ = new ushahidi.Geolocation(this.map_);
+    this.geolocation_.updateLocation();
   }
 
   google.maps.event.addListener(this.map_, 'maptypeid_changed', function() {
@@ -36,6 +38,13 @@ ushahidi.Map.prototype.initMap_ = function(node) {
       if (l) {
         l.style.display = (l.style.display == 'block') ? 'none' : 'block';
       }
+    };
+  }
+
+  var locateBtn = document.getElementById('my-location');
+  if (locateBtn) {
+    locateBtn.onclick = function(e) {
+      me.geolocation_.updateLocation(); 
     };
   }
 
