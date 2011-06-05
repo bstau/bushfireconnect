@@ -17,6 +17,17 @@ ushahidi.Map.prototype.initMap_ = function(node) {
     mapTypeId: this.params_.maptype
   });
 
+  var marker = new google.maps.Marker({
+    map: this.map_,
+    draggable: true,
+    icon: new google.maps.MarkerImage(
+      'http://oa-samples.googlecode.com/svn-history/r73/trunk/' +
+      'presentations/gdd-2010/saopaulo/talks/maps/my-location.png',
+      null, null, new google.maps.Point(6, 7)),
+    flat: true,
+    raiseOnDrag: false
+  });
+
   this.geolocation_ = null;
   if (ushahidi.Geolocation) {
     this.geolocation_ = new ushahidi.Geolocation(this.map_);
@@ -111,3 +122,17 @@ ushahidi.Map.prototype.buildHash_ = function() {
   hash.push('m=' + this.map_.getMapTypeId());
   window.location.hash = hash.join('|');
 };
+
+
+function getCurrentPosition(map, marker) {
+  if (!navigator.geolocation) {
+    return;
+  }
+  navigator.geolocation.getCurrentPosition(function(p) {
+    var ll = new google.maps.LatLng(p.coords.latitude, p.coords.longitude);
+    if (map.getZoom() < 10)
+        map.setZoom(13);
+    map.setCenter(ll);
+  });
+}
+
