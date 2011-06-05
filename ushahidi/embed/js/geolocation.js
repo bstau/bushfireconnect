@@ -67,7 +67,8 @@ ushahidi.Geolocation.prototype.updateMap_ = function(contentString) {
         radius: this.accuracy_,
         strokeColor: '#44c4ff',
         fillColor: '#44c4ff'
-    }).bindTo('center', this.marker, 'position');
+    });
+    this.markerCircle.bindTo('center', this.marker, 'position');
   }
 
   this.marker.setPosition(this.location_);

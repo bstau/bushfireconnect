@@ -29,12 +29,15 @@ body {
   top: 38px;
   height: auto;
   width: 20em;
+  -webkit-box-shadow: 0 3px 12px 3px rgba(32, 32, 32, 0.4);
+  -moz-box-shadow: 0 3px 12px 3px rgba(32, 32, 32, 0.4);
   box-shadow: 0 3px 12px 3px rgba(32, 32, 32, 0.4);
 }
 
 #layerlist .layer {
   padding: 0.5em 0.5em;
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #e7e7e7));
+  background: -moz-linear-gradient(center bottom, #e7e7e7 0%, #ffffff 100%);
 }
 
 #footer {

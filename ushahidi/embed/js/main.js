@@ -2,11 +2,15 @@ var ushahidi = ushahidi || {};
 
 ushahidi.Map = function(node, params) {
   this.params_ = params;
+  this.layers = [];
   this.initMap_(node);
 };
 
 ushahidi.Map.prototype.addLayer = function(layer) {
+  this.layers.push(layer);
   layer.setMap(this.map_);
+  if (layer.setParent)
+      layer.setParent(this);
 };
 
 ushahidi.Map.prototype.initMap_ = function(node) {
@@ -64,15 +68,26 @@ ushahidi.Map.prototype.initMap_ = function(node) {
         data = eval('(' + this.responseText + ')');
         if (data.payload && data.payload.categories) {
           if (data.payload.categories.length) {
+            var layerconfig = {};
             for (var i = 0; i < data.payload.categories.length; ++i) {
               var cat = data.payload.categories[i].category;
+              var layer = null;
               if (0 == cat.parent_id) {
+                layer = parseInt(cat.id);
                 var elem = document.createElement('div');
                 var cb = document.createElement('input');
                 var lbl = document.createElement('label');
                 cb.type = 'checkbox';
                 cb.checked = true;
                 cb.id = lbl.htmlFor = 'layer' + cat.id;
+                cb.onchange = function(xcb, xid) { return function(e) {
+                  for (var i = 0; i < me.layers.length; ++i) {
+                    var l = me.layers[i];
+                    if (l.setLayerVisibility) {
+                      l.setLayerVisibility(xid, xcb.checked); // document.getElementById(cb.id).checked);
+                    }
+                  }
+                }}(cb, parseInt(cat.id));
                 var txt = document.createTextNode(' ' + cat.description);
                 if (cat.color && cat.color.length) {
                   var colourIcon = document.createElement('div');
@@ -86,8 +101,16 @@ ushahidi.Map.prototype.initMap_ = function(node) {
                 elem.appendChild(cb);
                 elem.appendChild(lbl);
                 ll.appendChild(elem); 
+              } else {
+                layer = parseInt(cat.parent_id);
               }
+              if (layerconfig[layer])
+                layerconfig[layer].push(parseInt(cat.id));
+              else
+                layerconfig[layer] = [parseInt(cat.id)];
             }
+
+            me.layerconfig_ = layerconfig;
           } else {
             var lb = document.getElementById('layerbtn');
             if (lb) lb.style.display = 'none';
