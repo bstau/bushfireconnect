@@ -45,9 +45,6 @@ ushahidi.Geolocation.prototype.handleNoGeolocation_ = function() {
 }
 
 ushahidi.Geolocation.prototype.updateMap_ = function(contentString) {
-  this.map_.setCenter(this.location_);
-  this.map_.setZoom(this.zoomLevel_);
-
   if (!this.marker) {
     this.marker = new google.maps.Marker({
         visible: false,
@@ -71,6 +68,18 @@ ushahidi.Geolocation.prototype.updateMap_ = function(contentString) {
     this.markerCircle.bindTo('center', this.marker, 'position');
   }
 
+  // Cap the zoom level to treat it as 50 meter accuracy, useful for '0' accuracy values to avoid log(0).
+  var accuracy = this.accuracy_ > 50 ? this.accuracy_ : 50;
+  // Only approximate!
+  var accuracyDeg = this.accuracy_ * 360.0 / 30000000;
+  // Take log_2(accuracyDeg)
+  var zoomLevel = Math.floor(-1 * Math.log((accuracyDeg * 10) / 360.0) / Math.LN2);
+  alert(zoomLevel);
+  if (zoomLevel < 0) zoomLevel = 0;
+  if (zoomLevel > 14) zoomLevel = 14;
+
   this.marker.setPosition(this.location_);
   this.marker.setVisible(true);
+  this.map_.setCenter(this.location_);
+  this.map_.setZoom(zoomLevel);
 }
