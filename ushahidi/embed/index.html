@@ -13,6 +13,7 @@
   <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
   <script src="js/main.js"></script>
   <script src="js/layers.js"></script>
+  <script src="js/dotter.js"></script>
   <script src="js/api.js"></script>
   <script src="js/osm.js"></script>
   <script src="js/layercontrol.js"></script>
@@ -30,7 +31,8 @@
       }
       var map = new ushahidi.Map($('#map')[0], params);
       var api = new ushahidi.Api('../');
-      map.addLayer(new ushahidi.IncidentOverlay(api));
+      var dotter = new ushahidi.Dotter(10, 10);
+      map.addLayer(new ushahidi.IncidentOverlay(api, dotter));
 
       new ushahidi.LayerControl(api,
           document.getElementById('layerbtn'),
