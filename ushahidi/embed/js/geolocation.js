@@ -1,8 +1,18 @@
 ushahidi.Geolocation = function(map) {
-  this.map_ = map;
-  this.location_ = map.getCenter();
+  this.map_ = map.getMap();
+  this.location_ = this.map_.getCenter();
   this.zoomLevel_ = 12
-  this.infoWindow_ = new google.maps.InfoWindow();
+  this.marker_ = new google.maps.Marker({
+    map: this.map_,
+    icon: new google.maps.MarkerImage(
+      'http://oa-samples.googlecode.com/svn-history/r73/trunk/' +
+        'presentations/gdd-2010/saopaulo/talks/maps/my-location.png',
+          null, null, new google.maps.Point(6, 7)),
+    flat: true
+  });
+  this.circle_ = new google.maps.Circle;
+  this.circle_.bindTo('center', this.marker_, 'position');
+  this.circle_.bindTo('map', this.marker_);
 };
 
 ushahidi.Geolocation.prototype.updateLocation = function() {
@@ -17,59 +27,27 @@ ushahidi.Geolocation.prototype.updateLocation = function() {
     }, function() {
       me.handleNoGeolocation_();
     });
-  } else if (google.gears) {
-    // Try Google Gears Geolocation
-    me.browserSupportFlag_ = true;
-    var geo = google.gears.factory.create('beta.geolocation');
-    geo.getCurrentPosition(function(position) {
-      me.location_ = new google.maps.LatLng(position.latitude,position.longitude);
-      me.accuracy_ = position.accuracy;
-      me.updateMap_();
-    }, function() {
-      me.handleNoGeolocation_(browserSupportFlag);
-    });
   } else {
     // Browser doesn't support Geolocation
     browserSupportFlag = false;
     me.handleNoGeolocation_(browserSupportFlag);
   }
-}
+};
 
 ushahidi.Geolocation.prototype.handleNoGeolocation_ = function() {
-  if (this.browserSupportFlag_ == true) {
-    contentString = "Error: The Geolocation service failed.";
-  } else {
-    contentString = "Error: Your browser doesn't support geolocation.";
-  }
-  this.updateMap_(contentString);
-}
+  // noop
+};
 
-ushahidi.Geolocation.prototype.updateMap_ = function(contentString) {
-  this.map_.setCenter(this.location_);
-  this.map_.setZoom(this.zoomLevel_);
+ushahidi.Geolocation.prototype.updateMap_ = function() {
+  var map = this.map_;
+  map.setCenter(this.location_);
+  map.setZoom(this.zoomLevel_);
 
-  if (!this.marker) {
-    this.marker = new google.maps.Marker({
-        visible: false,
-        map: this.map_,
-        draggable: false,
-        icon: new google.maps.MarkerImage(
-          'http://oa-samples.googlecode.com/svn-history/r73/trunk/' +
-            'presentations/gdd-2010/saopaulo/talks/maps/my-location.png',
-              null, null, new google.maps.Point(6, 7)),
-        flat: true,
-        raiseOnDrag: false});
-  }
+  this.marker_.setPosition(this.location_);
 
-  if (!this.markerCircle) {
-    this.markerCircle = new google.maps.Circle({
-        map: this.map_,
-        radius: this.accuracy_,
-        strokeColor: '#44c4ff',
-        fillColor: '#44c4ff'
-    }).bindTo('center', this.marker, 'position');
-  }
-
-  this.marker.setPosition(this.location_);
-  this.marker.setVisible(true);
-}
+  this.circle_.setOptions({
+    radius: this.accuracy_,
+    strokeColor: '#44c4ff',
+    fillColor: '#44c4ff'
+  });
+};

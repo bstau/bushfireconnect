@@ -31,8 +31,16 @@
       var map = new ushahidi.Map($('#map')[0], params);
       var api = new ushahidi.Api('../');
       map.addLayer(new ushahidi.IncidentOverlay(api));
-      var control = new ushahidi.LayerControl(api, document.getElementById('layerbtn'),
+
+      new ushahidi.LayerControl(api,
+          document.getElementById('layerbtn'),
           document.getElementById('layerlist'));
+
+      var geolocation = new ushahidi.Geolocation(map);
+
+      if (params.geolocate) {
+        geolocation.updateLocation();
+      }
     });
 
     function parseHash(params) {

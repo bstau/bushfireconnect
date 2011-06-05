@@ -22,14 +22,6 @@ ushahidi.Map.prototype.initMap_ = function(node) {
 
   map.mapTypes.set('osm', osm = new OSMLayer());
 
-  if (ushahidi.Geolocation) {
-    this.geolocation_ = new ushahidi.Geolocation(this.map_);
-  }
-
-  if (this.params_.geolocate == true && this.geolocation_)  {
-    this.geolocation_.updateLocation();
-  }
-
   google.maps.event.addListener(this.map_, 'maptypeid_changed', function() {
     me.buildHash_();
   });
@@ -38,6 +30,9 @@ ushahidi.Map.prototype.initMap_ = function(node) {
   });
 };
 
+/**
+ * @return {google.maps.Map}
+ */
 ushahidi.Map.prototype.getMap = function() {
   return this.map_;
 };
