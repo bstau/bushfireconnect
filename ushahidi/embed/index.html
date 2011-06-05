@@ -5,7 +5,7 @@
 <!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
 <head>
-  <title>Ushahidi Mobile</title>
+  <title>BushfireConnect</title>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <link href="styles.css" rel="stylesheet" type="text/css">
@@ -16,12 +16,14 @@
   <script src="js/api.js"></script>
   <script src="js/osm.js"></script>
   <script src="js/layercontrol.js"></script>
+  <script src="js/geolocation.js"></script>
   <script>
     $(window).load(function() {
       var params = {
         center: new google.maps.LatLng(-28.917378673228, 132.037210454868),
         zoom: 4,
-        maptype: 'terrain'
+        maptype: google.maps.MapTypeId.TERRAIN,
+        geolocate: true
       };
       if (window.location.hash) {
         parseHash(params);
@@ -48,6 +50,7 @@
             break;
           case 'm':
             params.maptype = param[1];
+            break;
         }
       }
     }
@@ -55,7 +58,7 @@
 </head>
 <body>
   <div id="header">
-    <h1>Ushahidi Mobile</h1>
+    <h1>BushfireConnect</h1>
     <a href="#" class="button button-left" id="refresh">
       <span>
         <img src="img/icon_refresh.png">

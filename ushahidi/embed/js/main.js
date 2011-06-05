@@ -22,7 +22,15 @@ ushahidi.Map.prototype.initMap_ = function(node) {
 
   map.mapTypes.set('osm', osm = new OSMLayer());
 
-  google.maps.event.addListener(map, 'maptypeid_changed', function() {
+  if (ushahidi.Geolocation) {
+    this.geolocation_ = new ushahidi.Geolocation(this.map_);
+  }
+
+  if (this.params_.geolocate == true && this.geolocation_)  {
+    this.geolocation_.updateLocation();
+  }
+
+  google.maps.event.addListener(this.map_, 'maptypeid_changed', function() {
     me.buildHash_();
   });
   google.maps.event.addListener(map, 'idle', function() {
@@ -42,3 +50,17 @@ ushahidi.Map.prototype.buildHash_ = function() {
   hash.push('m=' + this.map_.getMapTypeId());
   window.location.hash = hash.join('|');
 };
+
+
+function getCurrentPosition(map, marker) {
+  if (!navigator.geolocation) {
+    return;
+  }
+  navigator.geolocation.getCurrentPosition(function(p) {
+    var ll = new google.maps.LatLng(p.coords.latitude, p.coords.longitude);
+    if (map.getZoom() < 10)
+        map.setZoom(13);
+    map.setCenter(ll);
+  });
+}
+
