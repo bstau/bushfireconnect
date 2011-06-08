@@ -1,48 +1,29 @@
 ushahidi.Geolocation = function(map) {
-  this.map_ = map;
-  this.location_ = map.getCenter();
+  this.map_ = map.getMap();
+  this.location_ = this.map_.getCenter();
   this.zoomLevel_ = 12
-  this.infoWindow_ = new google.maps.InfoWindow();
+
+  this.marker_ = new google.maps.Marker({
+    icon: new google.maps.MarkerImage(
+      'http://oa-samples.googlecode.com/svn-history/r73/trunk/' +
+        'presentations/gdd-2010/saopaulo/talks/maps/my-location.png',
+          null, null, new google.maps.Point(6, 7)),
+    flat: true
+  });
+  this.circle_ = new google.maps.Circle;
+  this.circle_.bindTo('center', this.marker_, 'position');
+  this.circle_.bindTo('map', this.marker_);
 };
 
 ushahidi.Geolocation.prototype.updateLocation = function() {
   var me = this;
-  this.browserSupportFlag_ = false;
-  if(navigator.geolocation) {
-    me.browserSupportFlag_ = true;
-    navigator.geolocation.getCurrentPosition(function(position) {
-      me.location_ = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-      me.accuracy_ = position.coords.accuracy;
-      me.updateMap_();
-    }, function() {
-      me.handleNoGeolocation_();
-    });
-  } else if (google.gears) {
-    // Try Google Gears Geolocation
-    me.browserSupportFlag_ = true;
-    var geo = google.gears.factory.create('beta.geolocation');
-    geo.getCurrentPosition(function(position) {
-      me.location_ = new google.maps.LatLng(position.latitude,position.longitude);
-      me.accuracy_ = position.accuracy;
-      me.updateMap_();
-    }, function() {
-      me.handleNoGeolocation_(browserSupportFlag);
-    });
-  } else {
-    // Browser doesn't support Geolocation
-    browserSupportFlag = false;
-    me.handleNoGeolocation_(browserSupportFlag);
-  }
-}
-
-ushahidi.Geolocation.prototype.handleNoGeolocation_ = function() {
-  if (this.browserSupportFlag_ == true) {
-    contentString = "Error: The Geolocation service failed.";
-  } else {
-    contentString = "Error: Your browser doesn't support geolocation.";
-  }
-  this.updateMap_(contentString);
-}
+  navigator.geolocation.getCurrentPosition(function(position) {
+    var location = new google.maps.LatLng(position.coords.latitude,
+                                          position.coords.longitude);
+    var accuracy = position.coords.accuracy;
+    me.updateMap_(location, accuracy);
+  });
+};
 
 ushahidi.Geolocation.prototype.updateMap_ = function(contentString) {
   if (!this.marker) {
@@ -58,28 +39,33 @@ ushahidi.Geolocation.prototype.updateMap_ = function(contentString) {
         raiseOnDrag: false});
   }
 
-  if (!this.markerCircle) {
-    this.markerCircle = new google.maps.Circle({
-        map: this.map_,
-        radius: this.accuracy_,
-        strokeColor: '#44c4ff',
-        fillColor: '#44c4ff'
-    });
-    this.markerCircle.bindTo('center', this.marker, 'position');
-  }
-
+ushahidi.Geolocation.getZoomLevel = function(accuracy_m) {
   // Cap the zoom level to treat it as 50 meter accuracy, useful for '0' accuracy values to avoid log(0).
-  var accuracy = this.accuracy_ > 50 ? this.accuracy_ : 50;
+  var accuracy = accuracy_m > 50 ? accuracy_m : 50;
   // Only approximate!
-  var accuracyDeg = this.accuracy_ * 360.0 / 30000000;
+  var accuracyDeg = accuracy * 360.0 / 30000000;
   // Take log_2(accuracyDeg)
   var zoomLevel = Math.floor(-1 * Math.log((accuracyDeg * 10) / 360.0) / Math.LN2);
-  alert(zoomLevel);
-  if (zoomLevel < 0) zoomLevel = 0;
-  if (zoomLevel > 14) zoomLevel = 14;
 
-  this.marker.setPosition(this.location_);
-  this.marker.setVisible(true);
-  this.map_.setCenter(this.location_);
-  this.map_.setZoom(zoomLevel);
+  // Cap zoom levels at 3..14.
+  if (zoomLevel < 3) zoomLevel = 3;
+  if (zoomLevel > 14) zoomLevel = 14;
 }
+
+ushahidi.Geolocation.prototype.updateMap_ = function(location, accuracy) {
+  var map = this.map_;
+  this.zoomLevel_ = ushahidi.Geolocation.getZoomLevel(accuracy);
+
+  map.panTo(location);
+  map.setZoom(this.zoomLevel_);
+
+  this.marker_.setPosition(location);
+  this.marker_.setMap(map);
+  this.marker.setVisible(true);
+
+  this.circle_.setOptions({
+    radius: accuracy,
+    strokeColor: '#44c4ff',
+    fillColor: '#44c4ff'
+  });
+};

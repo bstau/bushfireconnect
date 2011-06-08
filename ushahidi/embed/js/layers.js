@@ -1,7 +1,7 @@
-// TODO: some way to customise and filter the markers
 // TODO: modal dialog instead of info window
-ushahidi.IncidentOverlay = function(api) {
+ushahidi.IncidentOverlay = function(api, dotter) {
   this.api_ = api;
+  this.dotter_ = dotter;
   this.visibleLayers = [];
   for (var i = 0; i < 10000; ++i)
     this.visibleLayers.push(i);
@@ -29,9 +29,17 @@ ushahidi.IncidentOverlay.prototype.getVisibleCategories = function () {
 
 ushahidi.IncidentOverlay.prototype.setMap = function(map) {
   var me = this;
-  this.map_ = map;
-  this.api_.getIncidents(function(resp) {
-    me.setIncidents_(resp.payload.incidents);
+  me.map_ = map;
+  me.api_.getCategories(function(resp) {
+    var catsA = resp.payload.categories;
+    var cats = {};
+    for (var i = 0; i < catsA.length; i++) {
+      var cat = catsA[i].category;
+      cats[cat.id] = cat;
+    }
+    me.api_.getIncidents(function(resp) {
+      me.setIncidents_(resp.payload.incidents, cats);
+    });
   });
   var infowindow = new google.maps.InfoWindow;
   google.maps.event.addListener(map, 'incident_changed', function() {
@@ -51,18 +59,22 @@ ushahidi.IncidentOverlay.prototype.setParent = function(ushaMap) {
   this.ushahidiMap_ = ushaMap;
 }
 
-ushahidi.IncidentOverlay.prototype.setIncidents_ = function(incidents) {
+ushahidi.IncidentOverlay.prototype.setIncidents_ = function(incidents, cats) {
   var map = this.map_;
   this.incidents_ = incidents;
 
   for (var i = 0, ii = incidents.length; i < ii; i++) {
     var incident = incidents[i].incident;
+    var category = incidents[i].categories[0].category;
     var loc = new google.maps.LatLng(incident.locationlatitude,
         incident.locationlongitude);
 
+    // TODO: get the most senior category's color
+    var color = '#' + cats[category.id].color;
     var marker = new google.maps.Marker({
       position: loc,
-      map: map
+      map: map,
+      icon: this.dotter_.getDot(color)
     });
     marker.incident_ = incidents[i];
     incidents[i].xmarker_ = marker;

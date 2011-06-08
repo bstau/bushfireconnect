@@ -129,6 +129,9 @@ ushahidi.Map.prototype.initMap_ = function(node) {
   }
 };
 
+/**
+ * @return {google.maps.Map}
+ */
 ushahidi.Map.prototype.getMap = function() {
   return this.map_;
 };
