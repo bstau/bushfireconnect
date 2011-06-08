@@ -1,7 +1,6 @@
 ushahidi.Geolocation = function(map) {
   this.map_ = map.getMap();
   this.location_ = this.map_.getCenter();
-  this.zoomLevel_ = 12
 
   this.marker_ = new google.maps.Marker({
     icon: new google.maps.MarkerImage(
@@ -25,20 +24,6 @@ ushahidi.Geolocation.prototype.updateLocation = function() {
   });
 };
 
-ushahidi.Geolocation.prototype.updateMap_ = function(contentString) {
-  if (!this.marker) {
-    this.marker = new google.maps.Marker({
-        visible: false,
-        map: this.map_,
-        draggable: false,
-        icon: new google.maps.MarkerImage(
-          'http://oa-samples.googlecode.com/svn-history/r73/trunk/' +
-            'presentations/gdd-2010/saopaulo/talks/maps/my-location.png',
-              null, null, new google.maps.Point(6, 7)),
-        flat: true,
-        raiseOnDrag: false});
-  }
-
 ushahidi.Geolocation.getZoomLevel = function(accuracy_m) {
   // Cap the zoom level to treat it as 50 meter accuracy, useful for '0' accuracy values to avoid log(0).
   var accuracy = accuracy_m > 50 ? accuracy_m : 50;
@@ -50,18 +35,19 @@ ushahidi.Geolocation.getZoomLevel = function(accuracy_m) {
   // Cap zoom levels at 3..14.
   if (zoomLevel < 3) zoomLevel = 3;
   if (zoomLevel > 14) zoomLevel = 14;
+
+  return zoomLevel;
 }
 
 ushahidi.Geolocation.prototype.updateMap_ = function(location, accuracy) {
   var map = this.map_;
-  this.zoomLevel_ = ushahidi.Geolocation.getZoomLevel(accuracy);
 
   map.panTo(location);
-  map.setZoom(this.zoomLevel_);
+  map.setZoom(ushahidi.Geolocation.getZoomLevel(accuracy));
 
   this.marker_.setPosition(location);
   this.marker_.setMap(map);
-  this.marker.setVisible(true);
+  this.marker_.setVisible(true);
 
   this.circle_.setOptions({
     radius: accuracy,
