@@ -1,11 +1,25 @@
+/**
+ * @fileoverview Map object for Ushahidi API-based map.
+ */
+
 var ushahidi = ushahidi || {};
 
+/**
+ * Class to encapsulate map functionality.
+ * @param {DOMElement} node DOM element containing the map
+ * @param {Object} params Map configuration
+ * @constructor
+ */
 ushahidi.Map = function(node, params) {
   this.params_ = params;
   this.layers = [];
   this.initMap_(node);
 };
 
+/**
+ * Adds a new layer to the map.
+ * @param {ushahidi.IncidentOverlay} layer New layer to add
+ */
 ushahidi.Map.prototype.addLayer = function(layer) {
   this.layers.push(layer);
   layer.setMap(this.map_);
@@ -13,6 +27,10 @@ ushahidi.Map.prototype.addLayer = function(layer) {
       layer.setParent(this);
 };
 
+/**
+ * Inititalise the map.
+ * @param {DOMElement} node Node to construct the map within.
+ */
 ushahidi.Map.prototype.initMap_ = function(node) {
   var me = this;
   var map = this.map_ = new google.maps.Map(node, {
@@ -62,12 +80,21 @@ ushahidi.Map.prototype.initMap_ = function(node) {
 }; 
 
 /**
+ * Get the encapsulated Google Map object.
  * @return {google.maps.Map}
  */
 ushahidi.Map.prototype.getMap = function() {
   return this.map_;
 };
 
+/**
+ * Update the anchor component of the page's URL.
+ *
+ * We include viewport and map type information in the page URL to permit
+ * bookmarking and embedding of a given map view.
+ *
+ * Updates window.location.hash.
+ */
 ushahidi.Map.prototype.buildHash_ = function() {
   var hash = [];
   var center = this.map_.getCenter();
@@ -78,6 +105,13 @@ ushahidi.Map.prototype.buildHash_ = function() {
 };
 
 
+/**
+ * Set the current map position from the user's location.
+ *
+ * Uses the HTML5 geolocation API to get the user's location, then updates
+ * the center of the map's viewport. Also sets zoom to level 13 if the user
+ * is zoomed out wider than zoom level 10.
+ */
 function getCurrentPosition(map, marker) {
   if (!navigator.geolocation) {
     return;
