@@ -33,7 +33,7 @@ ushahidi.Map.prototype.initMap_ = function(node) {
   });
 
   this.geolocation_ = (ushahidi.Geolocation) ?
-      new ushahidi.Geolocation(map) : null;
+      new ushahidi.Geolocation(this) : null;
 
   if (this.params_.geolocate == true && this.geolocation_)  {
     this.geolocation_.updateLocation();
@@ -59,75 +59,7 @@ ushahidi.Map.prototype.initMap_ = function(node) {
       locateBtn.style.display = 'none';
     }
   }
-
-  var client = new XMLHttpRequest();
-  if (client) {
-    client.onreadystatechange = function() {
-      if (4 == this.readyState && 200 == this.status) {
-        var ll = document.getElementById('layerlist');
-        if (!ll) return;
-
-        data = eval('(' + this.responseText + ')');
-        if (data.payload && data.payload.categories) {
-          if (data.payload.categories.length) {
-            var layerconfig = {};
-            for (var i = 0; i < data.payload.categories.length; ++i) {
-              var cat = data.payload.categories[i].category;
-              var layer = null;
-              if (0 == cat.parent_id) {
-                layer = parseInt(cat.id);
-                var elem = document.createElement('div');
-                var cb = document.createElement('input');
-                var lbl = document.createElement('label');
-                cb.type = 'checkbox';
-                cb.checked = true;
-                cb.id = lbl.htmlFor = 'layer' + cat.id;
-                cb.onchange = function(xcb, xid) { return function(e) {
-                  for (var i = 0; i < me.layers.length; ++i) {
-                    var l = me.layers[i];
-                    if (l.setLayerVisibility) {
-                      l.setLayerVisibility(xid, xcb.checked); // document.getElementById(cb.id).checked);
-                    }
-                  }
-                }}(cb, parseInt(cat.id));
-                var txt = document.createTextNode(' ' + cat.description);
-                if (cat.color && cat.color.length) {
-                  var colourIcon = document.createElement('div');
-                  colourIcon.style.backgroundColor = '#' + cat.color;
-                  colourIcon.className = 'layercolour';
-                  elem.appendChild(colourIcon);
-                }
-
-                elem.className = 'layer';
-                lbl.appendChild(txt);
-                elem.appendChild(cb);
-                elem.appendChild(lbl);
-                ll.appendChild(elem); 
-              } else {
-                layer = parseInt(cat.parent_id);
-              }
-              if (layerconfig[layer])
-                layerconfig[layer].push(parseInt(cat.id));
-              else
-                layerconfig[layer] = [parseInt(cat.id)];
-            }
-
-            me.layerconfig_ = layerconfig;
-          } else {
-            var lb = document.getElementById('layerbtn');
-            if (lb) lb.style.display = 'none';
-          }
-        }
-      } else if (this.status && this.status != 200) {
-        var lb = document.getElementById('layerbtn');
-        if (lb) lb.style.display = 'none';
-      }
-    };
-
-    client.open('GET', '../api?task=categories&resp=json');
-    client.send();
-  }
-};
+}; 
 
 /**
  * @return {google.maps.Map}
