@@ -15,27 +15,29 @@ ushahidi.Map.prototype.addLayer = function(layer) {
 
 ushahidi.Map.prototype.initMap_ = function(node) {
   var me = this;
-  this.map_ = new google.maps.Map(node, {
+  var map = this.map_ = new google.maps.Map(node, {
     center: this.params_.center,
     zoom: this.params_.zoom,
-    mapTypeId: this.params_.maptype
+    mapTypeId: this.params_.maptype,
+    mapTypeControlOptions: {
+      mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain', 'osm']
+    }
   });
 
-  this.geolocation_ = null;
-  if (ushahidi.Geolocation) {
-    this.geolocation_ = new ushahidi.Geolocation(this.map_);
-  }
+  map.mapTypes.set('osm', osm = new OSMLayer());
+  google.maps.event.addListener(map, 'maptypeid_changed', function() {
+    me.buildHash_();
+  });
+  google.maps.event.addListener(map, 'idle', function() {
+    me.buildHash_();
+  });
+
+  this.geolocation_ = (ushahidi.Geolocation) ?
+      new ushahidi.Geolocation(map) : null;
 
   if (this.params_.geolocate == true && this.geolocation_)  {
     this.geolocation_.updateLocation();
   }
-
-  google.maps.event.addListener(this.map_, 'maptypeid_changed', function() {
-    me.buildHash_();
-  });
-  google.maps.event.addListener(this.map_, 'idle', function() {
-    me.buildHash_();
-  });
 
   var layerBtn = document.getElementById('layerbtn');
   if (layerBtn) {
@@ -125,6 +127,10 @@ ushahidi.Map.prototype.initMap_ = function(node) {
     client.open('GET', '../api?task=categories&resp=json');
     client.send();
   }
+};
+
+ushahidi.Map.prototype.getMap = function() {
+  return this.map_;
 };
 
 ushahidi.Map.prototype.buildHash_ = function() {
