@@ -2,7 +2,7 @@ ushahidi.Geolocation = function(map) {
   this.map_ = map;
   this.location_ = map.getCenter();
   this.zoomLevel_ = 12
-  this.infoWindow_ = new google.maps.InfoWindow();
+  this.api_ = new ushahidi.Api('../');
 };
 
 ushahidi.Geolocation.prototype.updateLocation = function() {
@@ -39,13 +39,46 @@ ushahidi.Geolocation.prototype.handleNoGeolocation_ = function() {
   } else {
     contentString = "Error: Your browser doesn't support geolocation.";
   }
-  this.updateMap_(contentString);
+  alert(contentString);
+}
+
+ushahidi.Geolocation.prototype.calculateAppropriateZoom = function() {
+  var bounds = this.map_.getBounds();
+  var southWest = bounds.getSouthWest();
+  var minLongitude = southWest.lng();
+  var minLatitude = southWest.lat();
+  var northEast = bounds.getNorthEast();
+  var maxLongitude = northEast.lng();
+  var maxLatitude = northEast.lat();
+  google.maps.event.clearListeners(this.map_, 'idle');
+  this.detectViewPort(minLongitude, minLatitude, maxLongitude, maxLatitude, 1);
+}
+
+ushahidi.Geolocation.prototype.detectViewPort = function(minLongitude, minLatitude, maxLongitude, maxLatitude, n) {
+  var me = this;
+
+  this.api_.getIncidentsWithinBounds(minLongitude, minLatitude, maxLongitude, maxLatitude, function(resp) {
+    var incidents = resp.payload.incidents
+    if((incidents != undefined && incidents.length != 0) || n == 20) {
+      var bounds = new google.maps.LatLngBounds(
+        new google.maps.LatLng(minLatitude, minLongitude),
+        new google.maps.LatLng(maxLatitude, maxLongitude)
+      );
+      me.map_.fitBounds(bounds);
+    }
+    else {
+      var delta = n * n * 0.1;
+      me.detectViewPort(minLongitude - delta, minLatitude - delta, maxLongitude + delta, maxLatitude + delta, n + 1);
+    }
+  });
 }
 
 ushahidi.Geolocation.prototype.updateMap_ = function(contentString) {
+  var me = this;
+  this.autoZoomCallBack =
+  google.maps.event.addListener(this.map_, 'idle', function() {
+     me.calculateAppropriateZoom();
+  });
   this.map_.setCenter(this.location_);
-  this.map_.setZoom(this.zoomLevel_)
-  this.infoWindow_.setContent(contentString);
-  this.infoWindow_.setPosition(this.location_);
-  this.infoWindow_.open(this.map_);
+  this.map_.setZoom(this.zoomLevel_);
 }
